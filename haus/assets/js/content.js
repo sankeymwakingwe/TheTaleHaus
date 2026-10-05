@@ -11,7 +11,7 @@
  */
 window.HAUS = {
   name: "The Tale Haus",
-  logo: "", // e.g. "images/logo.png" — until set, a text logo is shown
+  logo: "images/logo.png", // set to "" to show a text logo instead
   location: "Tanzania, East Africa",
   timeZone: "Africa/Dar_es_Salaam",
 
