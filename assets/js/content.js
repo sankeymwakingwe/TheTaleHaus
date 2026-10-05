@@ -1,79 +1,161 @@
 /*
  * ─────────────────────────────────────────────────────────────
- *  SITE CONTENT — edit this file to make the site yours.
+ *  THE TALE HAUS — SITE CONTENT
+ *  Edit this file to change text, projects, services and photos.
  * ─────────────────────────────────────────────────────────────
- *  • Put your photos in /images and reference them below.
- *  • Every section/category falls back to a gradient until its
- *    photo exists, so the site never looks broken.
+ *  • Put photos/videos in haus/images/ and set the paths below.
+ *  • Any image left as "" (or missing on disk) shows a placeholder,
+ *    so the site never looks broken.
+ *  • All copy here is placeholder text written for The Tale Haus —
+ *    rewrite it in your own words before launch.
  */
-window.SITE = {
-  // Shown as the spaced-out two-line logo (top left).
-  firstName: "Danie",
-  lastName: "Sankey",
-  tagline: "Photographer & Storyteller",
+window.HAUS = {
+  name: "The Tale Haus",
+  logo: "images/logo.png", // set to "" to show a text logo instead
+  location: "Tanzania, East Africa",
+  timeZone: "Africa/Dar_es_Salaam",
+
+  // "Currently, the Haus is …" — one is picked at random on each visit.
+  status: [
+    "Setting up a live stream",
+    "Colour grading a short film",
+    "Scouting locations in Zanzibar",
+    "Sipping chai between takes",
+    "Backing up today’s footage",
+  ],
 
   contact: {
-    phone: "+1 000 000 0000",
-    email: "hello@example.com",
-    location: "Your City, Country",
-    // Opens when someone taps the location on the Contact page.
-    mapUrl: "https://maps.google.com/?q=Your+City",
-  },
-
-  social: {
+    email: "inquiries@thetale.haus",
     instagram: "https://instagram.com/",
-    pinterest: "https://pinterest.com/",
+    youtube: "https://youtube.com/",
   },
 
+  hero: {
+    lines: ["Integrated", "Media Solutions"],
+    tagline: "Live Broadcasting + Film + Photography + Design",
+    image: "",
+    video: "", // e.g. "images/showreel.mp4" — plays muted on loop behind the headline
+  },
+
+  // "About The Tale Haus" section.
   about: {
-    image: "images/about.jpg",
-    heading: "Every frame tells a tale.",
     paragraphs: [
-      "Write a short introduction here: who you are, what you shoot, and what you care about when you pick up a camera.",
-      "Add a second paragraph about your approach, the people and brands you've worked with, or where your work has been featured.",
+      "The Tale Haus is a creative studio in Tanzania. We plan, shoot, stream and design the stories that brands, artists and communities want to share.",
+      "From a single portrait to a multi-camera live broadcast, we bring the crew, the gear and the eye to make it feel like yours. Every project starts with one question: what’s the tale? Everything else is built around the answer.",
     ],
   },
 
+  // The project shown under "Latest Project" (by slug).
+  latestProject: "zanzibar-beach-house",
+  latestImage: "",
+
+  // Logos for the moving brand strip. Leave image "" for a placeholder.
+  brands: [
+    { name: "Brand One", image: "" },
+    { name: "Brand Two", image: "" },
+    { name: "Brand Three", image: "" },
+    { name: "Brand Four", image: "" },
+    { name: "Brand Five", image: "" },
+    { name: "Brand Six", image: "" },
+    { name: "Brand Seven", image: "" },
+  ],
+
   /*
-   * Each category is one full-screen section on the home page and
-   * gets its own gallery page. `fallback` is the gradient shown
-   * until the cover photo is added.
+   * Projects. The first three appear on the home page; all of them
+   * appear on the Project Index. Each opens project.html?p=<slug>.
+   * `shots` sets the collage on the project page: each one is
+   * { image, shape } where shape is "large", "wide" or "tall".
    */
-  categories: [
+  projects: [
+    { slug: "zanzibar-beach-house", title: "Zanzibar Beach House", tag: "Hospitality film", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
+    { slug: "paul-clement", title: "Paul Clement", tag: "Live concert stream", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
+    { slug: "dr-ipyana", title: "Dr. Ipyana", tag: "Worship night film", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
+    { slug: "project-four", title: "Project Four", tag: "Brand campaign", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
+    { slug: "project-five", title: "Project Five", tag: "Portrait series", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
+    { slug: "project-six", title: "Project Six", tag: "Event coverage", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
+    { slug: "project-seven", title: "Project Seven", tag: "Music video", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
+    { slug: "project-eight", title: "Project Eight", tag: "Website + identity", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
+  ],
+
+  /*
+   * Services. `label` is the tile text on the home page (\n = line
+   * break; set `tile: false` to leave it off the home grid). `blurb`
+   * appears when someone hovers a tile. `title`, `image` and `text` are
+   * used on services.html. Wrap words in *asterisks* to italicise them.
+   */
+  services: [
     {
-      slug: "lifestyle",
-      title: "Lifestyle",
-      cover: "images/lifestyle/cover.jpg",
-      fallback: "radial-gradient(ellipse at 60% 35%, #8a5a3c 0%, #3b2418 45%, #120b08 100%)",
-      images: ["images/lifestyle/01.jpg", "images/lifestyle/02.jpg", "images/lifestyle/03.jpg", "images/lifestyle/04.jpg", "images/lifestyle/05.jpg", "images/lifestyle/06.jpg"],
+      slug: "live-broadcasting",
+      label: "High Quality\nLive Streaming",
+      blurb: "Multi-camera streams for concerts, conferences and launches.",
+      title: "High Quality Live Broadcasting",
+      image: "",
+      text: "Multi-camera live streams for concerts, conferences, church services and launches. We handle the cameras, sound, graphics and the stream itself, so your audience sees the moment as it happens.",
     },
     {
-      slug: "portraits",
-      title: "Portraits",
-      cover: "images/portraits/cover.jpg",
-      fallback: "radial-gradient(ellipse at 40% 30%, #6d6a64 0%, #2b2a28 50%, #0b0b0b 100%)",
-      images: ["images/portraits/01.jpg", "images/portraits/02.jpg", "images/portraits/03.jpg", "images/portraits/04.jpg", "images/portraits/05.jpg", "images/portraits/06.jpg"],
+      slug: "film-production",
+      blurb: "Brand films, documentaries and music videos.",
+      title: "Film Production",
+      image: "",
+      text: "Brand films, documentaries and music videos, from first idea to final grade. *You tell us your story, we show it to the world.*",
     },
     {
-      slug: "editorial",
-      title: "Editorial",
-      cover: "images/editorial/cover.jpg",
-      fallback: "radial-gradient(ellipse at 65% 40%, #7a2e2a 0%, #3a1514 50%, #0e0606 100%)",
-      images: ["images/editorial/01.jpg", "images/editorial/02.jpg", "images/editorial/03.jpg", "images/editorial/04.jpg", "images/editorial/05.jpg", "images/editorial/06.jpg"],
+      slug: "content-creation",
+      blurb: "Reels, short videos and photos for every platform.",
+      title: "Content Creation",
+      image: "",
+      text: "A steady flow of short videos, reels and photos made for each platform, shot in batches so your channels never go quiet.",
     },
     {
-      slug: "fashion",
-      title: "Fashion",
-      cover: "images/fashion/cover.jpg",
-      fallback: "radial-gradient(ellipse at 50% 30%, #3f5a5c 0%, #1a2627 50%, #070a0a 100%)",
-      images: ["images/fashion/01.jpg", "images/fashion/02.jpg", "images/fashion/03.jpg", "images/fashion/04.jpg", "images/fashion/05.jpg", "images/fashion/06.jpg"],
+      slug: "photography",
+      tile: false,
+      title: "Photography",
+      image: "",
+      text: "Portraits, products, events and campaigns. We capture the moments that are worth keeping, *because a picture is worth a thousand words.*",
     },
     {
-      slug: "events",
-      title: "Events",
-      cover: "images/events/cover.jpg",
-      fallback: "radial-gradient(ellipse at 35% 45%, #8c6d3a 0%, #3a2c15 50%, #0f0b05 100%)",
-      images: ["images/events/01.jpg", "images/events/02.jpg", "images/events/03.jpg", "images/events/04.jpg", "images/events/05.jpg", "images/events/06.jpg"],
+      slug: "graphics-design",
+      label: "Graphics Designing",
+      blurb: "Logos, identities, posters and social graphics.",
+      title: "Graphics Design",
+      image: "",
+      text: "Logos, identities, posters and social graphics that give your brand one clear look wherever people meet it.",
+    },
+    {
+      slug: "web-designing",
+      label: "Web Designing",
+      blurb: "Fast, easy-to-update websites that show off your work.",
+      title: "Web Design",
+      image: "",
+      text: "Websites that show off your work, load fast and are easy for you to update, on any screen.",
+    },
+    {
+      slug: "digital-marketing",
+      blurb: "Campaigns planned, cut and tracked for each platform.",
+      title: "Digital Marketing",
+      image: "",
+      text: "We plan the campaign, cut the content for each platform and track what works, so your story reaches the people it is meant for.",
     },
   ],
+
+
+  newsletter: {
+    // Where the signup form posts (e.g. a Formspree URL).
+    // Until set, Submit opens the visitor's email app instead.
+    action: "",
+  },
 };
+
+function defaultShots() {
+  return [
+    { image: "", shape: "large" },
+    { image: "", shape: "wide" },
+    { image: "", shape: "large" },
+    { image: "", shape: "wide" },
+    { image: "", shape: "large" },
+    { image: "", shape: "tall" },
+    { image: "", shape: "wide" },
+    { image: "", shape: "large" },
+    { image: "", shape: "tall" },
+  ];
+}

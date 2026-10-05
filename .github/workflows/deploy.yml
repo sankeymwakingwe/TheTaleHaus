@@ -1,8 +1,8 @@
-name: Deploy site to GitHub Pages
+name: Deploy The Tale Haus to GitHub Pages
 
 on:
   push:
-    branches: ["claude/personal-website-build-x6mzml"]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -27,7 +27,7 @@ jobs:
       - name: Collect site files
         run: |
           mkdir _site
-          cp -r *.html assets images haus .nojekyll _site/
+          cp -r *.html assets images CNAME .nojekyll _site/
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
