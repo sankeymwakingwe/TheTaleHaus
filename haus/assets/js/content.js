@@ -3,37 +3,62 @@
  *  THE TALE HAUS — SITE CONTENT
  *  Edit this file to change text, projects, services and photos.
  * ─────────────────────────────────────────────────────────────
- *  • Put photos in haus/images/ and set the `image` paths below.
- *  • Any image left as "" (or missing on disk) shows a teal
- *    placeholder, so the site never looks broken.
+ *  • Put photos/videos in haus/images/ and set the paths below.
+ *  • Any image left as "" (or missing on disk) shows a placeholder,
+ *    so the site never looks broken.
+ *  • All copy here is placeholder text written for The Tale Haus —
+ *    rewrite it in your own words before launch.
  */
 window.HAUS = {
   name: "The Tale Haus",
   logo: "", // e.g. "images/logo.png" — until set, a text logo is shown
-  location: ["Based in", "Tanzania, East Africa"],
+  location: "Tanzania, East Africa",
+  timeZone: "Africa/Dar_es_Salaam",
+
+  // "Currently, the Haus is …" — one is picked at random on each visit.
+  status: [
+    "Setting up a live stream",
+    "Colour grading a short film",
+    "Scouting locations in Zanzibar",
+    "Sipping chai between takes",
+    "Backing up today’s footage",
+  ],
 
   contact: {
-    email: "inquires@thetale.haus",
+    email: "inquiries@thetale.haus",
     instagram: "https://instagram.com/",
     youtube: "https://youtube.com/",
   },
 
   hero: {
-    lines: ["Integrated", "Media Solutions"],
+    lines: ["Let’s Tell", "Your Tale."],
+    tagline: "Live Broadcasting + Film + Photography + Design",
     image: "",
+    video: "", // e.g. "images/showreel.mp4" — plays muted on loop behind the headline
   },
 
-  // The project shown under "Latest Project" on the home page (by slug).
+  mission: {
+    title: "Stories From East Africa, Made for the World",
+    image: "",
+    paragraphs: [
+      "The Tale Haus is a creative studio in Tanzania. We plan, shoot, stream and design the stories that brands, artists and communities want to share.",
+      "From a single portrait to a multi-camera live broadcast, we bring the crew, the gear and the eye to make it feel like yours. Every project starts with one question: what’s the tale? Everything else is built around the answer.",
+    ],
+  },
+
+  // The project shown under "Latest Project" (by slug).
   latestProject: "zanzibar-beach-house",
   latestImage: "",
 
-  // Logos for the "Trusted Brands" strip. Leave image "" for a placeholder.
+  // Logos for the moving brand strip. Leave image "" for a placeholder.
   brands: [
     { name: "Brand One", image: "" },
     { name: "Brand Two", image: "" },
     { name: "Brand Three", image: "" },
     { name: "Brand Four", image: "" },
     { name: "Brand Five", image: "" },
+    { name: "Brand Six", image: "" },
+    { name: "Brand Seven", image: "" },
   ],
 
   /*
@@ -43,88 +68,93 @@ window.HAUS = {
    * { image, shape } where shape is "large", "wide" or "tall".
    */
   projects: [
-    {
-      slug: "zanzibar-beach-house",
-      title: "Zanzibar Beach House",
-      client: "Client name",
-      year: "2024",
-      cover: "",
-      film: "", // a YouTube/Vimeo embed URL or an .mp4 path
-      shots: defaultShots(),
-    },
-    { slug: "paul-clement", title: "Paul Clement", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
-    { slug: "dr-ipyana", title: "Dr. Ipyana", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
-    { slug: "project-four", title: "Project Four", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
-    { slug: "project-five", title: "Project Five", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
-    { slug: "project-six", title: "Project Six", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
-    { slug: "project-seven", title: "Project Seven", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
-    { slug: "project-eight", title: "Project Eight", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
+    { slug: "zanzibar-beach-house", title: "Zanzibar Beach House", tag: "Hospitality film", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
+    { slug: "paul-clement", title: "Paul Clement", tag: "Live concert stream", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
+    { slug: "dr-ipyana", title: "Dr. Ipyana", tag: "Worship night film", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
+    { slug: "project-four", title: "Project Four", tag: "Brand campaign", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
+    { slug: "project-five", title: "Project Five", tag: "Portrait series", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
+    { slug: "project-six", title: "Project Six", tag: "Event coverage", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
+    { slug: "project-seven", title: "Project Seven", tag: "Music video", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
+    { slug: "project-eight", title: "Project Eight", tag: "Website + identity", client: "Client name", year: "2023", cover: "", film: "", shots: defaultShots() },
   ],
 
   /*
-   * Services. `label` is the tile text on the home page (use \n for a
-   * line break); `title`, `image` and `text` are used on services.html.
-   * Wrap words in *asterisks* to italicise them.
+   * Services. `group` puts each one in a home-page chapter
+   * ("broadcast" or "creative"); `title`, `image` and `text` are also
+   * used on services.html. Wrap words in *asterisks* to italicise them.
    */
   services: [
     {
       slug: "live-broadcasting",
-      label: "High Quality\nLive Streaming",
-      title: "High Quality Live Broadcasting",
+      group: "broadcast",
+      title: "High Quality Live Streaming",
       image: "",
-      text: "We specialise in providing high-quality live broadcasting services that captivate your audience. Our team ensures that your content is engaging and impactful, helping you achieve your marketing goals.",
-    },
-    {
-      slug: "content-creation",
-      label: "Content Creation",
-      title: "Content Creation",
-      image: "",
-      text: "We freeze the timeless moments in pixels and allow these to linger with you. We also allow pictures to tell your unique brand’s story because at The Tale Haus we believe that, *“a picture is worth a thousand words.”*",
+      text: "Multi-camera live streams for concerts, conferences, church services and launches. We handle the cameras, sound, graphics and the stream itself, so your audience sees the moment as it happens.",
     },
     {
       slug: "film-production",
-      label: "Film Production",
+      group: "broadcast",
       title: "Film Production",
       image: "",
-      text: "We are a community of tale tellers whose cinematic creativity breathes life into your story. *“You tell us your story, we show it to the world.”*",
+      text: "Brand films, documentaries and music videos, from first idea to final grade. *You tell us your story, we show it to the world.*",
     },
     {
-      slug: "web-designing",
-      label: "Web Designing",
-      title: "Web Designing",
+      slug: "content-creation",
+      group: "broadcast",
+      title: "Content Creation",
       image: "",
-      text: "Description coming soon.",
-    },
-    {
-      slug: "digital-marketing",
-      label: "Digital Marketing",
-      title: "Digital Marketing",
-      image: "",
-      text: "Description coming soon.",
-    },
-    {
-      slug: "graphics-design",
-      label: "Graphics Designing",
-      title: "Graphics Design",
-      image: "",
-      text: "*Whether you’re a brand seeking a distinct identity or an individual looking to bring visions into life, we are here to craft stories through design that turn concepts into captivating visual tales.*",
+      text: "A steady flow of short videos, reels and photos made for each platform, shot in batches so your channels never go quiet.",
     },
     {
       slug: "photography",
-      label: "", // not shown as a home tile
+      group: "creative",
       title: "Photography",
       image: "",
-      text: "We freeze the timeless moments in pixels and allow these to linger with you. We also allow pictures to tell your unique brand’s story because at The Tale Haus we believe that, *“a picture is worth a thousand words.”*",
+      text: "Portraits, products, events and campaigns. We capture the moments that are worth keeping, *because a picture is worth a thousand words.*",
+    },
+    {
+      slug: "graphics-design",
+      group: "creative",
+      title: "Graphics Design",
+      image: "",
+      text: "Logos, identities, posters and social graphics that give your brand one clear look wherever people meet it.",
+    },
+    {
+      slug: "web-designing",
+      group: "creative",
+      title: "Web Design",
+      image: "",
+      text: "Websites that show off your work, load fast and are easy for you to update, on any screen.",
+    },
+    {
+      slug: "digital-marketing",
+      group: "creative",
+      title: "Digital Marketing",
+      image: "",
+      text: "We plan the campaign, cut the content for each platform and track what works, so your story reaches the people it is meant for.",
     },
   ],
 
-  // Order of sections on services.html (by slug).
-  servicesPageOrder: ["live-broadcasting", "film-production", "photography", "graphics-design", "content-creation", "web-designing", "digital-marketing"],
+  team: {
+    title: "The People Behind the Lens",
+    paragraphs: [
+      "Placeholder bio. Add a few lines about how The Tale Haus started, who founded it and what each person brings: years behind the camera, favourite kinds of shoots, the stories that made you.",
+      "A second paragraph can cover the wider crew of camera operators, editors and designers you call on for bigger productions.",
+    ],
+    people: [
+      { name: "Founder Name", role: "Creative Director", image: "", link: "" },
+      { name: "Co-founder Name", role: "Head of Production", image: "", link: "" },
+    ],
+  },
 
-  about: "The Tale Haus™ is a bespoke creative-focused agency that lives, creates, and pushes boundaries at the intersection of content production and brand strategy. Our expertise lies in campaign and brand development, collaborating with clients in a variety of capacities relating to creative direction for commercial campaigns, photo & video, and overall brand or rebrand strategies. Whether up-and-coming or a household name, we work with our clients to get to the core of “what message they want to share”, “why it matters” and how to translate and elevate these narratives through premium photo and video. It’s about connection, and more importantly, connecting in a way that positively impacts and inspires. At The Tale Haus™, all our projects and goals boil down to one thing: live to tell stories.",
+  ready: {
+    title: "Got a tale worth telling?",
+    text: "Tell us what you’re planning and when. We reply within two working days.",
+    image: "",
+  },
 
   newsletter: {
-    // Where the "Get Notified" form posts (e.g. a Formspree URL).
+    // Where the signup form posts (e.g. a Formspree URL).
     // Until set, Submit opens the visitor's email app instead.
     action: "",
   },

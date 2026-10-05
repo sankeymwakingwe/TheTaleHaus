@@ -15,7 +15,7 @@ Everything lives in **one file**: [`assets/js/content.js`](assets/js/content.js)
 
 ## Photos
 
-All images are placeholders for now. Drop files into `haus/images/` and set the matching path in `content.js`, e.g. `cover: "images/zanzibar/cover.jpg"`. Anything left empty (or missing) shows a teal placeholder.
+All images and copy are placeholders for now — rewrite the text in your own words before launch.
 
 Project films take a YouTube/Vimeo **embed** URL or an `.mp4` path.
 
