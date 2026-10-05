@@ -233,37 +233,43 @@ svg { width: 18px; height: 18px; flex: none; }
 .float-nav {
   position: fixed;
   left: 50%;
-  bottom: 16px;
+  top: 34px;
   transform: translateX(-50%);
   z-index: 60;
   display: flex;
-  gap: 4px;
-  padding: 5px;
-  background: rgba(10, 10, 10, 0.72);
+  gap: 2px;
+  padding: 4px;
+  background: rgba(10, 10, 10, 0.55);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
   animation: nav-in 0.9s var(--ease) 0.3s both;
 }
 .float-nav a {
-  display: grid;
-  justify-items: center;
-  gap: 5px;
-  min-width: 76px;
-  padding: 10px 16px 8px;
-  border-radius: 8px;
-  font-size: 11px;
-  letter-spacing: 0.06em;
+  position: relative;
+  padding: 10px 20px;
+  font-size: 14px;
   color: var(--muted);
-  transition: color 0.3s, background 0.3s;
+  transition: color 0.3s;
 }
-.float-nav a:hover { color: var(--paper); background: rgba(255, 255, 255, 0.06); }
-.float-nav a.is-current { color: var(--ink); background: var(--paper); }
-.float-nav svg { width: 16px; height: 16px; }
+.float-nav a:hover,
+.float-nav a.is-current { color: var(--paper); }
+.float-nav a::after {
+  content: "";
+  position: absolute;
+  left: 20px; right: 20px; bottom: 6px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
+.float-nav a:hover::after,
+.float-nav a.is-current::after { transform: scaleX(1); }
 
-@keyframes nav-in { from { opacity: 0; transform: translate(-50%, 24px); } }
+@keyframes nav-in { from { opacity: 0; transform: translate(-50%, -16px); } }
 
 .toast {
   position: fixed;
@@ -283,7 +289,10 @@ svg { width: 18px; height: 18px; flex: none; }
 @media (max-width: 860px) {
   .site-header { padding-top: 28px; }
   .header-icons { gap: 1.2rem; }
-  .float-nav a { min-width: 0; padding: 9px 14px 7px; }
+  /* Too narrow to share a row with the logo, so it drops below the header. */
+  .float-nav { top: 78px; }
+  .float-nav a { padding: 8px 14px; font-size: 13px; }
+  .float-nav a::after { left: 14px; right: 14px; bottom: 5px; }
   .dots { display: none; }
   .work-grid { grid-template-columns: 1fr; }
   .work-tile { min-height: 80vh; }

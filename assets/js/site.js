@@ -10,9 +10,6 @@
     phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
     mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
     pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
-    home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>',
-    grid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="6.5" height="6.5"/><rect x="13.5" y="4" width="6.5" height="6.5"/><rect x="4" y="13.5" width="6.5" height="6.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5"/></svg>',
-    user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h15m-5-5 5 5-5 5"/></svg>',
     close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6 6 18"/></svg>',
   };
@@ -26,15 +23,15 @@
 
   /* ── Header ─────────────────────────────────────────────── */
   const links = [
-    ["index.html", "Home", "home", icon.home],
-    ["work.html", "Work", "work", icon.grid],
-    ["about.html", "About", "about", icon.user],
-    ["contact.html", "Contact", "contact", icon.mail],
+    ["index.html", "Home", "home"],
+    ["work.html", "Work", "work"],
+    ["about.html", "About", "about"],
+    ["contact.html", "Contact", "contact"],
   ];
   const navLinks = links
-    .map(([href, label, key, svg]) => {
+    .map(([href, label, key]) => {
       const current = page === key || (key === "work" && page === "gallery");
-      return `<a href="${href}"${current ? ' class="is-current" aria-current="page"' : ""}>${svg}<span>${label}</span></a>`;
+      return `<a href="${href}"${current ? ' class="is-current" aria-current="page"' : ""}>${label}</a>`;
     })
     .join("");
 

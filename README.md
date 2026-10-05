@@ -1,6 +1,6 @@
 # Personal Website
 
-A full-screen photography portfolio: every section is a full-bleed photo with a title and a "View Work →" link, plus a floating nav bar at the bottom of the screen.
+A full-screen photography portfolio: every section is a full-bleed photo with a title and a "View Work →" link, plus a floating text nav at the top of the screen.
 
 ## Make it yours
 
