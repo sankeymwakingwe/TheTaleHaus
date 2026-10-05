@@ -17,34 +17,44 @@
   const spaced = (word) => [...word].map((c) => `<span>${esc(c)}</span>`).join("");
   // Photo layered over a gradient: if the photo is missing, the gradient shows.
   const bg = (img, fallback) => `background-image: url('${img}'), ${fallback || "linear-gradient(#1a1a1a,#0a0a0a)"}`;
-  const fullName = `${S.firstName} ${S.lastName}`;
+  const fullName = S.name;
 
-  /* ── Header: centred floating nav ───────────────────────── */
+  /* ── Header: centred nav ───────────────────────────────── */
   const links = [
     ["index.html", "Home", "home"],
-    ["work.html", "Work", "work"],
     ["about.html", "About", "about"],
+    ["work.html", "Portfolio", "work"],
+    ["investment.html", "Investment", "investment"],
+    ["clients.html", "Clients", "clients"],
     ["contact.html", "Contact", "contact"],
   ];
   const navLink = ([href, label, key]) => {
     const current = page === key || (key === "work" && page === "gallery");
-    return `<a href="${href}"${current ? ' class="is-current" aria-current="page"' : ""}>${label}</a>`;
+    return `<a class="nav-link" href="${href}"${current ? ' aria-current="page"' : ""}>${label}</a>`;
   };
 
-  // Centred: two links, the logo, two links.
+  // Three links, the name, three links. Phones get the name and a menu button.
   document.body.insertAdjacentHTML(
     "afterbegin",
     `<header class="site-header">
-      <nav class="float-nav" aria-label="Main">
-        ${links.slice(0, 2).map(navLink).join("")}
-        <a class="logo" href="index.html" aria-label="${esc(fullName)} — home">
-          <span class="logo-line">${spaced(S.firstName)}</span>
-          <span class="logo-line">${spaced(S.lastName)}</span>
-        </a>
-        ${links.slice(2).map(navLink).join("")}
+      <nav class="main-nav" aria-label="Main">
+        ${links.slice(0, 3).map(navLink).join("")}
+        <a class="logo" href="index.html">${esc(fullName)}</a>
+        ${links.slice(3).map(navLink).join("")}
+        <button type="button" class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
       </nav>
-    </header>`
+    </header>
+    <div class="mobile-menu" hidden>${links.map(navLink).join("")}</div>`
   );
+
+  const menuBtn = document.querySelector(".menu-btn");
+  const mobileMenu = document.querySelector(".mobile-menu");
+  menuBtn.addEventListener("click", () => {
+    const open = menuBtn.getAttribute("aria-expanded") !== "true";
+    menuBtn.setAttribute("aria-expanded", open);
+    mobileMenu.hidden = !open;
+    document.body.classList.toggle("no-scroll", open);
+  });
 
   const c = S.contact;
 
@@ -223,6 +233,39 @@
       const body = `${f.get("message")}\n\n— ${f.get("name")} (${f.get("email")})`;
       location.href = `mailto:${c.email}?subject=${encodeURIComponent("Enquiry from " + f.get("name"))}&body=${encodeURIComponent(body)}`;
     });
+  }
+
+  if (page === "investment") {
+    const v = S.investment;
+    main.innerHTML = `<section class="slide is-active panel">
+      <div class="slide-media" style="${bg(v.image, S.categories[2 % S.categories.length].fallback)}"></div>
+      <div class="panel-text panel-wide">
+        <span class="slide-index">Investment</span>
+        <h1>${esc(v.heading)}</h1>
+        <p>${esc(v.intro)}</p>
+        <ul class="packages">${v.packages
+          .map((pk) => `<li><h3>${esc(pk.name)}</h3><span class="price">${esc(pk.price)}</span><p>${esc(pk.details)}</p></li>`)
+          .join("")}</ul>
+        <a class="view-link" href="contact.html">Enquire ${icon.arrow}</a>
+      </div>
+    </section>`;
+  }
+
+  if (page === "clients") {
+    const v = S.clients;
+    main.innerHTML = `<section class="slide is-active panel">
+      <div class="slide-media" style="${bg(v.image, S.categories[3 % S.categories.length].fallback)}"></div>
+      <div class="panel-text panel-wide">
+        <span class="slide-index">Clients</span>
+        <h1>${esc(v.heading)}</h1>
+        <p>${esc(v.intro)}</p>
+        <ul class="client-names">${v.names.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>
+        ${v.testimonials
+          .map((t) => `<blockquote class="testimonial"><p>“${esc(t.quote)}”</p><cite>${esc(t.by)}</cite></blockquote>`)
+          .join("")}
+        <a class="view-link" href="contact.html">Work with me ${icon.arrow}</a>
+      </div>
+    </section>`;
   }
 
   /* ── Cinematic layer ────────────────────────────────────── */

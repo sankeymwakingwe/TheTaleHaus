@@ -7,9 +7,8 @@
  *    photo exists, so the site never looks broken.
  */
 window.SITE = {
-  // Shown as the spaced-out two-line logo (top left).
-  firstName: "Danie",
-  lastName: "Sankey",
+  // Shown in capitals as the logo in the middle of the nav, and on the title card.
+  name: "DanieSankey",
   tagline: "Photographer & Storyteller",
 
   contact: {
@@ -31,6 +30,28 @@ window.SITE = {
     paragraphs: [
       "Write a short introduction here: who you are, what you shoot, and what you care about when you pick up a camera.",
       "Add a second paragraph about your approach, the people and brands you've worked with, or where your work has been featured.",
+    ],
+  },
+
+  investment: {
+    image: "images/investment.jpg",
+    heading: "Investment",
+    intro: "Every session is tailored to you. These packages are a starting point; get in touch for a custom quote.",
+    packages: [
+      { name: "Portrait Session", price: "From $000", details: "1 hour, one location, 20 edited images." },
+      { name: "Lifestyle & Editorial", price: "From $000", details: "Half day, up to three looks, 50 edited images." },
+      { name: "Events", price: "From $000", details: "Full-day coverage, online gallery, 300+ edited images." },
+    ],
+  },
+
+  clients: {
+    image: "images/clients.jpg",
+    heading: "Clients",
+    intro: "A few of the people and brands I've had the pleasure of working with.",
+    names: ["Client One", "Client Two", "Client Three", "Client Four", "Client Five", "Client Six"],
+    testimonials: [
+      { quote: "Add a short testimonial from a happy client here.", by: "Client name" },
+      { quote: "And another one, so visitors can hear it from someone else.", by: "Client name" },
     ],
   },
 
