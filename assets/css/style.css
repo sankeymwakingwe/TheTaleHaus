@@ -45,7 +45,7 @@ svg { width: 18px; height: 18px; flex: none; }
 }
 .site-header > * { pointer-events: auto; }
 
-.logo { display: grid; gap: 4px; font-size: 10px; font-weight: 400; letter-spacing: 0; line-height: 1; }
+.logo { display: grid; gap: 4px; font-size: 10px; font-weight: 400; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
 .logo-line { display: flex; gap: 0.95em; }
 .logo-line span { width: 0.75em; text-align: center; }
 
@@ -392,7 +392,7 @@ svg { width: 18px; height: 18px; flex: none; }
 .intro-tag { font-size: 11px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--muted); animation: fade-in 1.4s var(--ease) both; }
 .intro-pre { animation-delay: 0.3s; }
 .intro-tag { animation-delay: 2s; }
-.intro-name { display: flex; flex-wrap: wrap; justify-content: center; font-family: var(--serif); font-size: clamp(2rem, 6vw, 4.5rem); font-weight: 300; letter-spacing: 0.35em; padding-left: 0.35em; }
+.intro-name { text-transform: uppercase; display: flex; flex-wrap: wrap; justify-content: center; font-family: var(--serif); font-size: clamp(2rem, 6vw, 4.5rem); font-weight: 300; letter-spacing: 0.35em; padding-left: 0.35em; }
 .intro-name span { display: inline-block; min-width: 0.3em; animation: resolve 1.6s var(--ease) both; }
 .intro-name span:nth-child(odd) { animation-delay: 0.7s; }
 .intro-name span:nth-child(even) { animation-delay: 0.95s; }

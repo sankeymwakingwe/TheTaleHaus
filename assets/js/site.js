@@ -19,7 +19,6 @@
   // Photo layered over a gradient: if the photo is missing, the gradient shows.
   const bg = (img, fallback) => `background-image: url('${img}'), ${fallback || "linear-gradient(#1a1a1a,#0a0a0a)"}`;
   const fullName = `${S.firstName} ${S.lastName}`;
-  document.title = document.title.replace("Your Name", fullName);
 
   /* ── Header ─────────────────────────────────────────────── */
   const links = [

@@ -1,4 +1,4 @@
-# Personal Website
+# Danie Sankey — Website
 
 A cinematic, full-screen photography portfolio: every section is a full-bleed photo with a title and a "View Work →" link, plus a floating text nav at the top of the screen.
 

@@ -8,8 +8,8 @@
  */
 window.SITE = {
   // Shown as the spaced-out two-line logo (top left).
-  firstName: "YOUR",
-  lastName: "NAME",
+  firstName: "Danie",
+  lastName: "Sankey",
   tagline: "Photographer & Storyteller",
 
   contact: {
