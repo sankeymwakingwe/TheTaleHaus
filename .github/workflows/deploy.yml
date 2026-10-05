@@ -27,7 +27,7 @@ jobs:
       - name: Collect site files
         run: |
           mkdir _site
-          cp -r *.html assets images .nojekyll _site/
+          cp -r *.html assets images haus .nojekyll _site/
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
