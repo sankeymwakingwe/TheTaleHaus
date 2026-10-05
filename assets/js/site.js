@@ -6,7 +6,6 @@
   const icon = {
     instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>',
     pinterest: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M10.5 20.5 12 13m0 0c.3 1.3 1.4 2 2.6 2 2.2 0 3.6-2 3.6-4.6C18.2 7.6 15.8 6 13 6 9.6 6 7.6 8.4 7.6 11c0 1.1.4 2.2 1.2 2.7"/></svg>',
-    share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 5l7 6-7 6v-3.5c-5 0-8.5 1.5-11 5 1-5 4-9.5 11-10.5V5z"/></svg>',
     phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
     mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
     pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
@@ -20,54 +19,32 @@
   const bg = (img, fallback) => `background-image: url('${img}'), ${fallback || "linear-gradient(#1a1a1a,#0a0a0a)"}`;
   const fullName = `${S.firstName} ${S.lastName}`;
 
-  /* ── Header ─────────────────────────────────────────────── */
+  /* ── Header: centred floating nav ───────────────────────── */
   const links = [
     ["index.html", "Home", "home"],
     ["work.html", "Work", "work"],
     ["about.html", "About", "about"],
     ["contact.html", "Contact", "contact"],
   ];
-  const navLinks = links
-    .map(([href, label, key]) => {
-      const current = page === key || (key === "work" && page === "gallery");
-      return `<a href="${href}"${current ? ' class="is-current" aria-current="page"' : ""}>${label}</a>`;
-    })
-    .join("");
+  const navLink = ([href, label, key]) => {
+    const current = page === key || (key === "work" && page === "gallery");
+    return `<a href="${href}"${current ? ' class="is-current" aria-current="page"' : ""}>${label}</a>`;
+  };
 
+  // Centred: two links, the logo, two links.
   document.body.insertAdjacentHTML(
     "afterbegin",
     `<header class="site-header">
-      <a class="logo" href="index.html" aria-label="${esc(fullName)} — home">
-        <span class="logo-line">${spaced(S.firstName)}</span>
-        <span class="logo-line">${spaced(S.lastName)}</span>
-      </a>
-      <div class="header-icons">
-        ${S.social.instagram ? `<a href="${S.social.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${icon.instagram}</a>` : ""}
-        ${S.social.pinterest ? `<a href="${S.social.pinterest}" target="_blank" rel="noopener" aria-label="Pinterest">${icon.pinterest}</a>` : ""}
-        <button type="button" class="share-btn" aria-label="Share">${icon.share}</button>
-      </div>
-    </header>
-    <nav class="float-nav" aria-label="Main">${navLinks}</nav>`
+      <nav class="float-nav" aria-label="Main">
+        ${links.slice(0, 2).map(navLink).join("")}
+        <a class="logo" href="index.html" aria-label="${esc(fullName)} — home">
+          <span class="logo-line">${spaced(S.firstName)}</span>
+          <span class="logo-line">${spaced(S.lastName)}</span>
+        </a>
+        ${links.slice(2).map(navLink).join("")}
+      </nav>
+    </header>`
   );
-
-  document.querySelector(".share-btn").addEventListener("click", async () => {
-    const data = { title: document.title, url: location.href };
-    try {
-      if (navigator.share) await navigator.share(data);
-      else {
-        await navigator.clipboard.writeText(location.href);
-        toast("Link copied");
-      }
-    } catch (_) {}
-  });
-
-  function toast(msg) {
-    const t = document.createElement("div");
-    t.className = "toast";
-    t.textContent = msg;
-    document.body.appendChild(t);
-    setTimeout(() => t.remove(), 2000);
-  }
 
   const c = S.contact;
 
@@ -228,6 +205,8 @@
           <li><a href="mailto:${c.email}">${icon.mail}${esc(c.email)}</a></li>
           <li><a href="tel:${c.phone.replace(/[^\d+]/g, "")}">${icon.phone}${esc(c.phone)}</a></li>
           <li><a href="${c.mapUrl}" target="_blank" rel="noopener">${icon.pin}${esc(c.location)}</a></li>
+          ${S.social.instagram ? `<li><a href="${S.social.instagram}" target="_blank" rel="noopener">${icon.instagram}Instagram</a></li>` : ""}
+          ${S.social.pinterest ? `<li><a href="${S.social.pinterest}" target="_blank" rel="noopener">${icon.pinterest}Pinterest</a></li>` : ""}
         </ul>
         <form class="contact-form">
           <input name="name" placeholder="Name" required>

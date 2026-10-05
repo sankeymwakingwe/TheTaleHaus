@@ -31,29 +31,20 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
 svg { width: 18px; height: 18px; flex: none; }
 
-/* ── Header ─────────────────────────────────────────────── */
+/* ── Header: centred floating nav ───────────────────────── */
 .site-header {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  padding: 44px var(--gutter) 24px;
+  height: 140px;
   background: linear-gradient(rgba(0, 0, 0, 0.35), transparent);
   pointer-events: none;
 }
 .site-header > * { pointer-events: auto; }
 
-.logo { display: grid; gap: 4px; font-size: 10px; font-weight: 400; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
-.logo-line { display: flex; gap: 0.95em; }
+.logo { display: grid; gap: 4px; padding: 0 22px; font-size: 10px; font-weight: 400; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
+.logo-line { display: flex; justify-content: center; gap: 0.95em; }
 .logo-line span { width: 0.75em; text-align: center; }
-
-.header-icons { display: flex; gap: 1.6rem; margin-left: auto; }
-.header-icons a,
-.header-icons button { display: grid; place-items: center; opacity: 0.85; transition: opacity 0.3s; }
-.header-icons a:hover,
-.header-icons button:hover { opacity: 1; }
 
 /* ── Full-screen slides ─────────────────────────────────── */
 .slide {
@@ -277,10 +268,11 @@ svg { width: 18px; height: 18px; flex: none; }
 .float-nav {
   position: fixed;
   left: 50%;
-  top: 34px;
+  top: 30px;
   transform: translateX(-50%);
   z-index: 60;
   display: flex;
+  align-items: center;
   gap: 2px;
   padding: 4px;
   background: rgba(10, 10, 10, 0.55);
@@ -291,7 +283,7 @@ svg { width: 18px; height: 18px; flex: none; }
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
   animation: nav-in 0.9s var(--ease) 0.3s both;
 }
-.float-nav a {
+.float-nav a:not(.logo) {
   position: relative;
   padding: 10px 20px;
   font-size: 14px;
@@ -300,7 +292,7 @@ svg { width: 18px; height: 18px; flex: none; }
 }
 .float-nav a:hover,
 .float-nav a.is-current { color: var(--paper); }
-.float-nav a::after {
+.float-nav a:not(.logo)::after {
   content: "";
   position: absolute;
   left: 20px; right: 20px; bottom: 6px;
@@ -314,20 +306,6 @@ svg { width: 18px; height: 18px; flex: none; }
 .float-nav a.is-current::after { transform: scaleX(1); }
 
 @keyframes nav-in { from { opacity: 0; transform: translate(-50%, -16px); } }
-
-.toast {
-  position: fixed;
-  left: 50%;
-  bottom: 80px;
-  transform: translateX(-50%);
-  z-index: 120;
-  padding: 10px 18px;
-  font-size: 13px;
-  background: var(--paper);
-  color: var(--ink);
-  border-radius: 4px;
-  animation: rise 0.4s var(--ease);
-}
 
 /* ── Cinematic layer ────────────────────────────────────── */
 /* Film grain */
@@ -426,12 +404,10 @@ svg { width: 18px; height: 18px; flex: none; }
 
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 860px) {
-  .site-header { padding-top: 28px; }
-  .header-icons { gap: 1.2rem; }
-  /* Too narrow to share a row with the logo, so it drops below the header. */
-  .float-nav { top: 78px; }
-  .float-nav a { padding: 8px 14px; font-size: 13px; }
-  .float-nav a::after { left: 14px; right: 14px; bottom: 5px; }
+  .float-nav { top: 20px; }
+  .float-nav a:not(.logo) { padding: 8px 10px; font-size: 13px; }
+  .float-nav a:not(.logo)::after { left: 10px; right: 10px; bottom: 5px; }
+  .logo { padding: 0 10px; font-size: 9px; }
   .dots { display: none; }
   .work-grid { grid-template-columns: 1fr; }
   .work-tile { min-height: 80vh; }
