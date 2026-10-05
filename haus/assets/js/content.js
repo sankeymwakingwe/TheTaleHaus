@@ -31,15 +31,14 @@ window.HAUS = {
   },
 
   hero: {
-    lines: ["Let’s Tell", "Your Tale."],
+    lines: ["Integrated", "Media Solutions"],
     tagline: "Live Broadcasting + Film + Photography + Design",
     image: "",
     video: "", // e.g. "images/showreel.mp4" — plays muted on loop behind the headline
   },
 
-  mission: {
-    title: "Stories From East Africa, Made for the World",
-    image: "",
+  // "About The Tale Haus" section.
+  about: {
     paragraphs: [
       "The Tale Haus is a creative studio in Tanzania. We plan, shoot, stream and design the stories that brands, artists and communities want to share.",
       "From a single portrait to a multi-camera live broadcast, we bring the crew, the gear and the eye to make it feel like yours. Every project starts with one question: what’s the tale? Everything else is built around the answer.",
@@ -79,79 +78,66 @@ window.HAUS = {
   ],
 
   /*
-   * Services. `group` puts each one in a home-page chapter
-   * ("broadcast" or "creative"); `title`, `image` and `text` are also
+   * Services. `label` is the tile text on the home page (\n = line
+   * break; set `tile: false` to leave it off the home grid). `blurb`
+   * appears when someone hovers a tile. `title`, `image` and `text` are
    * used on services.html. Wrap words in *asterisks* to italicise them.
    */
   services: [
     {
       slug: "live-broadcasting",
-      group: "broadcast",
-      title: "High Quality Live Streaming",
+      label: "High Quality\nLive Streaming",
+      blurb: "Multi-camera streams for concerts, conferences and launches.",
+      title: "High Quality Live Broadcasting",
       image: "",
       text: "Multi-camera live streams for concerts, conferences, church services and launches. We handle the cameras, sound, graphics and the stream itself, so your audience sees the moment as it happens.",
     },
     {
       slug: "film-production",
-      group: "broadcast",
+      blurb: "Brand films, documentaries and music videos.",
       title: "Film Production",
       image: "",
       text: "Brand films, documentaries and music videos, from first idea to final grade. *You tell us your story, we show it to the world.*",
     },
     {
       slug: "content-creation",
-      group: "broadcast",
+      blurb: "Reels, short videos and photos for every platform.",
       title: "Content Creation",
       image: "",
       text: "A steady flow of short videos, reels and photos made for each platform, shot in batches so your channels never go quiet.",
     },
     {
       slug: "photography",
-      group: "creative",
+      tile: false,
       title: "Photography",
       image: "",
       text: "Portraits, products, events and campaigns. We capture the moments that are worth keeping, *because a picture is worth a thousand words.*",
     },
     {
       slug: "graphics-design",
-      group: "creative",
+      label: "Graphics Designing",
+      blurb: "Logos, identities, posters and social graphics.",
       title: "Graphics Design",
       image: "",
       text: "Logos, identities, posters and social graphics that give your brand one clear look wherever people meet it.",
     },
     {
       slug: "web-designing",
-      group: "creative",
+      label: "Web Designing",
+      blurb: "Fast, easy-to-update websites that show off your work.",
       title: "Web Design",
       image: "",
       text: "Websites that show off your work, load fast and are easy for you to update, on any screen.",
     },
     {
       slug: "digital-marketing",
-      group: "creative",
+      blurb: "Campaigns planned, cut and tracked for each platform.",
       title: "Digital Marketing",
       image: "",
       text: "We plan the campaign, cut the content for each platform and track what works, so your story reaches the people it is meant for.",
     },
   ],
 
-  team: {
-    title: "The People Behind the Lens",
-    paragraphs: [
-      "Placeholder bio. Add a few lines about how The Tale Haus started, who founded it and what each person brings: years behind the camera, favourite kinds of shoots, the stories that made you.",
-      "A second paragraph can cover the wider crew of camera operators, editors and designers you call on for bigger productions.",
-    ],
-    people: [
-      { name: "Founder Name", role: "Creative Director", image: "", link: "" },
-      { name: "Co-founder Name", role: "Head of Production", image: "", link: "" },
-    ],
-  },
-
-  ready: {
-    title: "Got a tale worth telling?",
-    text: "Tell us what you’re planning and when. We reply within two working days.",
-    image: "",
-  },
 
   newsletter: {
     // Where the signup form posts (e.g. a Formspree URL).

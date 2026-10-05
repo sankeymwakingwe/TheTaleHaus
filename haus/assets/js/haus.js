@@ -14,7 +14,7 @@
     back: '<svg class="ico" viewBox="0 0 18 16" aria-hidden="true"><path d="M17 8H2M7 3 2 8l5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>',
   };
 
-  // An image (or video), or a placeholder until the file exists.
+  // An image (or video), or a teal placeholder until the file exists.
   function media(src, label, cls = "") {
     const ph = `<span class="ph-label">${esc(label)}</span>`;
     if (!src) return `<div class="media is-ph ${cls}" role="img" aria-label="${esc(label)} (placeholder)">${ph}</div>`;
@@ -23,208 +23,145 @@
   }
 
   const projectUrl = (p) => `project.html?p=${encodeURIComponent(p.slug)}`;
-  const service = (slug) => H.services.find((s) => s.slug === slug);
 
   /* ── Shared chrome ─────────────────────────────────────── */
   const logo = H.logo
     ? `<img src="${esc(H.logo)}" alt="${esc(H.name)}">`
-    : `<span class="logo-word">The Tale Haus<sup>®</sup></span><span class="logo-mono" aria-hidden="true">TH</span>`;
+    : `<span class="logo-mark">TH</span><span class="logo-text">THE<br>TALE<br>HAUS</span>`;
 
   const status = H.status[Math.floor(Math.random() * H.status.length)];
-  const infobar = `
-    <header class="infobar">
-      <div class="cell cell-logo"><small>Creative Studio</small><a class="logo" href="index.html" aria-label="${esc(H.name)} home">${logo}</a></div>
-      <div class="cell"><small>Based in</small><span>${esc(H.location)}</span></div>
-      <div class="cell"><small>Local time</small><span class="clock">--:--</span></div>
-      <div class="cell cell-status"><small>Currently, the Haus is</small><span>${esc(status)}</span></div>
-      <div class="cell cell-cta"><a class="btn-dark" href="mailto:${esc(H.contact.email)}">Let’s Connect</a></div>
+  const topbar = `
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="logo" href="index.html" aria-label="${esc(H.name)} home">${logo}</a>
+        <span class="divider" aria-hidden="true"></span>
+        <p class="info"><small>Based in</small>${esc(H.location)}</p>
+        <span class="divider" aria-hidden="true"></span>
+        <p class="info"><small>Local time</small><span class="clock">--:--</span></p>
+        <span class="divider hide-md" aria-hidden="true"></span>
+        <p class="info hide-md"><small>Currently, the Haus is</small>${esc(status)}</p>
+        <a class="btn-connect" href="mailto:${esc(H.contact.email)}">Let’s Connect</a>
+      </div>
     </header>`;
 
+  // The teal pill nav from the design. It sticks to the top as you scroll.
   const nav = `
     <nav class="pill-nav" aria-label="Main">
-      <a href="index.html">HAUS</a>
-      <a href="projects.html" ${page === "projects" || page === "project" ? 'aria-current="page"' : ""}>WORK</a>
-      <a href="index.html#team">US</a>
-      <a href="services.html" ${page === "services" ? 'aria-current="page"' : ""}>SERVICES</a>
+      <a href="index.html" data-spy="hello" ${page === "home" ? 'aria-current="page"' : ""}>HAUS</a>
+      <a href="projects.html" data-spy="work" ${page === "projects" || page === "project" ? 'aria-current="page"' : ""}>WORK</a>
+      <a href="index.html#about" data-spy="about">US</a>
+      <a href="services.html" data-spy="services" ${page === "services" ? 'aria-current="page"' : ""}>SERVICES</a>
     </nav>`;
 
   const year = new Date().getFullYear();
-  const footerCard = `
-    <div class="footer-card">
-      <p class="footer-logo">The Tale<br>.Haus<sup>®</sup></p>
-      <div class="footer-cols">
-        <form class="notify" ${H.newsletter.action ? `action="${esc(H.newsletter.action)}" method="POST"` : ""}>
-          <h3>STAY IN THE LOOP</h3>
-          <p>Hear about new projects, behind-the-scenes and open shoot days.</p>
-          <label class="sr-only" for="notify-email">Email address</label>
-          <input id="notify-email" name="email" type="email" required placeholder="Email">
-          <button type="submit">Submit</button>
-          <p class="fine">We’ll only use your email to send Tale Haus updates. Unsubscribe any time.</p>
-        </form>
-        <div>
-          <h3>FOLLOW THE HAUS</h3>
-          <p><a href="${esc(H.contact.instagram)}" target="_blank" rel="noopener">Instagram ${arrow.up}</a></p>
-          <p><a href="${esc(H.contact.youtube)}" target="_blank" rel="noopener">YouTube ${arrow.up}</a></p>
+  const footer = `
+    <footer class="site-footer" data-label="Footer">
+      <div class="footer-card">
+        <div class="footer-cols">
+          <form class="notify" ${H.newsletter.action ? `action="${esc(H.newsletter.action)}" method="POST"` : ""}>
+            <h3>GET NOTIFIED</h3>
+            <p>Hear about new projects, behind-the-scenes and open shoot days.</p>
+            <label class="sr-only" for="notify-email">Email address</label>
+            <input id="notify-email" name="email" type="email" required placeholder="Your email">
+            <button type="submit">Submit</button>
+            <p class="fine">We’ll only use your email to send Tale Haus updates. Unsubscribe any time.</p>
+          </form>
+          <div>
+            <h3>FOLLOW THE TALE HAUS</h3>
+            <p><a href="${esc(H.contact.instagram)}" target="_blank" rel="noopener">Instagram ${arrow.up}</a></p>
+            <p><a href="${esc(H.contact.youtube)}" target="_blank" rel="noopener">YouTube ${arrow.up}</a></p>
+          </div>
+          <div>
+            <h3>GET IN TOUCH</h3>
+            <p><a href="mailto:${esc(H.contact.email)}">${esc(H.contact.email)} ${arrow.up}</a></p>
+          </div>
         </div>
-        <div>
-          <h3>SAY HELLO</h3>
-          <p><a href="mailto:${esc(H.contact.email)}">${esc(H.contact.email)} ${arrow.up}</a></p>
-        </div>
+        <p class="copyright">Copyright © ${year} The Tale Haus | Let’s tell your tales | All rights reserved</p>
       </div>
-      <p class="copyright">© 2024–${year} The Tale Haus | Let’s tell your tales | All rights reserved</p>
-    </div>`;
-  const footer = `<footer class="site-footer">${footerCard}</footer>`;
+    </footer>`;
 
-  /* ── Home: a sideways film strip of numbered chapters ───── */
-  const spine = (n, label) => `<div class="spine" aria-hidden="true"><span>${String(n).padStart(2, "0")} — ${esc(label)}</span></div>`;
-  const shapes = ["square", "circle", "diamond", "square"];
-  const serviceList = (group) =>
-    H.services.filter((s) => s.group === group).map((s, i) => `
-      <article class="svc">
-        <h3><span class="shape ${shapes[i % shapes.length]}" aria-hidden="true"></span>${esc(s.title)}</h3>
-        <p>${rich(s.text)}</p>
-      </article>`).join("");
-
+  /* ── Pages ─────────────────────────────────────────────── */
   function home() {
     const latest = H.projects.find((p) => p.slug === H.latestProject) || H.projects[0];
-    const chapters = [
-      {
-        id: "hello", label: "Hello",
-        html: `
-          <div class="panel hero-panel">
-            <div class="hero">
-              ${media(H.hero.video || H.hero.image, "Showreel video", "hero-media")}
-              <div class="hero-copy">
-                <h1>${H.hero.lines.map(esc).join("<br>")}</h1>
-                <p class="tagline">${esc(H.hero.tagline)}</p>
-                <p class="ready"><small>Ready?</small><a class="btn-ghost" href="mailto:${esc(H.contact.email)}">Let’s Connect</a></p>
-              </div>
-            </div>
-          </div>`,
-      },
-      {
-        id: "mission", label: "Our Mission",
-        html: `
-          ${media(H.mission.image, "Behind the scenes photo", "panel photo-panel")}
-          <div class="panel text-panel">
-            <h2>01 OUR MISSION</h2>
-            <h3 class="lede">${esc(H.mission.title)}</h3>
-            ${H.mission.paragraphs.map((p) => `<p class="body">${rich(p)}</p>`).join("")}
-          </div>`,
-      },
-      {
-        id: "broadcast", label: "Broadcast + Film",
-        html: `
-          ${media("", "Live production photo", "panel photo-panel wide")}
-          <div class="panel text-panel wide">
-            <h2>02 BROADCAST + FILM</h2>
-            <div class="svc-grid">${serviceList("broadcast")}
-              <p class="svc-cta"><a class="btn-outline" href="services.html#film-production">Start a Production</a></p>
-            </div>
-          </div>`,
-      },
-      {
-        id: "creative", label: "Photo + Design",
-        html: `
-          ${media("", "Portrait photo", "panel photo-panel")}
-          <div class="panel text-panel wide">
-            <h2>03 PHOTO + DESIGN</h2>
-            <div class="svc-grid">${serviceList("creative")}
-              <p class="svc-cta"><a class="btn-outline" href="services.html#photography">Start a Project</a></p>
-            </div>
-          </div>`,
-      },
-      {
-        id: "work", label: "Work",
-        html: `
-          ${media("", "On-set photo", "panel photo-panel narrow")}
-          <div class="panel work-panel">
-            <h2>04 WORK</h2>
-            <div class="marquee" aria-label="Brands we’ve worked with">
-              <div class="marquee-track">
-                ${[...H.brands, ...H.brands].map((b, i) => (b.image ? `<img src="${esc(b.image)}" alt="${i < H.brands.length ? esc(b.name) : ""}">` : `<span class="brand-ph" ${i >= H.brands.length ? 'aria-hidden="true"' : ""}>${esc(b.name)}</span>`)).join("")}
-              </div>
-            </div>
-            <div class="work-grid">
-              <div class="latest">
-                <h3>Latest Project</h3>
-                <p class="sub">Fresh from the edit suite at The Tale Haus.</p>
-                <a class="card" href="${projectUrl(latest)}">
-                  ${media(H.latestImage || latest.cover, latest.title)}
-                  <span class="card-copy"><strong>${esc(latest.title)}</strong><small>${esc(latest.tag)}</small><span class="btn-ghost">View ${arrow.up}</span></span>
-                </a>
-              </div>
-              <div class="index">
-                <h3>Project Index</h3>
-                <p class="sub">A few tales we’re proud of.</p>
-                <ol class="index-list">
-                  ${H.projects.slice(0, 4).map((p, i) => `
-                    <li><a href="${projectUrl(p)}"><span class="num">${String(i + 1).padStart(2, "0")}</span><span class="t">${esc(p.title)}</span><span class="tag">${esc(p.tag)}</span>${arrow.up}</a></li>`).join("")}
-                </ol>
-                <a class="btn-outline" href="projects.html">View All Projects</a>
-              </div>
-            </div>
-          </div>`,
-      },
-      {
-        id: "team", label: "Team",
-        html: `
-          <div class="panel text-panel">
-            <h2>05 THE TEAM</h2>
-            <h3 class="lede">${esc(H.team.title)}</h3>
-            ${H.team.paragraphs.map((p) => `<p class="body">${rich(p)}</p>`).join("")}
-          </div>
-          <div class="panel people-panel">
-            ${H.team.people.map((m) => `
-              <figure class="person">
-                ${media(m.image, m.name)}
-                <figcaption><strong>${esc(m.name)}</strong><small>${esc(m.role)}</small></figcaption>
-              </figure>`).join("")}
-          </div>`,
-      },
-      {
-        id: "ready", label: "Ready?",
-        html: `
-          <div class="panel ready-panel">
-            ${media(H.ready.image, "Campaign photo", "ready-media")}
-            <div class="ready-copy">
-              <h2>${esc(H.ready.title)}</h2>
-              <p>${esc(H.ready.text)}</p>
-              <a class="btn-light" href="mailto:${esc(H.contact.email)}">Let’s Connect</a>
-            </div>
-          </div>`,
-      },
-      { id: "footer", label: "Footer", html: `<div class="panel footer-panel">${footerCard}</div>` },
-    ];
-
+    const tiles = H.services.filter((s) => s.tile !== false);
+    const brand = (b, hidden) =>
+      b.image
+        ? `<img src="${esc(b.image)}" alt="${hidden ? "" : esc(b.name)}">`
+        : `<span class="brand-ph" ${hidden ? 'aria-hidden="true"' : ""}>${esc(b.name)}</span>`;
     return `
-      ${infobar}
-      <div class="hscroll">
-        <div class="viewport">
-          <div class="track">
-            ${chapters.map((c, i) => `<section class="chapter" id="${c.id}" aria-label="${esc(c.label)}">${spine(i, c.label)}${c.html}</section>`).join("")}
-            <div class="spine end" aria-hidden="true"><span>LET’S TELL YOUR TALES</span></div>
-          </div>
+      ${topbar}
+      ${nav}
+      <section class="hero" id="hello" data-label="Hello">
+        ${media(H.hero.video || H.hero.image, "Hero image or showreel", "hero-media")}
+        <div class="hero-copy">
+          <h1>${H.hero.lines.map(esc).join("<br>")}</h1>
+          <p class="tagline">${esc(H.hero.tagline)}</p>
+          <p class="ready"><small>Ready?</small><a class="dash-btn" href="mailto:${esc(H.contact.email)}">Let’s Connect</a></p>
         </div>
-      </div>
-      <nav class="dock" aria-label="Sections">
-        ${chapters.filter((c) => c.id !== "ready").map((c) => `<a href="#${c.id}" data-target="${c.id}">${esc(c.label)}</a>`).join("")}
-      </nav>`;
+      </section>
+
+      <section class="block" id="latest" data-label="Latest Project">
+        <div class="head"><h2>LATEST PROJECT</h2><p>Fresh from the edit suite at The Tale Haus.</p></div>
+        <a class="card latest" href="${projectUrl(latest)}">
+          ${media(H.latestImage || latest.cover, latest.title)}
+          <span class="card-copy">
+            <strong>${esc(latest.title)}</strong>
+            <small>${esc(latest.tag)}</small>
+            <span class="dash-btn">VIEW ${arrow.up}</span>
+          </span>
+        </a>
+      </section>
+
+      <section class="block brands-block" id="brands" data-label="Trusted Brands">
+        <div class="head"><h2>TRUSTED BRANDS</h2></div>
+        <div class="brands">
+          <div class="brands-track">${H.brands.map((b) => brand(b, false)).join("")}${H.brands.map((b) => brand(b, true)).join("")}</div>
+        </div>
+      </section>
+
+      <section class="block" id="work" data-label="Project Index">
+        <div class="head"><h2>PROJECT INDEX</h2><p>A few tales we’re proud of.</p></div>
+        <div class="index-head" aria-hidden="true"><span>ID</span><span>PROJECT</span></div>
+        <ol class="project-list">
+          ${H.projects.slice(0, 3).map((p, i) => `
+            <li><a class="project-tile" href="${projectUrl(p)}">
+              ${media(p.cover, p.title)}
+              <span class="tile-id">${String(i + 1).padStart(2, "0")}</span>
+              <span class="tile-title">${esc(p.title.toUpperCase())}<small>${esc(p.tag)}</small></span>
+              <span class="tile-view">VIEW ${arrow.up}</span>
+            </a></li>`).join("")}
+        </ol>
+        <p class="center"><a class="btn-outline" href="projects.html">VIEW ALL PROJECTS</a></p>
+      </section>
+
+      <section class="block" id="services" data-label="Services">
+        <div class="head"><h2>SERVICES</h2><p>Everything The Tale Haus team can make for you.</p></div>
+        <div class="service-grid">
+          ${tiles.map((s) => `
+            <a class="service-tile" href="services.html#${esc(s.slug)}">
+              <span class="dash-btn">${esc(s.label || s.title).replace(/\n/g, "<br>").toUpperCase()}</span>
+              ${s.blurb ? `<span class="blurb">${esc(s.blurb)} ${arrow.up}</span>` : ""}
+            </a>`).join("")}
+        </div>
+      </section>
+
+      <section class="block about" id="about" data-label="About">
+        <h2>ABOUT THE TALE HAUS</h2>
+        ${H.about.paragraphs.map((p) => `<p>${rich(p)}</p>`).join("")}
+      </section>
+      ${footer}`;
   }
 
-  /* ── Sub-pages ─────────────────────────────────────────── */
   function projects() {
     return `
-      ${infobar}
-      <section class="page-head">
-        <h1 class="serif">PROJECT INDEX</h1>
-        ${nav}
-      </section>
+      ${topbar}
+      ${nav}
+      <section class="page-head"><h1 class="serif">PROJECT INDEX</h1></section>
       <ol class="project-list full">
         ${H.projects.map((p) => `
           <li><a class="project-tile tall" href="${projectUrl(p)}">
             ${media(p.cover, p.title)}
-            <span class="tile-title">${esc(p.title.toUpperCase())}</span>
+            <span class="tile-title">${esc(p.title.toUpperCase())}<small>${esc(p.tag)}</small></span>
             <span class="dash-btn serif">VIEW ${arrow.up}</span>
           </a></li>`).join("")}
       </ol>
@@ -242,7 +179,8 @@
     else film = `<div class="media film"><iframe src="${esc(p.film)}" title="${esc(p.title)} film" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>`;
 
     return `
-      ${infobar}
+      ${topbar}
+      ${nav}
       <p class="backrow"><a class="back" href="projects.html">${arrow.back}<span>Project Index</span></a></p>
       <section class="project-hero">
         ${media(p.cover, p.title, "hero-media")}
@@ -261,7 +199,6 @@
           <small>Click a collection to jump to its content</small>
           <a class="dash-btn dark serif" href="#moments">More Moments ${arrow.down}</a>
         </div>
-        ${nav}
       </section>
       <section class="moments" id="moments">
         <h2 class="serif big">More Moments</h2>
@@ -277,8 +214,8 @@
 
   function services() {
     return `
-      ${infobar}
-      <section class="page-head">${nav}</section>
+      ${topbar}
+      ${nav}
       ${H.services.map((s) => `
         <section class="service" id="${esc(s.slug)}">
           <h2>${esc(s.title)}</h2>
@@ -291,84 +228,65 @@
   main.innerHTML = { home, projects, project, services }[page]();
 
   /* ── Live clock in the studio's time zone ───────────────── */
-  const clockEls = document.querySelectorAll(".clock");
+  const clocks = document.querySelectorAll(".clock");
   const fmt = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: H.timeZone });
-  const tick = () => clockEls.forEach((el) => (el.textContent = fmt.format(new Date()) + " EAT"));
+  const tick = () => clocks.forEach((el) => (el.textContent = fmt.format(new Date()) + " EAT"));
   tick();
   setInterval(tick, 15000);
 
-  /* ── Home: map vertical scroll to sideways movement ─────── */
+  /* ── Numbered side labels ("01 — LATEST PROJECT") ───────── */
+  document.querySelectorAll("[data-label]").forEach((el, i) => {
+    const tag = document.createElement("span");
+    tag.className = "side-label";
+    tag.setAttribute("aria-hidden", "true");
+    tag.textContent = `${String(i).padStart(2, "0")} — ${el.dataset.label}`;
+    el.prepend(tag);
+  });
+
+  /* ── Sticky nav: compact once scrolled, highlight the section in view ── */
+  const navEl = document.querySelector(".pill-nav");
+  const spyLinks = [...navEl.querySelectorAll("[data-spy]")];
+  const spyTargets = spyLinks.map((a) => document.getElementById(a.dataset.spy)).filter(Boolean);
+  const onScroll = () => {
+    navEl.classList.toggle("stuck", navEl.getBoundingClientRect().top <= 12);
+    if (page !== "home") return;
+    let current = "hello";
+    spyTargets.forEach((t) => { if (t.getBoundingClientRect().top < window.innerHeight * 0.4) current = t.id; });
+    spyLinks.forEach((a) => (a.dataset.spy === current ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current")));
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // On the home page, nav links to sections on this page scroll instead of reloading.
   if (page === "home") {
-    const stage = document.querySelector(".hscroll");
-    const track = document.querySelector(".track");
-    const dockLinks = [...document.querySelectorAll(".dock a")];
-    const chapters = dockLinks.map((a) => document.getElementById(a.dataset.target));
-    const sideways = window.matchMedia("(min-width: 900px)");
-    let dist = 0;
-
-    const layout = () => {
-      if (sideways.matches) {
-        dist = Math.max(0, track.scrollWidth - track.clientWidth);
-        stage.style.height = `${dist + stage.querySelector(".viewport").clientHeight}px`;
-      } else {
-        dist = 0;
-        stage.style.height = "";
-        track.style.transform = "";
-      }
-      update();
-    };
-
-    // How far along the strip we are, in px.
-    const progress = () => Math.min(dist, Math.max(0, window.scrollY - stage.offsetTop));
-
-    const update = () => {
-      let x = 0;
-      if (sideways.matches) {
-        x = progress();
-        track.style.transform = `translate3d(${-x}px,0,0)`;
-      }
-      document.body.classList.toggle("scrolled", window.scrollY > 40);
-      // Highlight the chapter that fills most of the screen.
-      let active = 0;
-      chapters.forEach((c, i) => {
-        const start = sideways.matches ? c.offsetLeft - x : c.getBoundingClientRect().top;
-        const edge = sideways.matches ? window.innerWidth * 0.45 : window.innerHeight * 0.45;
-        if (start <= edge) active = i;
-      });
-      dockLinks.forEach((a, i) => a.classList.toggle("on", i === active));
-    };
-
-    dockLinks.forEach((a) =>
-      a.addEventListener("click", (e) => {
-        const target = document.getElementById(a.dataset.target);
-        if (!sideways.matches) return; // normal anchor jump on phones
+    spyLinks.forEach((a) => {
+      const id = a.dataset.spy;
+      if (id === "hello" || id === "about") a.addEventListener("click", (e) => {
         e.preventDefault();
-        window.scrollTo({ top: stage.offsetTop + target.offsetLeft, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-      })
-    );
-
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", layout);
-    sideways.addEventListener("change", layout);
-    document.fonts?.ready.then(layout);
-    layout();
-
-    // Deep links like index.html#team.
-    if (location.hash) {
-      const t = document.getElementById(location.hash.slice(1));
-      if (t) sideways.matches ? window.scrollTo(0, stage.offsetTop + t.offsetLeft) : t.scrollIntoView();
-    }
-  } else if (location.hash) {
-    document.getElementById(location.hash.slice(1))?.scrollIntoView();
+        document.getElementById(id).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      });
+    });
   }
 
+  /* ── Gentle fade-up as sections scroll into view ────────── */
+  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const els = document.querySelectorAll(".block > *, .service, .project-list li");
+    els.forEach((el) => el.classList.add("rise"));
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }), { rootMargin: "0px 0px -8% 0px" });
+    els.forEach((el) => io.observe(el));
+  }
+
+  if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+
   // Newsletter: without a form endpoint, fall back to the visitor's email app.
-  document.querySelectorAll(".notify").forEach((form) => {
-    if (H.newsletter.action) return;
+  const form = document.querySelector(".notify");
+  if (form && !H.newsletter.action) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const email = form.querySelector("input").value;
-      location.href = `mailto:${H.contact.email}?subject=${encodeURIComponent("Stay in the loop")}&body=${encodeURIComponent("Please add " + email + " to The Tale Haus updates.")}`;
+      location.href = `mailto:${H.contact.email}?subject=${encodeURIComponent("Get notified")}&body=${encodeURIComponent("Please add " + email + " to The Tale Haus updates.")}`;
     });
-  });
+  }
 })();
