@@ -82,7 +82,7 @@
           (cat, i) => `<section class="slide" id="${cat.slug}">
             <div class="slide-media" style="${bg(cat.cover, cat.fallback)}"></div>
             <div class="slide-text">
-              <span class="slide-index">${String(i + 1).padStart(2, "0")}</span>
+              <span class="slide-index">Chapter ${String(i + 1).padStart(2, "0")}</span>
               <h2>${esc(cat.title)}</h2>
               <a class="view-link" href="gallery.html?c=${cat.slug}">View Work ${icon.arrow}</a>
             </div>
@@ -93,24 +93,35 @@
         .map((cat) => `<a href="#${cat.slug}" aria-label="${esc(cat.title)}"></a>`)
         .join("")}</nav>`;
 
+    main.insertAdjacentHTML(
+      "beforeend",
+      `<div class="hud" aria-hidden="true">
+        <span class="hud-scene">Scene <b>01</b> / ${String(S.categories.length).padStart(2, "0")}</span>
+        <span class="hud-tc"><i></i><b>00:00:00:00</b></span>
+      </div>`
+    );
     const slides = [...main.querySelectorAll(".slide")];
     const dots = [...main.querySelectorAll(".dots a")];
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (!e.isIntersecting) return;
-          slides.forEach((s) => s.classList.toggle("is-active", s === e.target));
-          dots.forEach((d, i) => d.classList.toggle("is-active", slides[i] === e.target));
-        });
-      },
-      { threshold: 0.6 }
-    );
-    slides.forEach((s) => io.observe(s));
+    const sceneNum = main.querySelector(".hud-scene b");
+    main.addEventListener("scene", (e) => {
+      const i = slides.indexOf(e.detail);
+      dots.forEach((d, j) => d.classList.toggle("is-active", j === i));
+      sceneNum.textContent = String(i + 1).padStart(2, "0");
+    });
+
+    // Running 24fps timecode, like a camera viewfinder.
+    const tc = main.querySelector(".hud-tc b");
+    const t0 = performance.now();
+    const pad = (n) => String(n).padStart(2, "0");
+    setInterval(() => {
+      const f = Math.floor(((performance.now() - t0) / 1000) * 24);
+      tc.textContent = `${pad(Math.floor(f / 86400))}:${pad(Math.floor(f / 1440) % 60)}:${pad(Math.floor(f / 24) % 60)}:${pad(f % 24)}`;
+    }, 1000 / 24);
 
     document.addEventListener("keydown", (e) => {
       if (!["ArrowDown", "ArrowUp", "PageDown", "PageUp"].includes(e.key)) return;
       e.preventDefault();
-      const cur = slides.findIndex((s) => s.classList.contains("is-active"));
+      const cur = Math.max(0, slides.findIndex((s) => s.classList.contains("is-active")));
       const next = Math.max(0, Math.min(slides.length - 1, cur + (e.key === "ArrowDown" || e.key === "PageDown" ? 1 : -1)));
       slides[next].scrollIntoView({ behavior: "smooth" });
     });
@@ -119,10 +130,10 @@
   if (page === "work") {
     main.innerHTML = `<section class="work-grid">${S.categories
       .map(
-        (cat, i) => `<a class="work-tile" href="gallery.html?c=${cat.slug}">
-          <div class="work-tile-media" style="${bg(cat.cover, cat.fallback)}"></div>
+        (cat, i) => `<a class="work-tile reveal" href="gallery.html?c=${cat.slug}">
+          <div class="work-tile-media reveal-media" style="${bg(cat.cover, cat.fallback)}"></div>
           <div class="work-tile-text">
-            <span class="slide-index">${String(i + 1).padStart(2, "0")}</span>
+            <span class="slide-index">Chapter ${String(i + 1).padStart(2, "0")}</span>
             <h2>${esc(cat.title)}</h2>
             <span class="view-link">View Work ${icon.arrow}</span>
           </div>
@@ -148,12 +159,12 @@
         </div>
       </section>
       <section class="gallery">${cat.images
-        .map((src, i) => `<button type="button" class="gallery-item" data-i="${i}" style="${bg(src, cat.fallback)}" aria-label="Open image ${i + 1}"></button>`)
+        .map((src, i) => `<button type="button" class="gallery-item reveal" data-i="${i}" aria-label="Open image ${i + 1}"><span class="reveal-media" style="${bg(src, cat.fallback)}"></span></button>`)
         .join("")}</section>
       <a class="next-cat slide" href="gallery.html?c=${next.slug}">
         <div class="slide-media" style="${bg(next.cover, next.fallback)}"></div>
         <div class="slide-text">
-          <span class="slide-index">Next</span>
+          <span class="slide-index">Next chapter</span>
           <h2>${esc(next.title)}</h2>
           <span class="view-link">View Work ${icon.arrow}</span>
         </div>
@@ -235,4 +246,99 @@
       location.href = `mailto:${c.email}?subject=${encodeURIComponent("Enquiry from " + f.get("name"))}&body=${encodeURIComponent(body)}`;
     });
   }
+
+  /* ── Cinematic layer ────────────────────────────────────── */
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `<div class="grain" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="letterbox" aria-hidden="true"><span></span><span></span></div>`
+  );
+
+  // Split headings into letters so they can resolve one by one, like a title card.
+  document.querySelectorAll(".slide h2, .work-tile h2, .panel h1").forEach((el) => {
+    const text = el.textContent;
+    let n = 0;
+    el.setAttribute("aria-label", text);
+    el.innerHTML = text
+      .split(" ")
+      .map((word) => `<span class="w" aria-hidden="true">${[...word].map((ch) => `<span class="ch" style="--i:${n++}">${esc(ch)}</span>`).join("")}</span>`)
+      .join(" ");
+  });
+
+  // Every full-screen scene comes alive when it fills most of the screen.
+  const sceneIO = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        e.target.classList.toggle("is-active", e.isIntersecting);
+        if (e.isIntersecting) main.dispatchEvent(new CustomEvent("scene", { detail: e.target }));
+      });
+    },
+    { threshold: 0.6 }
+  );
+  // About/Contact panels can be taller than the screen, so they stay lit.
+  document.querySelectorAll(".slide:not(.panel)").forEach((el) => sceneIO.observe(el));
+
+  // Tiles and gallery frames wipe in as they enter the screen.
+  const revealIO = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in-view");
+        revealIO.unobserve(e.target);
+      });
+    },
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll(".reveal").forEach((el) => revealIO.observe(el));
+
+  // Opening: letterbox bars part to reveal the page.
+  const root = document.documentElement;
+  const open = () => requestAnimationFrame(() => root.classList.add("is-open"));
+
+  // Title card, shown once per visit on the home page.
+  let seenIntro = true;
+  try {
+    seenIntro = sessionStorage.getItem("intro") === "1";
+    sessionStorage.setItem("intro", "1");
+  } catch (_) {}
+
+  if (page === "home" && !seenIntro && !reduceMotion) {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `<div class="intro" role="presentation">
+        <span class="intro-pre">A tale by</span>
+        <span class="intro-name">${spaced(fullName)}</span>
+        <span class="intro-tag">${esc(S.tagline)}</span>
+      </div>`
+    );
+    const intro = document.querySelector(".intro");
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      intro.classList.add("is-done");
+      open();
+      setTimeout(() => intro.remove(), 1200);
+    };
+    intro.addEventListener("click", finish);
+    setTimeout(finish, 3600);
+  } else {
+    open();
+  }
+
+  // Closing: bars shut before moving to another page, then part again on arrival.
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href]");
+    if (!a || reduceMotion || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (a.target === "_blank" || a.origin !== location.origin || a.getAttribute("href").startsWith("#")) return;
+    if (a.pathname === location.pathname && a.search === location.search) return;
+    e.preventDefault();
+    root.classList.add("is-leaving");
+    setTimeout(() => (location.href = a.href), 650);
+  });
+  // Coming back via the browser's back button restores the page mid-transition.
+  addEventListener("pageshow", (e) => e.persisted && root.classList.remove("is-leaving"));
 })();

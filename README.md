@@ -1,6 +1,8 @@
 # Personal Website
 
-A full-screen photography portfolio: every section is a full-bleed photo with a title and a "View Work →" link, plus a floating text nav at the top of the screen.
+A cinematic, full-screen photography portfolio: every section is a full-bleed photo with a title and a "View Work →" link, plus a floating text nav at the top of the screen.
+
+Cinematic touches: an opening title card (once per visit), letterbox bars that open on each page and close between pages, film grain, a vignette and colour grade, serif title cards that resolve letter by letter, a viewfinder scene counter and timecode, and wipe-in reveals on the Work and Gallery pages. Visitors who've turned on "reduce motion" get a calm, static version.
 
 ## Make it yours
 
