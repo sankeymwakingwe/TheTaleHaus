@@ -1,4 +1,4 @@
-/* Shared chrome (header, menu, contact dock) + per-page rendering. */
+/* Shared chrome (header, floating nav) + per-page rendering. */
 (function () {
   const S = window.SITE;
   const page = document.body.dataset.page;
@@ -10,7 +10,9 @@
     phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
     mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
     pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
-    whatsapp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 .8a5 5 0 0 1-2.3-2.3l.8-1-1-2z"/></svg>',
+    home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>',
+    grid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="6.5" height="6.5"/><rect x="13.5" y="4" width="6.5" height="6.5"/><rect x="4" y="13.5" width="6.5" height="6.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5"/></svg>',
+    user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h15m-5-5 5 5-5 5"/></svg>',
     close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6 6 18"/></svg>',
   };
@@ -24,13 +26,16 @@
 
   /* ── Header ─────────────────────────────────────────────── */
   const links = [
-    ["index.html", "Home", "home"],
-    ["work.html", "Work", "work"],
-    ["about.html", "About", "about"],
-    ["contact.html", "Contact", "contact"],
+    ["index.html", "Home", "home", icon.home],
+    ["work.html", "Work", "work", icon.grid],
+    ["about.html", "About", "about", icon.user],
+    ["contact.html", "Contact", "contact", icon.mail],
   ];
   const navLinks = links
-    .map(([href, label, key]) => `<a href="${href}" class="${page === key || (key === "work" && page === "gallery") ? "is-current" : ""}">${label}</a>`)
+    .map(([href, label, key, svg]) => {
+      const current = page === key || (key === "work" && page === "gallery");
+      return `<a href="${href}"${current ? ' class="is-current" aria-current="page"' : ""}>${svg}<span>${label}</span></a>`;
+    })
     .join("");
 
   document.body.insertAdjacentHTML(
@@ -40,28 +45,14 @@
         <span class="logo-line">${spaced(S.firstName)}</span>
         <span class="logo-line">${spaced(S.lastName)}</span>
       </a>
-      <nav class="nav">${navLinks}</nav>
       <div class="header-icons">
         ${S.social.instagram ? `<a href="${S.social.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${icon.instagram}</a>` : ""}
         ${S.social.pinterest ? `<a href="${S.social.pinterest}" target="_blank" rel="noopener" aria-label="Pinterest">${icon.pinterest}</a>` : ""}
         <button type="button" class="share-btn" aria-label="Share">${icon.share}</button>
       </div>
-      <button type="button" class="menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
     </header>
-    <div class="mobile-menu" hidden>
-      <nav>${navLinks}</nav>
-      <div class="mobile-menu-foot">${esc(S.contact.email)}<br>${esc(S.contact.location)}</div>
-    </div>`
+    <nav class="float-nav" aria-label="Main">${navLinks}</nav>`
   );
-
-  const menuBtn = document.querySelector(".menu-btn");
-  const menu = document.querySelector(".mobile-menu");
-  menuBtn.addEventListener("click", () => {
-    const open = menuBtn.getAttribute("aria-expanded") !== "true";
-    menuBtn.setAttribute("aria-expanded", open);
-    document.body.classList.toggle("menu-open", open);
-    menu.hidden = !open;
-  });
 
   document.querySelector(".share-btn").addEventListener("click", async () => {
     const data = { title: document.title, url: location.href };
@@ -82,17 +73,7 @@
     setTimeout(() => t.remove(), 2000);
   }
 
-  /* ── Floating contact dock + WhatsApp ───────────────────── */
   const c = S.contact;
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    `<div class="dock">
-      <a href="tel:${c.phone.replace(/[^\d+]/g, "")}">${icon.phone}<span>Call</span></a>
-      <a href="mailto:${c.email}">${icon.mail}<span>Email</span></a>
-      <a href="${c.mapUrl}" target="_blank" rel="noopener">${icon.pin}<span>Location</span></a>
-    </div>
-    ${c.whatsapp ? `<a class="whatsapp" href="https://wa.me/${c.whatsapp}" target="_blank" rel="noopener" aria-label="WhatsApp">${icon.whatsapp}</a>` : ""}`
-  );
 
   /* ── Pages ──────────────────────────────────────────────── */
   const main = document.querySelector("main");
@@ -197,11 +178,11 @@
       lb.querySelector(".lb-img").style.cssText = bg(cat.images[cur], cat.fallback);
       lb.querySelector(".lb-count").textContent = `${cur + 1} / ${cat.images.length}`;
       lb.hidden = false;
-      document.body.classList.add("menu-open");
+      document.body.classList.add("no-scroll");
     };
     const hide = () => {
       lb.hidden = true;
-      document.body.classList.remove("menu-open");
+      document.body.classList.remove("no-scroll");
     };
     main.querySelectorAll(".gallery-item").forEach((b) => b.addEventListener("click", () => show(+b.dataset.i)));
     lb.querySelector(".lb-close").addEventListener("click", hide);

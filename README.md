@@ -1,12 +1,12 @@
 # Personal Website
 
-A full-screen photography portfolio: every section is a full-bleed photo with a title and a "View Work →" link, plus a minimal nav and a floating Call / Email / Location bar.
+A full-screen photography portfolio: every section is a full-bleed photo with a title and a "View Work →" link, plus a floating nav bar at the bottom of the screen.
 
 ## Make it yours
 
 Edit **one file**: [`assets/js/content.js`](assets/js/content.js). It holds:
 
-- your name (shown as the spaced-out logo), phone, email, location, WhatsApp, and social links
+- your name (shown as the spaced-out logo), phone, email, location, and social links
 - the About text
 - the photo categories (Lifestyle, Portraits, …). Each one is a full-screen section on the home page and gets its own gallery page. Add, remove, rename, or reorder them freely.
 

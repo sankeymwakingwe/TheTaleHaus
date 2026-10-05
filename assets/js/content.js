@@ -16,10 +16,8 @@ window.SITE = {
     phone: "+1 000 000 0000",
     email: "hello@example.com",
     location: "Your City, Country",
-    // Opens when someone taps "Location".
+    // Opens when someone taps the location on the Contact page.
     mapUrl: "https://maps.google.com/?q=Your+City",
-    // WhatsApp number, digits only with country code (leave "" to hide).
-    whatsapp: "10000000000",
   },
 
   social: {
