@@ -64,7 +64,7 @@ window.SITE = {
     {
       slug: "lifestyle",
       title: "Lifestyle",
-      cover: "images/lifestyle/cover.jpg",
+      cover: "images/hero.jpg",
       fallback: "radial-gradient(ellipse at 60% 35%, #8a5a3c 0%, #3b2418 45%, #120b08 100%)",
       images: ["images/lifestyle/01.jpg", "images/lifestyle/02.jpg", "images/lifestyle/03.jpg", "images/lifestyle/04.jpg", "images/lifestyle/05.jpg", "images/lifestyle/06.jpg"],
     },

@@ -448,6 +448,12 @@ svg { width: 18px; height: 18px; flex: none; }
 }
 
 @media (max-width: 860px) {
+  /* Titles sit low on phones so they don't cover faces in the photos. */
+  .slide:not(.panel) { align-items: flex-end; }
+  .slide:not(.panel) .slide-text { margin: 0 0 96px; }
+  .slide:not(.panel) .slide-media::after {
+    background: linear-gradient(transparent 45%, rgba(0, 0, 0, 0.7));
+  }
   .dots { display: none; }
   .work-grid { grid-template-columns: 1fr; }
   .work-tile { min-height: 80vh; }
