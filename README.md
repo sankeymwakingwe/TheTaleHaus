@@ -8,6 +8,9 @@ Built from the Figma file "The Tale Haus" (frames: Desktop - 1, Project Index Pa
 | Project Index (all projects) | `projects.html` |
 | Project detail (Client / Year, Film, Shots collage) | `project.html?p=<slug>` |
 | Services | `services.html` |
+| Photo collection + full-screen viewer | `gallery.html?c=<slug>` |
+| Investment (packages) | `investment.html` |
+| Contact (details + enquiry form) | `contact.html` |
 
 ## Editing
 

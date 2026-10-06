@@ -527,3 +527,79 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
   .dash-btn { min-width: 150px; padding: 10px 24px; font-size: 15px; }
   .project-tile.tall .tile-title { padding-top: 40px; }
 }
+
+/* ── Content brought over from the Danie Sankey site ──── */
+
+/* About: photo beside the text */
+.about { max-width: none; }
+.about-grid { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
+.about-media { aspect-ratio: 4 / 5; border-radius: 30px; }
+.about-copy { display: grid; gap: 14px; justify-items: start; }
+.about .about-copy h2 { text-align: left; margin: 0; }
+.about-lede { font: 400 clamp(28px, 3vw, 44px)/1.1 var(--display); color: var(--teal); }
+.about-copy p { margin: 0; line-height: 1.55; }
+.about-copy .btn-outline { margin-top: 8px; }
+
+/* What clients say */
+.quotes { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 20px; }
+.quote { margin: 0; padding: 32px 34px; border: 1.5px solid var(--line); border-radius: 22px; display: grid; gap: 18px; align-content: space-between; }
+.quote blockquote { margin: 0; font: 400 clamp(20px, 1.7vw, 26px)/1.35 var(--display); }
+.quote figcaption { font-size: 14px; color: var(--muted); }
+.quote figcaption strong { color: var(--ink); font-weight: 600; }
+
+/* Photo collections (Project Index page) */
+.collection-grid { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 15px; }
+.collection-tile { position: relative; display: grid; place-items: end center; padding-bottom: 22px; aspect-ratio: 3 / 4; border-radius: 22px; overflow: hidden; color: var(--white); text-decoration: none; }
+.collection-tile > .media { position: absolute; inset: 0; }
+.collection-tile .media .ph-label { display: none; }
+.collection-tile .media img { transition: transform 0.6s ease; }
+.collection-tile:hover .media img { transform: scale(1.04); }
+.collection-tile .tile-title { padding-top: 0; }
+
+/* Gallery page */
+.photo-grid { max-width: calc(var(--wrap) + 2 * var(--edge)); margin: 0 auto; padding: 0 var(--edge); display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 15px; }
+.photo { padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 18px; overflow: hidden; }
+.photo .media { aspect-ratio: 4 / 5; }
+.photo .media img { transition: transform 0.5s ease; }
+.photo:hover .media img { transform: scale(1.04); }
+.lightbox { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(0, 20, 21, 0.92); }
+.lightbox[hidden] { display: none; }
+.lb-img { width: min(90vw, 1100px); height: min(82vh, 900px); }
+.lb-img .media { width: 100%; height: 100%; background: transparent; }
+.lb-img .media img { object-fit: contain; }
+.lb-close, .lb-prev, .lb-next { position: absolute; border: 0; background: none; color: var(--white); font: 300 48px/1 var(--sans); cursor: pointer; padding: 12px 18px; opacity: 0.8; }
+.lb-close:hover, .lb-prev:hover, .lb-next:hover { opacity: 1; }
+.lb-close { top: 12px; right: 16px; }
+.lb-prev { left: 8px; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 8px; top: 50%; transform: translateY(-50%); }
+.lb-count { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; color: rgba(255, 255, 255, 0.75); font-size: 14px; }
+
+/* Investment page */
+.page-intro { max-width: 52ch; margin: 14px auto 0; color: var(--muted); line-height: 1.55; }
+.packages { max-width: calc(var(--wrap) + 2 * var(--edge)); margin: 0 auto; padding: 0 var(--edge); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 15px; }
+.package { padding: 34px 30px; border-radius: 26px; background: var(--teal); color: var(--white); display: grid; gap: 10px; align-content: start; }
+.package h2 { font: 400 30px/1.1 var(--display); }
+.package .price { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; opacity: 0.9; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+.package p { margin: 0; line-height: 1.5; }
+
+/* Contact page */
+.contact-grid { max-width: calc(var(--wrap) + 2 * var(--edge)); margin: 0 auto; padding: 0 var(--edge); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(20px, 3vw, 40px); align-items: start; }
+.contact-card { display: grid; gap: 4px; padding: 34px 32px; border-radius: 26px; background: var(--teal); color: var(--white); }
+.contact-card small { margin-top: 14px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; }
+.contact-card small:first-child { margin-top: 0; }
+.contact-card a { font-size: 18px; font-weight: 500; text-decoration: none; overflow-wrap: anywhere; }
+.contact-card a:hover { text-decoration: underline; }
+.enquiry { display: grid; gap: 8px; padding: 34px 32px; border: 1.5px solid var(--line); border-radius: 26px; }
+.enquiry label { font-size: 14px; font-weight: 600; margin-top: 8px; }
+.enquiry input, .enquiry select, .enquiry textarea { width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 12px; font: inherit; font-size: 16px; color: var(--ink); background: var(--white); }
+.enquiry input:focus, .enquiry select:focus, .enquiry textarea:focus { outline: 2px solid var(--teal); outline-offset: 1px; border-color: transparent; }
+.enquiry .btn-solid { justify-self: start; margin-top: 14px; background: var(--teal); color: var(--white); }
+.enquiry .btn-solid:hover { background: var(--deep); }
+.enquiry .fine { font-size: 12px; color: var(--muted); }
+.footer-links { margin-top: 18px; }
+
+@media (max-width: 760px) {
+  .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .about-media { aspect-ratio: 4 / 4.4; }
+  .quote { padding: 26px 24px; }
+}

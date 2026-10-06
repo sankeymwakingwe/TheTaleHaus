@@ -40,7 +40,7 @@
         <p class="info"><small>Local time</small><span class="clock">--:--</span></p>
         <span class="divider hide-md" aria-hidden="true"></span>
         <p class="info hide-md"><small>Currently, the Haus is</small>${esc(status)}</p>
-        <a class="btn-connect" href="mailto:${esc(H.contact.email)}">Let’s Connect</a>
+        <a class="btn-connect" href="contact.html">Let’s Connect</a>
       </div>
     </header>`;
 
@@ -79,6 +79,9 @@
           <div>
             <h3>GET IN TOUCH</h3>
             <p><a href="mailto:${esc(H.contact.email)}">${esc(H.contact.email)} ${arrow.up}</a></p>
+            <p><a href="tel:${esc(H.contact.phone.replace(/\s/g, ""))}">${esc(H.contact.phone)}</a></p>
+            <p>${esc(H.contact.location)}</p>
+            <p class="footer-links"><a href="investment.html">Investment</a> · <a href="contact.html">Contact</a></p>
           </div>
         </div>
         <p class="copyright">Copyright © ${year} The Tale Haus | Let’s tell your tales | All rights reserved</p>
@@ -100,7 +103,7 @@
         ${media(H.hero.video || H.hero.image, "Hero image or showreel", "hero-media")}
         <div class="hero-copy">
           <h1>${H.hero.lines.map(esc).join("<br>")}</h1>
-          <p class="ready"><a class="btn-solid" href="mailto:${esc(H.contact.email)}">Let’s Connect</a></p>
+          <p class="ready"><a class="btn-solid" href="contact.html">Let’s Connect</a></p>
         </div>
       </section>
 
@@ -120,6 +123,17 @@
         <div class="head"><h2>TRUSTED BRANDS</h2></div>
         <div class="brands">
           <div class="brands-track">${H.brands.map((b) => brand(b, false)).join("")}${H.brands.map((b) => brand(b, true)).join("")}</div>
+        </div>
+      </section>
+
+      <section class="block" id="clients" data-label="Clients">
+        <div class="head"><h2>WHAT CLIENTS SAY</h2></div>
+        <div class="quotes">
+          ${H.testimonials.map((t) => `
+            <figure class="quote">
+              <blockquote>“${esc(t.quote)}”</blockquote>
+              <figcaption><strong>${esc(t.by)}</strong>${t.role ? ` · ${esc(t.role)}` : ""}</figcaption>
+            </figure>`).join("")}
         </div>
       </section>
 
@@ -150,8 +164,15 @@
       </section>
 
       <section class="block about" id="about" data-label="About">
-        <h2>ABOUT THE TALE HAUS</h2>
-        ${H.about.paragraphs.map((p) => `<p>${rich(p)}</p>`).join("")}
+        <div class="about-grid">
+          ${media(H.about.image, "The Tale Haus team", "about-media")}
+          <div class="about-copy">
+            <h2>ABOUT THE TALE HAUS</h2>
+            <p class="about-lede">${esc(H.about.heading)}</p>
+            ${H.about.paragraphs.map((p) => `<p>${rich(p)}</p>`).join("")}
+            <p><a class="btn-outline" href="investment.html">See our packages</a></p>
+          </div>
+        </div>
       </section>
       ${footer}`;
   }
@@ -169,6 +190,16 @@
             <span class="dash-btn">View ${arrow.up}</span>
           </a></li>`).join("")}
       </ol>
+      <section class="block" id="collections">
+        <div class="head"><h2>PHOTO COLLECTIONS</h2><p>Portraits, lifestyle, editorial, fashion and events.</p></div>
+        <div class="collection-grid">
+          ${H.galleries.map((g) => `
+            <a class="collection-tile" href="gallery.html?c=${encodeURIComponent(g.slug)}">
+              ${media(g.cover, g.title)}
+              <span class="tile-title">${esc(g.title.toUpperCase())}</span>
+            </a>`).join("")}
+        </div>
+      </section>
       ${footer}`;
   }
 
@@ -229,7 +260,114 @@
       ${footer}`;
   }
 
-  main.innerHTML = { home, projects, project, services }[page]();
+  function gallery() {
+    const slug = new URLSearchParams(location.search).get("c");
+    const i = Math.max(0, H.galleries.findIndex((g) => g.slug === slug));
+    const g = H.galleries[i];
+    const next = H.galleries[(i + 1) % H.galleries.length];
+    document.title = `${g.title} — The Tale Haus`;
+    return `
+      ${topbar}
+      ${nav}
+      <p class="backrow"><a class="back" href="projects.html#collections">${arrow.back}<span>All collections</span></a></p>
+      <section class="page-head"><h1>${esc(g.title.toUpperCase())}</h1></section>
+      <div class="photo-grid">
+        ${g.images.map((src, n) => `
+          <button type="button" class="photo" data-i="${n}" aria-label="Open photo ${n + 1} of ${g.images.length}">
+            ${media(src, `${g.title} — photo ${n + 1}`)}
+          </button>`).join("")}
+      </div>
+      <p class="center"><a class="btn-outline" href="gallery.html?c=${encodeURIComponent(next.slug)}">Next: ${esc(next.title)} ${arrow.up}</a></p>
+      <div class="lightbox" hidden>
+        <button type="button" class="lb-close" aria-label="Close">×</button>
+        <button type="button" class="lb-prev" aria-label="Previous photo">‹</button>
+        <div class="lb-img"></div>
+        <button type="button" class="lb-next" aria-label="Next photo">›</button>
+        <p class="lb-count"></p>
+      </div>
+      ${footer}`;
+  }
+
+  function investment() {
+    const v = H.investment;
+    return `
+      ${topbar}
+      ${nav}
+      <section class="page-head"><h1>INVESTMENT</h1><p class="page-intro">${esc(v.intro)}</p></section>
+      <div class="packages">
+        ${v.packages.map((k) => `
+          <article class="package">
+            <h2>${esc(k.name)}</h2>
+            <p class="price">${esc(k.price)}</p>
+            <p>${esc(k.details)}</p>
+          </article>`).join("")}
+      </div>
+      <p class="center"><a class="btn-outline" href="contact.html">Ask for a quote</a></p>
+      ${footer}`;
+  }
+
+  function contact() {
+    const c = H.contact;
+    return `
+      ${topbar}
+      ${nav}
+      <section class="page-head"><h1>LET’S CONNECT</h1><p class="page-intro">Tell us what you’re planning and when. We reply within two working days.</p></section>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <small>Email</small><a href="mailto:${esc(c.email)}">${esc(c.email)}</a>
+          <small>Phone / WhatsApp</small><a href="tel:${esc(c.phone.replace(/\s/g, ""))}">${esc(c.phone)}</a>
+          <small>Studio</small><a href="${esc(c.mapUrl)}" target="_blank" rel="noopener">${esc(c.location)} ${arrow.up}</a>
+          <small>Follow</small><span><a href="${esc(c.instagram)}" target="_blank" rel="noopener">Instagram</a> · <a href="${esc(c.youtube)}" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <form class="enquiry">
+          <label for="q-name">Your name</label><input id="q-name" name="name" required>
+          <label for="q-email">Email</label><input id="q-email" name="email" type="email" required>
+          <label for="q-service">What do you need?</label>
+          <select id="q-service" name="service">${H.services.map((s) => `<option>${esc(s.title)}</option>`).join("")}<option>Something else</option></select>
+          <label for="q-msg">Tell us about it</label><textarea id="q-msg" name="message" rows="5" required></textarea>
+          <button type="submit" class="btn-solid">Send enquiry</button>
+          <p class="fine">This opens your email app with your message filled in.</p>
+        </form>
+      </div>
+      ${footer}`;
+  }
+
+  main.innerHTML = { home, projects, project, services, gallery, investment, contact }[page]();
+
+  // Contact form: hand the message to the visitor's email app.
+  const enquiry = document.querySelector(".enquiry");
+  if (enquiry) enquiry.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = new FormData(enquiry);
+    const body = `${f.get("message")}\n\n— ${f.get("name")} (${f.get("email")})`;
+    location.href = `mailto:${H.contact.email}?subject=${encodeURIComponent("Enquiry: " + f.get("service"))}&body=${encodeURIComponent(body)}`;
+  });
+
+  // Gallery: full-screen viewer with arrows, swipe-free keyboard support.
+  const lb = document.querySelector(".lightbox");
+  if (lb) {
+    const g = H.galleries[Math.max(0, H.galleries.findIndex((x) => x.slug === new URLSearchParams(location.search).get("c")))];
+    let cur = 0;
+    const show = (n) => {
+      cur = (n + g.images.length) % g.images.length;
+      lb.querySelector(".lb-img").innerHTML = media(g.images[cur], `${g.title} — photo ${cur + 1}`);
+      lb.querySelector(".lb-count").textContent = `${cur + 1} / ${g.images.length}`;
+      lb.hidden = false;
+      document.body.style.overflow = "hidden";
+    };
+    const hide = () => { lb.hidden = true; document.body.style.overflow = ""; };
+    document.querySelectorAll(".photo").forEach((b) => b.addEventListener("click", () => show(+b.dataset.i)));
+    lb.querySelector(".lb-close").addEventListener("click", hide);
+    lb.querySelector(".lb-prev").addEventListener("click", () => show(cur - 1));
+    lb.querySelector(".lb-next").addEventListener("click", () => show(cur + 1));
+    lb.addEventListener("click", (e) => { if (e.target === lb) hide(); });
+    document.addEventListener("keydown", (e) => {
+      if (lb.hidden) return;
+      if (e.key === "Escape") hide();
+      if (e.key === "ArrowLeft") show(cur - 1);
+      if (e.key === "ArrowRight") show(cur + 1);
+    });
+  }
 
 
   /* ── Live clock in the studio's time zone ───────────────── */
