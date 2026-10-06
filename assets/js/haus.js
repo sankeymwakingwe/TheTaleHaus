@@ -227,13 +227,6 @@
 
   main.innerHTML = { home, projects, project, services }[page]();
 
-  /* ── Scale the 1440px design up on wider screens, like the Figma frame ── */
-  const fit = () => {
-    const z = Math.max(1, window.innerWidth / 1440);
-    document.body.style.zoom = z === 1 ? "" : String(z);
-  };
-  fit();
-  window.addEventListener("resize", fit);
 
   /* ── Live clock in the studio's time zone ───────────────── */
   const clocks = document.querySelectorAll(".clock");
@@ -242,22 +235,34 @@
   tick();
   setInterval(tick, 15000);
 
-  /* ── Numbered side labels ("01 — LATEST PROJECT") ───────── */
-  document.querySelectorAll("[data-label]").forEach((el, i) => {
-    const tag = document.createElement("span");
-    tag.className = "side-label";
-    tag.setAttribute("aria-hidden", "true");
-    tag.textContent = `${String(i).padStart(2, "0")} — ${el.dataset.label}`;
-    el.prepend(tag);
-  });
+  /* ── Side rails: current section on the left, next one on the right ── */
+  const chapters = [...document.querySelectorAll("[data-label]")];
+  if (chapters.length > 1) {
+    document.body.classList.add("has-rails");
+    const name = (i) => `${String(i).padStart(2, "0")} — ${chapters[i].dataset.label}`;
+    document.body.insertAdjacentHTML("beforeend",
+      '<aside class="rail rail-left" aria-hidden="true"><span></span></aside>' +
+      '<aside class="rail rail-right" aria-hidden="true"><span></span></aside>');
+    const [left, right] = document.querySelectorAll(".rail span");
+    let shown = -1;
+    const spyRails = () => {
+      let i = 0;
+      chapters.forEach((c, n) => { if (c.getBoundingClientRect().top < window.innerHeight * 0.5) i = n; });
+      if (i === shown) return;
+      shown = i;
+      left.textContent = name(i);
+      right.textContent = i + 1 < chapters.length ? name(i + 1) : "LET’S TELL YOUR TALES";
+    };
+    window.addEventListener("scroll", spyRails, { passive: true });
+    spyRails();
+  }
 
   /* ── Sticky nav: compact once scrolled, highlight the section in view ── */
   const navEl = document.querySelector(".pill-nav");
   const spyLinks = [...navEl.querySelectorAll("[data-spy]")];
   const spyTargets = spyLinks.map((a) => document.getElementById(a.dataset.spy)).filter(Boolean);
   const onScroll = () => {
-    const z = parseFloat(document.body.style.zoom) || 1;
-    navEl.classList.toggle("stuck", navEl.getBoundingClientRect().top <= 12 * z + 1);
+    navEl.classList.toggle("stuck", navEl.getBoundingClientRect().top <= 13);
     if (page !== "home") return;
     let current = "hello";
     spyTargets.forEach((t) => { if (t.getBoundingClientRect().top < window.innerHeight * 0.4) current = t.id; });
