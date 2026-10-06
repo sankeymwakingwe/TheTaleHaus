@@ -19,6 +19,7 @@
   --display: "quincy-cf", "DM Serif Display", Georgia, serif; /* hero title — Quincy CF via Adobe Fonts kit ann1gwy */
   --small: "Nunito", system-ui, sans-serif;
   --wrap: 80%;      /* cards, tiles and grids sit at 80% of the page, as in the Figma */
+  --wrapf: 0.8;     /* the same, as a number */
   --edge: 40px;     /* page side padding */
   --rail: 64px;     /* width of the section rails on wide screens */
   --gutter: 16px;
@@ -161,7 +162,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 
 /* ── Home blocks ──────────────────────────────────────── */
 .block { position: relative; padding: 40px var(--edge) 0; scroll-margin-top: 80px; }
-.block > .head { margin: 0 0 40px; }
+/* Headings line up with the cards below them (same 80% column). */
+.block > .head { max-width: var(--wrap); margin: 0 auto 32px; }
 .block h2 { font-size: 1em; font-weight: 700; }
 .block .head p { margin-top: 2px; }
 
@@ -238,7 +240,7 @@ a:hover .dash-btn, .dash-btn:hover { background: rgba(255, 255, 255, 0.15); }
 
 /* Trusted brands — a slowly moving strip */
 .brands-block { padding-left: 0; padding-right: 0; }
-.brands-block .head { padding: 0 var(--edge); margin-bottom: 0; }
+.brands-block .head { max-width: none; width: calc((100% - 2 * var(--edge)) * var(--wrapf)); margin: 0 auto; }
 .brands { margin-top: 16px; min-height: 141px; background: var(--band); display: flex; align-items: center; overflow: hidden; }
 .brands-track { display: flex; align-items: center; gap: 72px; width: max-content; padding-left: 72px; animation: brands 32s linear infinite; }
 .brands:hover .brands-track { animation-play-state: paused; }
@@ -247,15 +249,19 @@ a:hover .dash-btn, .dash-btn:hover { background: rgba(255, 255, 255, 0.15); }
 .brands img { height: 56px; width: auto; filter: grayscale(1); opacity: 0.85; }
 .brand-ph { font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; font-size: 14px; color: rgba(0, 36, 37, 0.55); white-space: nowrap; }
 
+/* ID / PROJECT header row: ID sits over each tile's number, PROJECT over its title. */
 .index-head {
+  position: relative;
   max-width: var(--wrap);
-  margin: -24px auto 24px;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+  margin: -8px auto 14px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--ink);
   font-weight: 700;
+  font-size: 0.85em;
+  letter-spacing: 0.08em;
+  text-align: center;
 }
-.index-head span { justify-self: center; border-bottom: 1px solid var(--ink); padding: 0 4px; }
-.index-head span:last-child { justify-self: start; padding-left: 130px; }
+.index-head span:first-child { position: absolute; left: 24px; top: 0; }
 
 .project-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 17px; }
 .tile-title { position: relative; display: grid; gap: 4px; font-weight: 700; text-align: center; padding: 0 16px; text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4); }
@@ -441,11 +447,10 @@ a:hover .dash-btn, .dash-btn:hover { background: rgba(255, 255, 255, 0.15); }
   .pill-nav { width: calc(100% - 2 * var(--gutter)); height: 52px; border-radius: 26px; margin-top: -26px; }
   .pill-nav.stuck { height: 48px; width: calc(100% - 2 * var(--gutter)); }
   .pill-nav a { font-size: 13px; padding: 7px 10px; }
-  :root { --edge: var(--gutter); --wrap: 100%; }
+  :root { --edge: var(--gutter); --wrap: 100%; --wrapf: 1; }
   .hero { margin-top: -26px; border-radius: 24px; height: auto; aspect-ratio: 4 / 5; }
   .card { border-radius: 28px; }
   .card, .project-tile { aspect-ratio: 16 / 9; }
-  .index-head span:last-child { padding-left: 24px; }
   .tile-title small, .tile-view, .blurb { opacity: 0.9; transform: none; }
   .service-grid { grid-template-columns: 1fr; }
   .service-tile { aspect-ratio: 16 / 8; border-radius: 22px; font-size: 14px; }
