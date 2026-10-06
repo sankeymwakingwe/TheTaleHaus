@@ -106,7 +106,7 @@
           <span class="card-copy">
             <strong>${esc(latest.title)}</strong>
             <small>${esc(latest.tag)}</small>
-            <span class="dash-btn">VIEW ${arrow.up}</span>
+            <span class="dash-btn">View ${arrow.up}</span>
           </span>
         </a>
       </section>
@@ -127,10 +127,10 @@
               ${media(p.cover, p.title)}
               <span class="tile-id">${String(i + 1).padStart(2, "0")}</span>
               <span class="tile-title">${esc(p.title.toUpperCase())}<small>${esc(p.tag)}</small></span>
-              <span class="tile-view">VIEW ${arrow.up}</span>
+              <span class="tile-view">View ${arrow.up}</span>
             </a></li>`).join("")}
         </ol>
-        <p class="center"><a class="btn-outline" href="projects.html">VIEW ALL PROJECTS</a></p>
+        <p class="center"><a class="btn-outline" href="projects.html">View all projects</a></p>
       </section>
 
       <section class="block" id="services" data-label="Services">
@@ -161,7 +161,7 @@
           <li><a class="project-tile tall" href="${projectUrl(p)}">
             ${media(p.cover, p.title)}
             <span class="tile-title">${esc(p.title.toUpperCase())}<small>${esc(p.tag)}</small></span>
-            <span class="dash-btn">VIEW ${arrow.up}</span>
+            <span class="dash-btn">View ${arrow.up}</span>
           </a></li>`).join("")}
       </ol>
       ${footer}`;

@@ -159,7 +159,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .tagline { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
 .ready { display: grid; justify-items: center; gap: 6px; margin-top: 16px; }
 .ready small { font-size: 12px; opacity: 0.85; }
-.ready .dash-btn { font-size: 15px; padding: 6px 24px; }
+.ready .dash-btn { margin-top: 8px; }
 
 /* ── Home blocks ──────────────────────────────────────── */
 .block { position: relative; padding: 40px var(--edge) 0; scroll-margin-top: 80px; }
@@ -220,24 +220,30 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .card-copy strong { font: 400 clamp(24px, 2.4vw, 34px)/1.1 var(--display); }
 .card-copy small { font-size: 13px; opacity: 0.85; margin-bottom: 10px; }
 
+/* Buttons: thin solid outline, softly rounded corners, roomy padding (like the reference site). */
 .dash-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 4px 31px;
-  border: 1px dashed currentColor;
-  border-radius: 40px;
-  font-weight: 700;
+  gap: 14px;
+  min-width: 190px;
+  padding: 12px 30px;
+  border: 1.5px solid currentColor;
+  border-radius: 14px;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   text-align: center;
   color: var(--white);
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.25s, color 0.25s;
 }
-a:hover .dash-btn, .dash-btn:hover { background: rgba(255, 255, 255, 0.15); }
-.dash-btn.dark { color: var(--ink); border-radius: 10px; padding: 2px 18px; }
-.dash-btn.dark:hover { background: var(--grey); }
+a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal); }
+.dash-btn.dark { color: var(--ink); min-width: 0; padding: 10px 22px; }
+.dash-btn.dark:hover { background: var(--ink); color: var(--white); }
+/* Service tile titles keep the same frame but stay labels, not buttons. */
+.service-tile .dash-btn { font-weight: 600; font-size: 15px; letter-spacing: 0.04em; line-height: 1.3; }
 
 /* Trusted brands — a slowly moving strip */
 .brands-block { padding-left: 0; padding-right: 0; }
@@ -275,13 +281,14 @@ a:hover .dash-btn, .dash-btn:hover { background: rgba(255, 255, 255, 0.15); }
 .btn-outline {
   display: inline-block;
   margin-top: 24px;
-  padding: 12px 22px;
-  border: 1px solid var(--teal);
-  border-radius: 20px;
+  padding: 12px 30px;
+  border: 1.5px solid var(--teal);
+  border-radius: 14px;
   color: var(--teal);
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 500;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.25s, color 0.25s;
 }
 .btn-outline:hover { background: var(--teal); color: var(--white); }
 
@@ -393,7 +400,7 @@ a:hover .dash-btn, .dash-btn:hover { background: rgba(255, 255, 255, 0.15); }
 .project-list.full { padding: 0 var(--edge); }
 .project-tile.tall { align-content: end; gap: 20px; padding-bottom: 20px; }
 .project-tile.tall .tile-title { align-self: center; margin-bottom: auto; padding-top: 80px; }
-.project-tile.tall .dash-btn { border-radius: 10px; font-size: 16px; padding: 6px 30px; min-width: 200px; }
+.project-tile.tall .dash-btn { margin-bottom: 8px; }
 
 .backrow { padding: 24px var(--edge) 0; }
 .back { display: inline-flex; align-items: center; gap: 10px; font: 400 16px var(--sans); text-decoration: none; }
@@ -409,7 +416,7 @@ a:hover .dash-btn, .dash-btn:hover { background: rgba(255, 255, 255, 0.15); }
 .meta-row strong { font: 400 16px var(--sans); border-top: 1px solid #000; padding-top: 6px; min-width: 87px; }
 .collections { text-align: center; display: grid; justify-items: center; gap: 6px; margin: 12px 0 0; }
 .collections h2 { font-size: 24px; }
-.collections .dash-btn { font-size: 20px; margin-top: 6px; }
+.collections .dash-btn { margin-top: 6px; }
 
 .moments { max-width: calc(min(100%, 1500px)); margin: 0 auto; padding: 120px var(--edge) 0; scroll-margin-top: 80px; }
 .moments h2.big { font-size: 36px; margin-bottom: 36px; }
@@ -466,6 +473,6 @@ a:hover .dash-btn, .dash-btn:hover { background: rgba(255, 255, 255, 0.15); }
   .moments { padding-top: 80px; }
   .collage { columns: 1; }
   .shot, .shot.wide, .shot.tall { width: 100%; margin-bottom: 17px; }
-  .project-tile.tall .dash-btn { font-size: 14px; min-width: 0; }
+  .dash-btn { min-width: 150px; padding: 10px 24px; font-size: 15px; }
   .project-tile.tall .tile-title { padding-top: 40px; }
 }
