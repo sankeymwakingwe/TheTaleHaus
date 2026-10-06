@@ -110,11 +110,11 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Smoky frosted glass, like the reference: the page shows through, blurred. */
-  background: linear-gradient(180deg, rgba(58, 64, 64, 0.48), rgba(38, 42, 42, 0.58));
+  /* Frosted glass in the brand teal: the page shows through, blurred. */
+  background: linear-gradient(180deg, rgba(36, 158, 161, 0.64), rgba(26, 128, 131, 0.76));
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
   transition: width 0.3s, height 0.3s;
@@ -127,7 +127,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .nav-brand, .nav-burger { display: none; }
 .nav-links { flex: 1; display: flex; align-items: center; justify-content: space-around; }
 .nav-links a {
-  color: rgba(255, 255, 255, 0.74);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.01em;
