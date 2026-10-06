@@ -21,7 +21,10 @@ Project films take a YouTube/Vimeo **embed** URL or an `.mp4` path.
 
 ## Fonts
 
-Montserrat and Nunito match the design. The design's display font, **Austena**, isn't on Google Fonts, so **DM Serif Display** stands in. To use Austena, add its webfont and change `--serif` at the top of `assets/css/haus.css`.
+- **Hero title:** Quincy CF, served by Adobe Fonts through the web project "DanieSankey website" (`ann1gwy`). Adobe only serves it on the domains listed in that project, so `thetale.haus` must be added there (fonts.adobe.com → My Fonts → Web Projects). Until then the title falls back to DM Serif Display.
+- **Everything else:** Montserrat and Nunito from Google Fonts; DM Serif Display stands in for Austena on other serif headings.
+
+To change a font, edit `--display` (hero title) or `--serif` at the top of `assets/css/haus.css`.
 
 ## Domain
 
