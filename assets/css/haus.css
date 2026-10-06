@@ -66,7 +66,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 }
 
 /* ── Top bar ──────────────────────────────────────────── */
-.topbar { background: var(--grey); }
+.topbar { background: var(--white); }
 .topbar-inner {
   min-height: 150px;
   padding: 0 var(--edge) 30px;
