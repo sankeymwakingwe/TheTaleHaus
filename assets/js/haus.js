@@ -45,12 +45,17 @@
     </header>`;
 
   // The teal pill nav from the design. It sticks to the top as you scroll.
+  // Frosted nav. On phones it folds into the brand name plus a menu button.
   const nav = `
     <nav class="pill-nav" aria-label="Main">
-      <a href="index.html" data-spy="hello" ${page === "home" ? 'aria-current="page"' : ""}>HAUS</a>
-      <a href="projects.html" data-spy="work" ${page === "projects" || page === "project" ? 'aria-current="page"' : ""}>WORK</a>
-      <a href="index.html#about" data-spy="about">US</a>
-      <a href="services.html" data-spy="services" ${page === "services" ? 'aria-current="page"' : ""}>SERVICES</a>
+      <a class="nav-brand" href="index.html">The Tale Haus<sup>®</sup></a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html" data-spy="hello" ${page === "home" ? 'aria-current="page"' : ""}>Haus</a>
+        <a href="projects.html" data-spy="work" ${page === "projects" || page === "project" ? 'aria-current="page"' : ""}>Work</a>
+        <a href="index.html#about" data-spy="about">Us</a>
+        <a href="services.html" data-spy="services" ${page === "services" ? 'aria-current="page"' : ""}>Services</a>
+      </div>
     </nav>`;
 
   const year = new Date().getFullYear();
@@ -255,6 +260,17 @@
     window.addEventListener("scroll", spyRails, { passive: true });
     spyRails();
   }
+
+  /* ── Phone menu button ─────────────────────────────────── */
+  const burger = document.querySelector(".nav-burger");
+  const setMenu = (open) => {
+    document.querySelector(".pill-nav").classList.toggle("open", open);
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  };
+  burger.addEventListener("click", () => setMenu(burger.getAttribute("aria-expanded") !== "true"));
+  document.querySelectorAll(".nav-links a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
   /* ── Sticky nav: compact once scrolled, highlight the section in view ── */
   const navEl = document.querySelector(".pill-nav");
