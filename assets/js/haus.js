@@ -227,6 +227,14 @@
 
   main.innerHTML = { home, projects, project, services }[page]();
 
+  /* ── Scale the 1440px design up on wider screens, like the Figma frame ── */
+  const fit = () => {
+    const z = Math.max(1, window.innerWidth / 1440);
+    document.body.style.zoom = z === 1 ? "" : String(z);
+  };
+  fit();
+  window.addEventListener("resize", fit);
+
   /* ── Live clock in the studio's time zone ───────────────── */
   const clocks = document.querySelectorAll(".clock");
   const fmt = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: H.timeZone });
@@ -248,7 +256,8 @@
   const spyLinks = [...navEl.querySelectorAll("[data-spy]")];
   const spyTargets = spyLinks.map((a) => document.getElementById(a.dataset.spy)).filter(Boolean);
   const onScroll = () => {
-    navEl.classList.toggle("stuck", navEl.getBoundingClientRect().top <= 12);
+    const z = parseFloat(document.body.style.zoom) || 1;
+    navEl.classList.toggle("stuck", navEl.getBoundingClientRect().top <= 12 * z + 1);
     if (page !== "home") return;
     let current = "hello";
     spyTargets.forEach((t) => { if (t.getBoundingClientRect().top < window.innerHeight * 0.4) current = t.id; });
