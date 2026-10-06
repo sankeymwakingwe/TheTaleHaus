@@ -21,10 +21,10 @@ Project films take a YouTube/Vimeo **embed** URL or an `.mp4` path.
 
 ## Fonts
 
-- **Hero title:** Quincy CF, served by Adobe Fonts through the web project "DanieSankey website" (`ann1gwy`). Adobe only serves it on the domains listed in that project, so `thetale.haus` must be added there (fonts.adobe.com → My Fonts → Web Projects). Until then the title falls back to DM Serif Display.
-- **Everything else:** Montserrat and Nunito from Google Fonts; DM Serif Display stands in for Austena on other serif headings.
+- **Headings:** Quincy CF, served by Adobe Fonts through the web project "DanieSankey website" (`ann1gwy`). Adobe only serves it on the domains listed in that project, so `thetale.haus` must be added there (fonts.adobe.com → My Fonts → Web Projects). Until then headings fall back to Georgia.
+- **Everything else:** Montserrat (Google Fonts). Quincy CF is used for all headings; Georgia is the fallback until the Adobe project allows thetale.haus.
 
-To change a font, edit `--display` (hero title) or `--serif` at the top of `assets/css/haus.css`.
+To change a font, edit `--display` (headings) or `--sans` at the top of `assets/css/haus.css`.
 
 ## Domain
 

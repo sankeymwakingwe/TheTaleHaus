@@ -161,7 +161,7 @@
           <li><a class="project-tile tall" href="${projectUrl(p)}">
             ${media(p.cover, p.title)}
             <span class="tile-title">${esc(p.title.toUpperCase())}<small>${esc(p.tag)}</small></span>
-            <span class="dash-btn serif">VIEW ${arrow.up}</span>
+            <span class="dash-btn">VIEW ${arrow.up}</span>
           </a></li>`).join("")}
       </ol>
       ${footer}`;
@@ -196,7 +196,7 @@
         <div class="collections">
           <h2 class="serif">Collections</h2>
           <small>Click a collection to jump to its content</small>
-          <a class="dash-btn dark serif" href="#moments">More Moments ${arrow.down}</a>
+          <a class="dash-btn dark" href="#moments">More Moments ${arrow.down}</a>
         </div>
       </section>
       <section class="moments" id="moments">

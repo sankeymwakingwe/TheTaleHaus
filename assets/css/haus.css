@@ -15,9 +15,8 @@
   --rail-next: #a9b4b4;
   --white: #fff;
   --sans: "Montserrat", system-ui, sans-serif;
-  --serif: "DM Serif Display", Georgia, serif; /* stand-in for Austena */
-  --display: "quincy-cf", "DM Serif Display", Georgia, serif; /* hero title — Quincy CF via Adobe Fonts kit ann1gwy */
-  --small: "Nunito", system-ui, sans-serif;
+  /* Two fonts only: Quincy CF for headings (Adobe Fonts kit ann1gwy), Montserrat for everything else. */
+  --display: "quincy-cf", Georgia, "Times New Roman", serif;
   --wrap: 80%;      /* cards, tiles and grids sit at 80% of the page, as in the Figma */
   --wrapf: 0.8;     /* the same, as a number */
   --edge: 40px;     /* page side padding */
@@ -41,7 +40,9 @@ body {
 a { color: inherit; }
 img { display: block; max-width: 100%; }
 h1, h2, h3, p { margin: 0; }
-.serif { font-family: var(--serif); font-weight: 400; }
+.serif { font-family: var(--display); font-weight: 400; }
+/* Headings */
+.block h2, .about h2, .service h2, .page-head h1 { font-family: var(--display); font-weight: 400; letter-spacing: 0.01em; }
 .center { text-align: center; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .ico { width: 0.8em; height: 0.8em; flex: none; vertical-align: -0.05em; }
@@ -79,8 +80,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 }
 .logo { display: flex; align-items: center; gap: 8px; color: var(--teal); text-decoration: none; }
 .logo img { height: 66px; width: auto; }
-.logo-mark { font: 400 44px/1 var(--serif); letter-spacing: -0.06em; }
-.logo-text { font: 400 13px/1.05 var(--serif); letter-spacing: 0.06em; }
+.logo-mark { font: 400 44px/1 var(--display); letter-spacing: -0.06em; }
+.logo-text { font: 400 13px/1.05 var(--display); letter-spacing: 0.06em; }
 .divider { width: 2px; height: 63px; background: var(--ink); flex: none; }
 .info { display: grid; gap: 2px; font-weight: 600; font-size: 17px; line-height: 1.2; }
 .info small { font-size: 12px; font-weight: 500; color: var(--muted); }
@@ -164,7 +165,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .block { position: relative; padding: 40px var(--edge) 0; scroll-margin-top: 80px; }
 /* Headings line up with the cards below them (same 80% column). */
 .block > .head { max-width: var(--wrap); margin: 0 auto 32px; }
-.block h2 { font-size: 1em; font-weight: 700; }
+.block h2 { font-size: 1.3em; }
 .block .head p { margin-top: 2px; }
 
 /* Section rails (wide screens): a thin strip down each side naming the
@@ -216,7 +217,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .card { border-radius: 50px; }
 .card .media .ph-label, .project-tile .media .ph-label { display: none; }
 .card-copy { position: relative; display: grid; justify-items: center; gap: 4px; text-align: center; }
-.card-copy strong { font: 400 clamp(24px, 2.4vw, 34px)/1.1 var(--serif); }
+.card-copy strong { font: 400 clamp(24px, 2.4vw, 34px)/1.1 var(--display); }
 .card-copy small { font-size: 13px; opacity: 0.85; margin-bottom: 10px; }
 
 .dash-btn {
@@ -392,16 +393,16 @@ a:hover .dash-btn, .dash-btn:hover { background: rgba(255, 255, 255, 0.15); }
 .project-list.full { padding: 0 var(--edge); }
 .project-tile.tall { align-content: end; gap: 20px; padding-bottom: 20px; }
 .project-tile.tall .tile-title { align-self: center; margin-bottom: auto; padding-top: 80px; }
-.project-tile.tall .dash-btn { border-radius: 10px; font-size: 24px; font-weight: 400; padding: 0 30px; min-width: 232px; }
+.project-tile.tall .dash-btn { border-radius: 10px; font-size: 16px; padding: 6px 30px; min-width: 200px; }
 
 .backrow { padding: 24px var(--edge) 0; }
-.back { display: inline-flex; align-items: center; gap: 10px; font: 400 16px var(--small); text-decoration: none; }
+.back { display: inline-flex; align-items: center; gap: 10px; font: 400 16px var(--sans); text-decoration: none; }
 .back:hover span { text-decoration: underline; }
 .project-hero { padding: 0 var(--edge); }
 .project-hero .hero-media { margin: 13px auto 0; aspect-ratio: 1120 / 491; max-height: 72vh; width: 100%; border-radius: 46px; }
 .project-hero .hero-media.is-ph { background: #c3e2e3; }
 .details { padding: 20px calc(var(--edge) + 29px) 0; }
-.details small { font: 400 14px var(--small); }
+.details small { font: 400 14px var(--sans); }
 .meta-row { display: flex; justify-content: space-between; }
 .meta-row div { display: grid; gap: 4px; font-size: 24px; }
 .meta-row .right { text-align: right; }
@@ -465,6 +466,6 @@ a:hover .dash-btn, .dash-btn:hover { background: rgba(255, 255, 255, 0.15); }
   .moments { padding-top: 80px; }
   .collage { columns: 1; }
   .shot, .shot.wide, .shot.tall { width: 100%; margin-bottom: 17px; }
-  .project-tile.tall .dash-btn { font-size: 18px; min-width: 0; }
+  .project-tile.tall .dash-btn { font-size: 14px; min-width: 0; }
   .project-tile.tall .tile-title { padding-top: 40px; }
 }
