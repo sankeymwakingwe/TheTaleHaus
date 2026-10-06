@@ -123,11 +123,14 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   color: var(--white);
   font-weight: 600;
   text-decoration: none;
-  padding: 8px 10px;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s;
+  padding: 10px 22px;
+  border-radius: 999px;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
-.pill-nav a:hover, .pill-nav a[aria-current="page"] { border-bottom-color: var(--white); }
+/* The section you're in gets a soft glow; hovering lifts a white pill behind the link. */
+.pill-nav a[aria-current="page"] { background: rgba(255, 255, 255, 0.16); }
+.pill-nav a:hover, .pill-nav a:focus-visible { background: var(--white); color: var(--teal); transform: translateY(-1px); }
+@media (prefers-reduced-motion: reduce) { .pill-nav a:hover { transform: none; } }
 
 /* ── Hero ─────────────────────────────────────────────── */
 .hero {
@@ -436,7 +439,7 @@ a:hover .dash-btn, .dash-btn:hover { background: rgba(255, 255, 255, 0.15); }
   .btn-connect { font-size: 13px; padding: 6px 12px; }
   .pill-nav { width: calc(100% - 2 * var(--gutter)); height: 52px; border-radius: 26px; margin-top: -26px; }
   .pill-nav.stuck { height: 48px; width: calc(100% - 2 * var(--gutter)); }
-  .pill-nav a { font-size: 13px; padding: 6px 4px; }
+  .pill-nav a { font-size: 13px; padding: 7px 10px; }
   :root { --edge: var(--gutter); --wrap: 100%; }
   .hero { margin-top: -26px; border-radius: 24px; height: auto; aspect-ratio: 4 / 5; }
   .card { border-radius: 28px; }
