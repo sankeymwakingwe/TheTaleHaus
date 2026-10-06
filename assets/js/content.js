@@ -33,8 +33,8 @@ window.HAUS = {
   hero: {
     lines: ["Integrated", "Media Solutions"],
     tagline: "Live Broadcasting + Film + Photography + Design",
-    image: "",
-    video: "", // e.g. "images/showreel.mp4" — plays muted on loop behind the headline
+    image: "images/hero-poster.jpg", // still shown while the video loads
+    video: "images/hero.mp4", // plays muted on loop behind the headline (MP4, H.264, no sound)
   },
 
   // "About The Tale Haus" section.

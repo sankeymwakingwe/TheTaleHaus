@@ -15,10 +15,10 @@
   };
 
   // An image (or video), or a teal placeholder until the file exists.
-  function media(src, label, cls = "") {
+  function media(src, label, cls = "", poster = "") {
     const ph = `<span class="ph-label">${esc(label)}</span>`;
     if (!src) return `<div class="media is-ph ${cls}" role="img" aria-label="${esc(label)} (placeholder)">${ph}</div>`;
-    if (/\.(mp4|webm|mov)$/i.test(src)) return `<div class="media ${cls}"><video src="${esc(src)}" autoplay muted loop playsinline></video></div>`;
+    if (/\.(mp4|webm|mov)$/i.test(src)) return `<div class="media ${cls}"><video src="${esc(src)}" ${poster ? `poster="${esc(poster)}"` : ""} autoplay muted loop playsinline preload="auto" aria-hidden="true"></video></div>`;
     return `<div class="media ${cls}"><img src="${esc(src)}" alt="${esc(label)}" loading="lazy" onerror="this.parentNode.classList.add('is-ph');this.remove()">${ph}</div>`;
   }
 
@@ -97,7 +97,7 @@
       ${topbar}
       ${nav}
       <section class="hero" id="hello" data-label="Hello">
-        ${media(H.hero.video || H.hero.image, "Hero image or showreel", "hero-media")}
+        ${media(H.hero.video || H.hero.image, "Hero image or showreel", "hero-media", H.hero.video ? H.hero.image : "")}
         <div class="hero-copy">
           <h1>${H.hero.lines.map(esc).join("<br>")}</h1>
           <p class="ready"><a class="btn-solid" href="mailto:${esc(H.contact.email)}">Let’s Connect</a></p>
@@ -230,6 +230,9 @@
   }
 
   main.innerHTML = { home, projects, project, services }[page]();
+
+  // Make sure background videos start muted (some browsers ignore the attribute in injected HTML).
+  document.querySelectorAll("video[autoplay]").forEach((v) => { v.muted = true; v.play().catch(() => {}); });
 
 
   /* ── Live clock in the studio's time zone ───────────────── */
