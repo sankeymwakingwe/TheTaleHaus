@@ -109,18 +109,20 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: rgba(36, 158, 161, 0.92);
+  /* Frosted glass: the page shows through, blurred. */
+  background: rgba(31, 140, 143, 0.72);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 30px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 36, 37, 0.18);
   transition: height 0.3s, width 0.3s, background 0.3s;
 }
 .pill-nav.stuck {
   height: 56px;
   width: min(52%, calc(100% - 2 * var(--gutter)));
   min-width: min(560px, calc(100% - 2 * var(--gutter)));
-  background: rgba(36, 158, 161, 0.85);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background: rgba(31, 140, 143, 0.66);
 }
 .pill-nav a {
   color: var(--white);
@@ -152,14 +154,32 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .hero .media .ph-label { display: none; }
 .hero-copy { position: relative; display: grid; justify-items: center; gap: 12px; padding: 40px 20px 0; color: var(--white); text-align: center; }
 .hero h1 {
-  font: 400 clamp(34px, 4.25vw, 61px)/1.05 var(--display);
-  text-transform: uppercase;
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+  font: 500 clamp(46px, 6.2vw, 104px)/0.98 var(--display);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.25);
 }
 .tagline { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
 .ready { display: grid; justify-items: center; gap: 6px; margin-top: 16px; }
 .ready small { font-size: 12px; opacity: 0.85; }
-.ready .dash-btn { margin-top: 8px; }
+/* Main call to action: solid white button with dark text. */
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  margin-top: 18px;
+  padding: 16px 40px;
+  border-radius: 14px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0, 36, 37, 0.18);
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+.btn-solid:hover, .btn-solid:focus-visible { background: var(--teal); color: var(--white); transform: translateY(-1px); }
 
 /* ── Home blocks ──────────────────────────────────────── */
 .block { position: relative; padding: 40px var(--edge) 0; scroll-margin-top: 80px; }

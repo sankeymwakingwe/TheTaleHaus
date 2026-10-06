@@ -95,7 +95,7 @@
         ${media(H.hero.video || H.hero.image, "Hero image or showreel", "hero-media")}
         <div class="hero-copy">
           <h1>${H.hero.lines.map(esc).join("<br>")}</h1>
-          <p class="ready"><a class="dash-btn" href="mailto:${esc(H.contact.email)}">Let’s Connect</a></p>
+          <p class="ready"><a class="btn-solid" href="mailto:${esc(H.contact.email)}">Let’s Connect</a></p>
         </div>
       </section>
 
