@@ -26,8 +26,8 @@ window.HAUS = {
 
   contact: {
     email: "inquiries@thetale.haus",
-    instagram: "https://instagram.com/",
-    youtube: "https://youtube.com/",
+    instagram: "https://www.instagram.com/thetalehaus",
+    youtube: "https://www.youtube.com/@thetalehaus1",
   },
 
   hero: {
