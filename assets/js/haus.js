@@ -77,7 +77,7 @@
     <footer class="site-footer" data-label="Footer">
       <div class="footer-card">
         <section class="contact" id="contact">
-          <h2 class="contact-title">Get in touch and let’s tell your tale.</h2>
+          <h2 class="contact-title">Get in touch and<br>Let’s tell your Tales</h2>
           <form class="contact-form" action="api/contact.php" method="POST">
             <div class="field"><label for="c-first">First name</label><input id="c-first" name="first_name" required autocomplete="given-name"></div>
             <div class="field"><label for="c-last">Last name</label><input id="c-last" name="last_name" autocomplete="family-name"></div>
