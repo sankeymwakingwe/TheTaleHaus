@@ -4,7 +4,7 @@ name: Deploy The Tale Haus to Namecheap
 # main. It stays switched off until these repository secrets exist
 # (Settings → Secrets and variables → Actions):
 #   FTP_SERVER    e.g. ftp.thetale.haus
-#   FTP_USERNAME  the cPanel FTP account
+#   FTP_USERNAME  the cPanel FTP account (its directory must be public_html)
 #   FTP_PASSWORD  its password
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
-          server-dir: public_html/
+          server-dir: ./   # the FTP account already starts in public_html
           exclude: |
             **/.git*
             **/.git*/**
