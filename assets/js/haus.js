@@ -77,7 +77,36 @@
     <footer class="site-footer" data-label="Footer">
       <div class="footer-card">
         <section class="contact" id="contact">
-          <h2 class="contact-title">Get in touch and<br>Let’s tell your Tales</h2>
+          <div class="footer-info">
+            <h2 class="contact-title">Get in touch and<br>Let’s tell your Tales</h2>
+            <form class="notify" action="api/subscribe.php" method="POST">
+              <h3>GET NOTIFIED</h3>
+              <p>New projects, behind-the-scenes and open shoot days. No spam, unsubscribe any time.</p>
+              <div class="notify-row">
+                <label class="sr-only" for="notify-email">Email address</label>
+                <input id="notify-email" name="email" type="email" required placeholder="Your email">
+                <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+            <div class="footer-links">
+              <div>
+                <h3>FOLLOW THE TALE HAUS</h3>
+                <p class="icons">
+                  ${iconLink(H.contact.instagram, "Instagram", "instagram")}
+                  ${iconLink(H.contact.youtube, "YouTube", "youtube")}
+                </p>
+              </div>
+              <div>
+                <h3>GET IN TOUCH</h3>
+                <p class="icons">
+                  ${iconLink(`mailto:${H.contact.email}`, `Email ${H.contact.email}`, "mail")}
+                  ${H.contact.whatsapp ? iconLink(`https://wa.me/${H.contact.whatsapp}`, `WhatsApp +${H.contact.whatsapp}`, "whatsapp") : ""}
+                  ${H.contact.whatsapp ? iconLink(`tel:+${H.contact.whatsapp}`, `Call +${H.contact.whatsapp}`, "phone") : ""}
+                </p>
+              </div>
+            </div>
+          </div>
           <form class="contact-form" action="api/contact.php" method="POST">
             <div class="field"><label for="c-first">First name</label><input id="c-first" name="first_name" required autocomplete="given-name"></div>
             <div class="field"><label for="c-last">Last name</label><input id="c-last" name="last_name" autocomplete="family-name"></div>
@@ -94,34 +123,6 @@
             <div class="wide"><button type="submit">Send message</button></div>
           </form>
         </section>
-        <div class="footer-cols">
-          <form class="notify" action="api/subscribe.php" method="POST">
-            <h3>GET NOTIFIED</h3>
-            <p>Hear about new projects, behind-the-scenes and open shoot days.</p>
-            <label class="sr-only" for="notify-email">Email address</label>
-            <input id="notify-email" name="email" type="email" required placeholder="Your email">
-            <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <button type="submit">Submit</button>
-            <p class="fine">We’ll only use your email to send Tale Haus updates. Unsubscribe any time.</p>
-          </form>
-          <div class="footer-links">
-          <div>
-            <h3>FOLLOW THE TALE HAUS</h3>
-            <p class="icons">
-              ${iconLink(H.contact.instagram, "Instagram", "instagram")}
-              ${iconLink(H.contact.youtube, "YouTube", "youtube")}
-            </p>
-          </div>
-          <div>
-            <h3>GET IN TOUCH</h3>
-            <p class="icons">
-              ${iconLink(`mailto:${H.contact.email}`, `Email ${H.contact.email}`, "mail")}
-              ${H.contact.whatsapp ? iconLink(`https://wa.me/${H.contact.whatsapp}`, `WhatsApp +${H.contact.whatsapp}`, "whatsapp") : ""}
-              ${H.contact.whatsapp ? iconLink(`tel:+${H.contact.whatsapp}`, `Call +${H.contact.whatsapp}`, "phone") : ""}
-            </p>
-          </div>
-          </div>
-        </div>
         <p class="copyright">Copyright © ${year} The Tale Haus | Let’s tell your tales | All rights reserved</p>
       </div>
     </footer>`;
@@ -360,9 +361,9 @@
     if (!form) return;
     const btn = form.querySelector("button");
     const note = document.createElement("p");
-    note.className = "form-note";
+    note.className = "form-note wide";
     note.setAttribute("role", "status");
-    btn.after(note);
+    form.append(note);
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       btn.disabled = true;
