@@ -235,7 +235,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   overflow: hidden;
 }
 .card > .media, .project-tile > .media { position: absolute; inset: 0; }
-.card .media img, .project-tile .media img { transition: transform 0.6s ease; }
+.card .media img, .project-tile .media img { transition: transform 0.6s ease; object-position: center 60%; }
 .card:hover .media img, .project-tile:hover .media img { transform: scale(1.04); }
 .card { border-radius: 50px; }
 .card .media .ph-label, .project-tile .media .ph-label { display: none; }
@@ -455,6 +455,7 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 .shot.wide { aspect-ratio: 501 / 250; width: 89%; }
 .shot.tall { aspect-ratio: 305 / 398; width: 54%; margin-left: auto; margin-right: auto; }
 .shot.portrait { aspect-ratio: 4 / 5; }
+.shot.landscape { aspect-ratio: 4 / 3; }
 .shot.portrait img { object-position: center 20%; }
 .shot:nth-child(4n + 2) { margin-left: auto; }
 
