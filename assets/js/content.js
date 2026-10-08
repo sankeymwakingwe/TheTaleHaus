@@ -51,13 +51,11 @@ window.HAUS = {
 
   // Logos for the moving brand strip. Leave image "" for a placeholder.
   brands: [
-    { name: "Brand One", image: "" },
-    { name: "Brand Two", image: "" },
-    { name: "Brand Three", image: "" },
-    { name: "Brand Four", image: "" },
-    { name: "Brand Five", image: "" },
-    { name: "Brand Six", image: "" },
-    { name: "Brand Seven", image: "" },
+    { name: "Lyson Law Group", image: "images/brands/lyson-law-group.png" },
+    { name: "Omukama East Africa Technology", image: "images/brands/omukama.png" },
+    { name: "Athenian General Supplies", image: "images/brands/athenian.png" },
+    { name: "BM Cargo", image: "images/brands/bm-cargo.png" },
+    { name: "Archfams Building Construction", image: "images/brands/archfams.png" },
   ],
 
   /*
