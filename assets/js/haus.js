@@ -224,6 +224,7 @@
           <h2>${esc(s.title)}</h2>
           ${media(s.image, s.title)}
           <p>${rich(s.text)}</p>
+          ${s.gallery ? `<div class="service-gallery">${s.gallery.map((g, i) => `<div class="sg-item" style="flex:${g.ratio};aspect-ratio:${g.ratio}">${media(g.image, `${s.title} — photo ${i + 2}`)}</div>`).join("")}</div>` : ""}
         </section>`).join("")}
       ${footer}`;
   }

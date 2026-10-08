@@ -110,7 +110,12 @@ window.HAUS = {
       label: "High Quality\nLive Streaming",
       blurb: "Multi-camera streams for concerts, conferences and launches.",
       title: "High Quality Live Broadcasting",
-      image: "",
+      image: "images/services/live/01.jpg",
+      // extra photos shown in a row under the description (w/h = width ÷ height)
+      gallery: [
+        { image: "images/services/live/02.jpg", ratio: 1.5 },
+        { image: "images/services/live/03.jpg", ratio: 0.667 },
+      ],
       text: "Multi-camera live streams for concerts, conferences, church services and launches. We handle the cameras, sound, graphics and the stream itself, so your audience sees the moment as it happens.",
     },
     {

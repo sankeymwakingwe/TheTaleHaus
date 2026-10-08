@@ -465,6 +465,10 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 .service h2 { font-size: clamp(28px, 3.4vw, 48px); font-weight: 400; text-transform: uppercase; line-height: 1.5; padding-left: 7px; }
 .service .media { aspect-ratio: 957 / 440; max-height: 70vh; width: 100%; margin: 8px 0 34px; background: var(--teal); }
 .service p { font-size: 18px; line-height: 1.5; padding-left: 7px; }
+.service .media:not(.is-ph) { border-radius: 18px; }
+.service-gallery { display: flex; gap: 15px; margin-top: 30px; }
+.service-gallery .sg-item { min-width: 0; }
+.service-gallery .media { aspect-ratio: auto; height: 100%; max-height: none; margin: 0; }
 
 /* ── Mid-size: drop the status cell ───────────────────── */
 @media (max-width: 1100px) {
