@@ -178,7 +178,7 @@
     document.title = `${p.title} — The Tale Haus`;
 
     let film;
-    if (!p.film) film = media("", "Film", "film");
+    if (!p.film) film = ""; // no film for this project: leave the Film block out
     else if (/\.(mp4|webm|mov)$/i.test(p.film)) film = `<div class="media film"><video src="${esc(p.film)}" controls playsinline preload="metadata"></video></div>`;
     else film = `<div class="media film"><iframe src="${esc(p.film)}" title="${esc(p.title)} film" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>`;
 
@@ -206,8 +206,7 @@
       </section>
       <section class="moments" id="moments">
         <h2 class="serif big">More Moments</h2>
-        <h3 class="serif">Film</h3>
-        ${film}
+        ${film ? `<h3 class="serif">Film</h3>${film}` : ""}
         <h3 class="serif">Shots</h3>
         <div class="collage">
           ${p.shots.map((s, i) => media(s.image, `${p.title} — shot ${i + 1}`, `shot ${s.shape}`)).join("")}
