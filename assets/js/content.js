@@ -46,7 +46,7 @@ window.HAUS = {
   },
 
   // The project shown under "Latest Project" (by slug).
-  latestProject: "zanzibar-beach-house",
+  latestProject: "lyson-law-group",
   latestImage: "",
 
   // Logos for the moving brand strip. Leave image "" for a placeholder.
@@ -67,6 +67,16 @@ window.HAUS = {
    * { image, shape } where shape is "large", "wide" or "tall".
    */
   projects: [
+    {
+      slug: "lyson-law-group",
+      title: "Lyson Law Group",
+      tag: "Corporate portraits",
+      client: "Lyson Law Group",
+      year: "2026",
+      cover: "images/projects/lyson/cover.jpg",
+      film: "",
+      shots: [1, 2, 3, 4, 5].map((n) => ({ image: `images/projects/lyson/0${n}.jpg`, shape: "portrait" })),
+    },
     { slug: "zanzibar-beach-house", title: "Zanzibar Beach House", tag: "Hospitality film", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
     { slug: "paul-clement", title: "Paul Clement", tag: "Live concert stream", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
     { slug: "dr-ipyana", title: "Dr. Ipyana", tag: "Worship night film", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },

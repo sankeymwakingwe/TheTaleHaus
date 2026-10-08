@@ -239,6 +239,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .card:hover .media img, .project-tile:hover .media img { transform: scale(1.04); }
 .card { border-radius: 50px; }
 .card .media .ph-label, .project-tile .media .ph-label { display: none; }
+/* Soft shade behind card titles so they stay readable on photos. */
+.card > .media:not(.is-ph)::after, .project-tile > .media:not(.is-ph)::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(0, 20, 21, 0.15), rgba(0, 20, 21, 0.45)); }
 .card-copy { position: relative; display: grid; justify-items: center; gap: 4px; text-align: center; }
 .card-copy strong { font: 400 clamp(24px, 2.4vw, 34px)/1.1 var(--display); }
 .card-copy small { font-size: 13px; opacity: 0.85; margin-bottom: 10px; }
@@ -452,6 +454,8 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 .shot.large { aspect-ratio: 563 / 491; }
 .shot.wide { aspect-ratio: 501 / 250; width: 89%; }
 .shot.tall { aspect-ratio: 305 / 398; width: 54%; margin-left: auto; margin-right: auto; }
+.shot.portrait { aspect-ratio: 4 / 5; }
+.shot.portrait img { object-position: center 20%; }
 .shot:nth-child(4n + 2) { margin-left: auto; }
 
 .service { max-width: calc(min(100%, 1300px)); margin: 0 auto; padding: 60px var(--edge) 40px; scroll-margin-top: 80px; }
