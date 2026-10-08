@@ -50,8 +50,8 @@ window.HAUS = {
   // "About The Tale Haus" section.
   about: {
     paragraphs: [
-      "The Tale Haus is a team of creatives located in Tanzania, ready to traverse any distance to get the job done.",
-      "We firmly believe in the uniqueness of every aspiration, and our mission is to transform aspirations and stories into captivating visuals that can endure in the hearts of the communities we serve.",
+      "We provide turnkey marketing solutions that are strategic, meaningful and effective, helping brands to stand out and connect with their audiences.",
+      "From research, strategy and planning, to copy, design, production, and seamless execution, our in-house team delivers outside-the-box campaigns that get results.",
     ],
   },
 
