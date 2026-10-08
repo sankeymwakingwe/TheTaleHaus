@@ -109,7 +109,8 @@ window.HAUS = {
    * Services. `label` is the tile text on the home page (\n = line
    * break; set `tile: false` to leave it off the home grid). `blurb`
    * appears when someone hovers a tile. `title`, `image` and `text` are
-   * used on services.html. Wrap words in *asterisks* to italicise them.
+   * used on services.html; `thumb` is an optional photo behind the home page
+   * tile. Wrap words in *asterisks* to italicise them.
    */
   services: [
     {
@@ -127,6 +128,7 @@ window.HAUS = {
     },
     {
       slug: "film-production",
+      thumb: "images/services/film/thumb.jpg",   // background photo for the home page tile
       blurb: "Brand films, documentaries and music videos.",
       title: "Film Production",
       image: "",

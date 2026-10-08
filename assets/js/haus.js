@@ -184,7 +184,8 @@
         <div class="head"><h2>SERVICES</h2><p>Everything The Tale Haus team can make for you.</p></div>
         <div class="service-grid">
           ${tiles.map((s) => `
-            <a class="service-tile" href="services.html#${esc(s.slug)}">
+            <a class="service-tile${s.thumb ? " has-thumb" : ""}" href="services.html#${esc(s.slug)}">
+              ${s.thumb ? `<img class="tile-thumb" src="${esc(s.thumb)}" alt="" loading="lazy">` : ""}
               <span class="dash-btn">${esc(s.label || s.title).replace(/\n/g, "<br>").toUpperCase()}</span>
               ${s.blurb ? `<span class="blurb">${esc(s.blurb)} ${arrow.up}</span>` : ""}
             </a>`).join("")}
