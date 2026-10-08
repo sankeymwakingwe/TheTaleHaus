@@ -588,3 +588,30 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 /* Form spam trap (hidden from people) and status message */
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .form-note { min-height: 1.2em; margin: -14px 0 14px; font-size: 12px; }
+
+/* Floating WhatsApp button */
+.whatsapp {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 16px;
+  border-radius: 28px;
+  background: #25d366;
+  color: var(--white);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 36, 37, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.whatsapp svg { width: 26px; height: 26px; flex: none; }
+.whatsapp:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0, 36, 37, 0.3); }
+@media (max-width: 760px) {
+  .whatsapp { right: 16px; bottom: 16px; width: 56px; padding: 0; justify-content: center; }
+  .whatsapp span { display: none; }
+}

@@ -28,6 +28,7 @@ window.HAUS = {
     email: "inquiries@thetale.haus",
     instagram: "https://www.instagram.com/thetalehaus",
     youtube: "https://www.youtube.com/@thetalehaus1",
+    whatsapp: "255659936142",   // country code + number, no "+" or spaces
   },
 
   hero: {
