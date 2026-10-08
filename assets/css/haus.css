@@ -423,7 +423,9 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 .contact-form button:hover { background: var(--ink); color: var(--white); }
 .contact-form .form-note { margin: 10px 0 0; }
 
-.footer-cols { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px; }
+/* Same two columns as the contact block above, so everything lines up */
+.footer-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 40px; }
+.footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 .footer-cols h3 {
   font-size: 12px;
   font-weight: 600;
@@ -447,33 +449,39 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 }
 .footer-cols .icon-link svg { width: 22px; height: 22px; }
 .footer-cols .icon-link:hover { text-decoration: none; background: var(--white); color: var(--teal); border-color: var(--white); }
+/* Signup form: same fields and button as the contact form, left-aligned */
 .notify input {
   display: block;
   width: 100%;
   max-width: 350px;
-  height: 31px;
-  margin: 18px 0 16px;
-  padding: 0 16px;
-  border: 1px solid var(--deep);
-  border-radius: 45px;
-  background: transparent;
+  height: 38px;
+  margin: 16px 0 12px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
   color: var(--white);
   font: inherit;
+  font-size: 13px;
 }
 .notify input::placeholder { color: rgba(255, 255, 255, 0.7); }
+.notify input:focus { outline: none; border-color: var(--white); background: rgba(255, 255, 255, 0.2); }
 .notify button {
   display: block;
-  width: 192px;
-  height: 31px;
-  margin: 0 0 30px 79px;
+  height: 38px;
+  padding: 0 28px;
+  margin: 0 0 14px;
   border: 0;
   border-radius: 45px;
-  background: var(--deep);
-  color: var(--white);
+  background: var(--white);
+  color: var(--ink);
   font: inherit;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s, color 0.2s;
 }
-.notify button:hover { background: var(--ink); }
+.notify button:hover { background: var(--ink); color: var(--white); }
 .notify .fine { max-width: 450px; }
 .copyright { text-align: center; }
 
@@ -585,9 +593,9 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
   .brands-track { gap: 40px; }
   .footer-card { padding: 60px 24px 32px; border-radius: 30px 30px 0 0; }
   .footer-cols { grid-template-columns: 1fr; gap: 32px; }
+  .footer-links { grid-template-columns: 1fr; gap: 32px; }
   .contact { grid-template-columns: 1fr; gap: 20px; padding-bottom: 36px; }
   .contact-form { grid-template-columns: 1fr; padding: 20px; }
-  .notify button { margin-left: 0; }
   .project-hero .hero-media { border-radius: 24px; aspect-ratio: 4 / 3; }
   .details { padding: 20px var(--gutter) 0; }
   .moments { padding-top: 80px; }
@@ -599,5 +607,5 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 
 /* Form spam trap (hidden from people) and status message */
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-.form-note { min-height: 1.2em; margin: -14px 0 14px; font-size: 12px; }
+.form-note { min-height: 1.2em; margin: -12px 0 12px; font-size: 12px; }
 

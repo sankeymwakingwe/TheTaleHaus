@@ -104,6 +104,7 @@
             <button type="submit">Submit</button>
             <p class="fine">We’ll only use your email to send Tale Haus updates. Unsubscribe any time.</p>
           </form>
+          <div class="footer-links">
           <div>
             <h3>FOLLOW THE TALE HAUS</h3>
             <p class="icons">
@@ -118,6 +119,7 @@
               ${H.contact.whatsapp ? iconLink(`https://wa.me/${H.contact.whatsapp}`, `WhatsApp +${H.contact.whatsapp}`, "whatsapp") : ""}
               ${H.contact.whatsapp ? iconLink(`tel:+${H.contact.whatsapp}`, `Call +${H.contact.whatsapp}`, "phone") : ""}
             </p>
+          </div>
           </div>
         </div>
         <p class="copyright">Copyright © ${year} The Tale Haus | Let’s tell your tales | All rights reserved</p>
