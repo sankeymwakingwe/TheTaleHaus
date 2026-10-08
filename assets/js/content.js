@@ -38,6 +38,15 @@ window.HAUS = {
     video: "images/hero.mp4", // plays muted on loop behind the headline (MP4, H.264, no sound)
   },
 
+  // "Meet the founder" section on the home page (before About).
+  // Leave `name` or `bio` empty to hide that line.
+  founder: {
+    name: "",
+    role: "Founder & Creative Director",
+    image: "images/team/founder.jpg",
+    bio: "",
+  },
+
   // "About The Tale Haus" section.
   about: {
     paragraphs: [
