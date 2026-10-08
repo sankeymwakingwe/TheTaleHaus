@@ -40,8 +40,8 @@ window.HAUS = {
   // "About The Tale Haus" section.
   about: {
     paragraphs: [
-      "The Tale Haus is a creative studio in Tanzania. We plan, shoot, stream and design the stories that brands, artists and communities want to share.",
-      "From a single portrait to a multi-camera live broadcast, we bring the crew, the gear and the eye to make it feel like yours. Every project starts with one question: what’s the tale? Everything else is built around the answer.",
+      "The Tale Haus is a team of creatives located in Tanzania, ready to traverse any distance to get the job done.",
+      "We firmly believe in the uniqueness of every aspiration, and our mission is to transform aspirations and stories into captivating visuals that can endure in the hearts of the communities we serve.",
     ],
   },
 
@@ -59,6 +59,10 @@ window.HAUS = {
     { name: "Johari Developers", image: "images/brands/johari-developers.png" },
     { name: "K-Finance", image: "images/brands/k-finance.png" },
     { name: "Maku Zanzibar", image: "images/brands/maku-zanzibar.png", tall: true },
+    { name: "Tanzania Commercial Bank", image: "images/brands/tcb.png" },
+    { name: "CRDB Bank", image: "images/brands/crdb.png" },
+    { name: "I&M Bank", image: "images/brands/i-and-m-bank.png" },
+    { name: "AfriCorp Attorneys", image: "images/brands/africorp.png" },
   ],
 
   /*
@@ -116,28 +120,28 @@ window.HAUS = {
         { image: "images/services/live/02.jpg", ratio: 1.5 },
         { image: "images/services/live/03.jpg", ratio: 0.667 },
       ],
-      text: "Multi-camera live streams for concerts, conferences, church services and launches. We handle the cameras, sound, graphics and the stream itself, so your audience sees the moment as it happens.",
+      text: "At The Tale Haus, we specialise in providing high-quality live broadcasting services that captivate your audience. Our team ensures that your content is engaging and impactful, helping you achieve your marketing goals.",
     },
     {
       slug: "film-production",
       blurb: "Brand films, documentaries and music videos.",
       title: "Film Production",
       image: "",
-      text: "Brand films, documentaries and music videos, from first idea to final grade. *You tell us your story, we show it to the world.*",
+      text: "We are a community of tale tellers whose cinematic creativity breathes life into your story. *“You tell us your story, we show it to the world.”*",
     },
     {
       slug: "content-creation",
       blurb: "Reels, short videos and photos for every platform.",
       title: "Content Creation",
       image: "",
-      text: "A steady flow of short videos, reels and photos made for each platform, shot in batches so your channels never go quiet.",
+      text: "We freeze the timeless moments in pixels and allow these to linger with you. We also allow pictures to tell your unique brand’s story because at The Tale Haus we believe that *“a picture is worth a thousand words.”*",
     },
     {
       slug: "photography",
       tile: false,
       title: "Photography",
       image: "",
-      text: "Portraits, products, events and campaigns. We capture the moments that are worth keeping, *because a picture is worth a thousand words.*",
+      text: "Portraits, products, events and campaigns, captured so the moments worth keeping stay with you.",
     },
     {
       slug: "graphics-design",
@@ -145,7 +149,7 @@ window.HAUS = {
       blurb: "Logos, identities, posters and social graphics.",
       title: "Graphics Design",
       image: "",
-      text: "Logos, identities, posters and social graphics that give your brand one clear look wherever people meet it.",
+      text: "Whether you’re a brand seeking a distinct identity or an individual looking to bring visions to life, we are here to craft stories through design that turn concepts into captivating visual tales.",
     },
     {
       slug: "web-designing",
