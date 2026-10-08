@@ -63,6 +63,8 @@ window.HAUS = {
     { name: "CRDB Bank", image: "images/brands/crdb.png" },
     { name: "I&M Bank", image: "images/brands/i-and-m-bank.png" },
     { name: "AfriCorp Attorneys", image: "images/brands/africorp.png" },
+    { name: "Worshippers Gathering", image: "images/brands/worshippers-gathering.png", tall: true },
+    { name: "IFM Tafes Family", image: "images/brands/ifm-tafes-family.png", tall: true },
   ],
 
   /*
