@@ -3,7 +3,8 @@
 require __DIR__ . '/_lib.php';
 
 require_post();
-$name    = field('name', 120);
+$name    = trim(field('first_name', 60) . ' ' . field('last_name', 60)) ?: field('name', 120);
+$phone   = field('phone', 40);
 $email   = field('email', 254);
 $service = field('service', 120);
 $message = field('message', 5000);
@@ -12,8 +13,8 @@ if ($name === '' || $message === '') respond(422, 'Please fill in your name and 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) respond(422, 'Please enter a valid email address.');
 rate_limit('contact');
 
-save_row('enquiries.csv', ['date' => date('c'), 'name' => $name, 'email' => $email, 'service' => $service, 'message' => $message]);
-$sent = notify("New enquiry: $service — $name", "Name: $name\nEmail: $email\nService: $service\n\n$message\n", $email);
+save_row('enquiries.csv', ['date' => date('c'), 'name' => $name, 'email' => $email, 'phone' => $phone, 'service' => $service, 'message' => $message]);
+$sent = notify("New enquiry: $service — $name", "Name: $name\nEmail: $email\nPhone: $phone\nService: $service\n\n$message\n", $email);
 
 if (!$sent) respond(500, 'Sorry, your message could not be sent. Please email ' . SITE_EMAIL . ' directly.');
 respond(200, 'Thanks! We’ll reply within two working days.');

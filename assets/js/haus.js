@@ -65,6 +65,24 @@
   const footer = `
     <footer class="site-footer" data-label="Footer">
       <div class="footer-card">
+        <section class="contact" id="contact">
+          <h2 class="contact-title">Get in touch and let’s tell your tale.</h2>
+          <form class="contact-form" action="api/contact.php" method="POST">
+            <div class="field"><label for="c-first">First name</label><input id="c-first" name="first_name" required autocomplete="given-name"></div>
+            <div class="field"><label for="c-last">Last name</label><input id="c-last" name="last_name" autocomplete="family-name"></div>
+            <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
+            <div class="field wide"><label for="c-service">What can we help with?</label>
+              <select id="c-service" name="service">
+                ${H.services.map((s) => `<option>${esc(s.title)}</option>`).join("")}
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field wide"><label for="c-message">Your message</label><textarea id="c-message" name="message" rows="5" required></textarea></div>
+            <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="wide"><button type="submit">Send message</button></div>
+          </form>
+        </section>
         <div class="footer-cols">
           <form class="notify" action="api/subscribe.php" method="POST">
             <h3>GET NOTIFIED</h3>
@@ -316,31 +334,36 @@
 
   if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
 
-  // Newsletter: posts to the PHP handler on our server. If that isn't
-  // available (e.g. while still on static hosting), fall back to email.
-  const form = document.querySelector(".notify");
-  if (form) {
+  // Forms post to the PHP handlers on our server and show the reply under the
+  // button. If the server can't be reached, fall back to the visitor's email app.
+  const ajaxForm = (form, url, fallback) => {
+    if (!form) return;
+    const btn = form.querySelector("button");
     const note = document.createElement("p");
     note.className = "form-note";
     note.setAttribute("role", "status");
-    form.querySelector("button").after(note);
+    btn.after(note);
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const btn = form.querySelector("button");
-      const email = form.querySelector('input[type="email"]').value;
       btn.disabled = true;
       note.textContent = "Sending…";
       try {
-        const res = await fetch(H.newsletter.action || "api/subscribe.php", { method: "POST", body: new FormData(form) });
+        const res = await fetch(url, { method: "POST", body: new FormData(form) });
         const data = await res.json();
         note.textContent = data.message;
         if (data.ok) form.reset();
       } catch {
         note.textContent = "";
-        location.href = `mailto:${H.contact.email}?subject=${encodeURIComponent("Get notified")}&body=${encodeURIComponent("Please add " + email + " to The Tale Haus updates.")}`;
+        location.href = fallback(new FormData(form));
       } finally {
         btn.disabled = false;
       }
     });
-  }
+  };
+  const mailto = (subject, body) => `mailto:${H.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  ajaxForm(document.querySelector(".notify"), H.newsletter.action || "api/subscribe.php", (d) =>
+    mailto("Get notified", `Please add ${d.get("email")} to The Tale Haus updates.`));
+  ajaxForm(document.querySelector(".contact-form"), "api/contact.php", (d) =>
+    mailto(`Enquiry: ${d.get("service")}`, `${d.get("message")}\n\n${d.get("first_name")} ${d.get("last_name")}\n${d.get("phone")}`));
 })();
