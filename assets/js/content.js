@@ -131,11 +131,16 @@ window.HAUS = {
       thumb: "images/services/film/thumb.jpg",   // background photo for the home page tile
       blurb: "Brand films, documentaries and music videos.",
       title: "Film Production",
-      image: "",
+      image: "images/services/film/01.jpg",
+      gallery: [
+        { image: "images/services/film/02.jpg", ratio: 0.8 },
+        { image: "images/services/film/03.jpg", ratio: 0.8 },
+      ],
       text: "We are a community of tale tellers whose cinematic creativity breathes life into your story. *“You tell us your story, we show it to the world.”*",
     },
     {
       slug: "content-creation",
+      thumb: "images/services/content/thumb.jpg",
       blurb: "Reels, short videos and photos for every platform.",
       title: "Content Creation",
       image: "",
