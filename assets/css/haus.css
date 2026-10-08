@@ -280,6 +280,7 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 @media (prefers-reduced-motion: reduce) { .brands-track { animation: none; } }
 .brands img { height: 64px; width: auto; max-width: 210px; object-fit: contain; filter: grayscale(1) contrast(1.1); opacity: 0.75; transition: filter 0.3s, opacity 0.3s; }
 .brands img:hover { filter: none; opacity: 1; }
+.brands img.tall { height: 96px; }
 .brand-ph { font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; font-size: 14px; color: rgba(0, 36, 37, 0.55); white-space: nowrap; }
 
 /* ID / PROJECT header row: ID sits over each tile's number, PROJECT over its title. */

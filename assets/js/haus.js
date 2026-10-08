@@ -91,7 +91,7 @@
     const tiles = H.services.filter((s) => s.tile !== false);
     const brand = (b, hidden) =>
       b.image
-        ? `<img src="${esc(b.image)}" alt="${hidden ? "" : esc(b.name)}">`
+        ? `<img src="${esc(b.image)}" alt="${hidden ? "" : esc(b.name)}"${b.tall ? ' class="tall"' : ""}>`
         : `<span class="brand-ph" ${hidden ? 'aria-hidden="true"' : ""}>${esc(b.name)}</span>`;
     return `
       ${topbar}

@@ -56,6 +56,9 @@ window.HAUS = {
     { name: "Athenian General Supplies", image: "images/brands/athenian.png" },
     { name: "BM Cargo", image: "images/brands/bm-cargo.png" },
     { name: "Archfams Building Construction", image: "images/brands/archfams.png" },
+    { name: "Johari Developers", image: "images/brands/johari-developers.png" },
+    { name: "K-Finance", image: "images/brands/k-finance.png" },
+    { name: "Maku Zanzibar", image: "images/brands/maku-zanzibar.png", tall: true },
   ],
 
   /*
