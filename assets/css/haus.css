@@ -436,6 +436,17 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 .footer-cols p { margin-bottom: 14px; }
 .footer-cols a { text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
 .footer-cols a:hover { text-decoration: underline; }
+.footer-cols .icons { display: flex; gap: 12px; margin-top: 4px; }
+.footer-cols .icon-link {
+  width: 46px;
+  height: 46px;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.footer-cols .icon-link svg { width: 22px; height: 22px; }
+.footer-cols .icon-link:hover { text-decoration: none; background: var(--white); color: var(--teal); border-color: var(--white); }
 .notify input {
   display: block;
   width: 100%;

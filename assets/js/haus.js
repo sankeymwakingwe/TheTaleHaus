@@ -62,6 +62,17 @@
     </nav>`;
 
   const year = new Date().getFullYear();
+  const ICONS = {
+    instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>',
+    youtube: '<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor" stroke="none"/>',
+    mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>',
+    whatsapp: '<path d="M3.5 20.5 4.8 16A8.5 8.5 0 1 1 8 19.2z"/><path d="M9.2 8.2c.2 3.3 3.3 6.4 6.6 6.6l1-1.6-2-1-1 .9c-1.2-.5-2.3-1.6-2.8-2.8l.9-1-1-2z" fill="currentColor" stroke="none"/>',
+    phone: '<path d="M5 3.5h3.5l1.8 4.6-2.3 1.4a11 11 0 0 0 6.5 6.5l1.4-2.3 4.6 1.8V19a1.8 1.8 0 0 1-1.8 1.8A16.3 16.3 0 0 1 3.2 5.3 1.8 1.8 0 0 1 5 3.5z"/>',
+  };
+  const iconLink = (href, label, icon) => {
+    const external = /^https?:/.test(href) ? ' target="_blank" rel="noopener"' : "";
+    return `<a class="icon-link" href="${esc(href)}"${external} aria-label="${esc(label)}" title="${esc(label)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">${ICONS[icon]}</svg></a>`;
+  };
   const footer = `
     <footer class="site-footer" data-label="Footer">
       <div class="footer-card">
@@ -95,13 +106,18 @@
           </form>
           <div>
             <h3>FOLLOW THE TALE HAUS</h3>
-            <p><a href="${esc(H.contact.instagram)}" target="_blank" rel="noopener">Instagram ${arrow.up}</a></p>
-            <p><a href="${esc(H.contact.youtube)}" target="_blank" rel="noopener">YouTube ${arrow.up}</a></p>
+            <p class="icons">
+              ${iconLink(H.contact.instagram, "Instagram", "instagram")}
+              ${iconLink(H.contact.youtube, "YouTube", "youtube")}
+            </p>
           </div>
           <div>
             <h3>GET IN TOUCH</h3>
-            <p><a href="mailto:${esc(H.contact.email)}">${esc(H.contact.email)} ${arrow.up}</a></p>
-            ${H.contact.whatsapp ? `<p><a href="https://wa.me/${esc(H.contact.whatsapp)}" target="_blank" rel="noopener">WhatsApp +${esc(H.contact.whatsapp.replace(/^(\d{3})(\d{3})(\d{3})(\d+)$/, "$1 $2 $3 $4"))} ${arrow.up}</a></p>` : ""}
+            <p class="icons">
+              ${iconLink(`mailto:${H.contact.email}`, `Email ${H.contact.email}`, "mail")}
+              ${H.contact.whatsapp ? iconLink(`https://wa.me/${H.contact.whatsapp}`, `WhatsApp +${H.contact.whatsapp}`, "whatsapp") : ""}
+              ${H.contact.whatsapp ? iconLink(`tel:+${H.contact.whatsapp}`, `Call +${H.contact.whatsapp}`, "phone") : ""}
+            </p>
           </div>
         </div>
         <p class="copyright">Copyright © ${year} The Tale Haus | Let’s tell your tales | All rights reserved</p>
