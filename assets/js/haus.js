@@ -198,22 +198,20 @@
         </div>
       </section>
 
-      ${H.founder && H.founder.image ? `
-      <section class="block founder" id="founder" data-label="Founder">
-        <div class="founder-inner">
-          <img class="founder-photo" src="${esc(H.founder.image)}" alt="${esc(H.founder.name || H.founder.role)}" loading="lazy">
-          <div class="founder-text">
-            <p class="eyebrow">MEET THE FOUNDER</p>
-            ${H.founder.name ? `<h2>${esc(H.founder.name)}</h2>` : ""}
-            <p class="founder-role">${esc(H.founder.role)}</p>
-            ${H.founder.bio ? `<p class="founder-bio">${rich(H.founder.bio)}</p>` : ""}
-          </div>
-        </div>
-      </section>` : ""}
 
       <section class="block about" id="about" data-label="About">
         <h2>ABOUT THE TALE HAUS</h2>
         ${H.about.paragraphs.map((p) => `<p>${rich(p)}</p>`).join("")}
+        ${H.founder && H.founder.image ? `
+        <div class="founder">
+          <img class="founder-photo" src="${esc(H.founder.image)}" alt="${esc(H.founder.name || H.founder.role)}" loading="lazy">
+          <div class="founder-text">
+            <p class="eyebrow">MEET THE FOUNDER</p>
+            ${H.founder.name ? `<h3>${esc(H.founder.name)}</h3>` : ""}
+            <p class="founder-role">${esc(H.founder.role)}</p>
+            ${H.founder.bio ? `<p class="founder-bio">${rich(H.founder.bio)}</p>` : ""}
+          </div>
+        </div>` : ""}
       </section>
       ${footer}`;
   }

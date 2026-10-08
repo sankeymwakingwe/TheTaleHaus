@@ -347,14 +347,14 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 .svc-row:hover .svc-go, .svc-row:focus-visible .svc-go { opacity: 1; transform: none; }
 .svc-foot { max-width: 680px; margin: 40px auto 0; text-align: center; font-size: 15px; line-height: 1.6; opacity: 0.9; }
 
-/* Meet the founder */
-.founder-inner { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr); gap: 60px; align-items: center; }
-.founder-photo { width: 100%; max-height: 560px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 30%; border-radius: 30px; }
+/* Founder, inside the About section */
+.about .founder { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1fr); gap: 56px; align-items: center; max-width: 1000px; margin: 56px auto 0; text-align: left; }
+.founder-photo { width: 100%; max-height: 520px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 30%; border-radius: 30px; }
+.about .founder-text p { text-align: left; max-width: none; margin-left: 0; margin-right: 0; }
 .founder-text .eyebrow { font-size: 13px; letter-spacing: 0.32em; color: var(--teal); margin-bottom: 10px; }
-.founder-text h2 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 3.6vw, 52px); line-height: 1.1; margin-bottom: 8px; }
-.founder-role { font-family: var(--display); font-size: clamp(22px, 2vw, 30px); color: var(--ink); }
-.founder-text h2 + .founder-role { font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.founder-bio { margin-top: 18px; font-size: 17px; line-height: 1.6; max-width: 520px; }
+.founder-text h3 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 3.4vw, 50px); line-height: 1.1; margin-bottom: 8px; }
+.founder-role { font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.about .founder-bio { margin-top: 18px; font-size: 17px; line-height: 1.65; }
 
 .about { max-width: calc(min(80%, 1100px) + 2 * var(--edge)); margin: 0 auto; padding-top: 90px; padding-bottom: 8px; }
 .about h2 { text-align: center; margin-bottom: 12px; }
@@ -572,7 +572,7 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
   .card, .project-tile { aspect-ratio: 16 / 9; }
   .tile-title small, .tile-view { opacity: 0.9; transform: none; }
   .services-list { padding: 64px var(--gutter) 56px; }
-  .founder-inner { grid-template-columns: 1fr; gap: 24px; }
+  .about .founder { grid-template-columns: 1fr; gap: 24px; margin-top: 40px; }
   .founder-photo { border-radius: 22px; }
   .svc-row { grid-template-columns: 40px minmax(0, 1fr); gap: 4px 12px; padding: 20px 4px; }
   .svc-desc { grid-column: 2; font-size: 14px; }

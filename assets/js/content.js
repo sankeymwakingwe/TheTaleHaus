@@ -38,13 +38,13 @@ window.HAUS = {
     video: "images/hero.mp4", // plays muted on loop behind the headline (MP4, H.264, no sound)
   },
 
-  // "Meet the founder" section on the home page (before About).
+  // Founder, shown in the About section under the studio text.
   // Leave `name` or `bio` empty to hide that line.
   founder: {
-    name: "",
+    name: "Daniel Sankey",
     role: "Founder & Creative Director",
     image: "images/team/founder.jpg",
-    bio: "",
+    bio: "Daniel Sankey is a photographer, filmmaker, and multimedia designer based in Zanzibar, Tanzania. He transforms ideas into cinematic stories through photography, film, and visual design, creating purposeful, emotionally resonant visuals guided by a bold visual identity and unwavering artistic vision.",
   },
 
   // "About The Tale Haus" section.
