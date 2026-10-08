@@ -32,6 +32,7 @@ The site is moving from GitHub Pages to **Namecheap shared hosting** so it can r
 
 - `api/subscribe.php` handles the "Get Notified" signup; `api/contact.php` handles enquiries. Each submission is emailed to inquiries@thetale.haus and saved to a CSV in `private/` (blocked from the web by `.htaccess`), with a spam trap and a 5-per-hour limit per visitor.
 - `.github/workflows/deploy-namecheap.yml` uploads the site over FTPS into the FTP account's home folder (set to `public_html` in cPanel) on every push to `main`, once the `FTP_SERVER`, `FTP_USERNAME` and `FTP_PASSWORD` repository secrets are set.
+- Add the `SMTP_USER` (a Private Email mailbox, e.g. inquiries@thetale.haus) and `SMTP_PASSWORD` secrets and the deploy writes `api/_config.php`, so form emails go out through Private Email's server instead of PHP `mail()` and don't land in spam.
 - Until the move, the site is still served by GitHub Pages, where PHP can't run, so the signup form falls back to opening the visitor's email app.
 
 ## Run locally

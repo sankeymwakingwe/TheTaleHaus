@@ -13,7 +13,7 @@ RewriteRule ^ http://thetale.haus%{REQUEST_URI} [L,R=301]
 
 # Keep helper files and saved form data private.
 RewriteRule ^(private|\.github)(/|$) - [F,L]
-RewriteRule ^api/_lib\.php$ - [F,L]
+RewriteRule ^api/_ - [F,L]
 <FilesMatch "\.(csv|json|md|yml)$">
   Require all denied
 </FilesMatch>

@@ -6,6 +6,9 @@ name: Deploy The Tale Haus to Namecheap
 #   FTP_SERVER    e.g. ftp.thetale.haus
 #   FTP_USERNAME  the cPanel FTP account (its directory must be public_html)
 #   FTP_PASSWORD  its password
+# Optional, so form emails are sent through Private Email and skip spam:
+#   SMTP_USER     a Private Email mailbox, e.g. inquiries@thetale.haus
+#   SMTP_PASSWORD that mailbox's password
 on:
   push:
     branches: ["main"]
@@ -27,6 +30,23 @@ jobs:
 
       - uses: actions/checkout@v4
         if: env.FTP_SERVER != ''
+
+      - name: Write mail settings
+        if: env.FTP_SERVER != ''
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: |
+          if [ -n "$SMTP_USER" ] && [ -n "$SMTP_PASSWORD" ]; then
+            {
+              echo "<?php"
+              echo "const SMTP_HOST = 'mail.privateemail.com';"
+              echo "define('SMTP_USER', base64_decode('$(printf %s "$SMTP_USER" | base64 -w0)'));"
+              echo "define('SMTP_PASS', base64_decode('$(printf %s "$SMTP_PASSWORD" | base64 -w0)'));"
+            } > api/_config.php
+          else
+            echo "SMTP secrets not set; forms will use PHP mail()."
+          fi
 
       - name: Upload to public_html
         if: env.FTP_SERVER != ''
