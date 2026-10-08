@@ -356,6 +356,7 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 
 .about { max-width: calc(min(80%, 1100px) + 2 * var(--edge)); margin: 0 auto; padding-top: 90px; padding-bottom: 40px; }
 .about h2 { text-align: center; margin-bottom: 12px; }
+.about p { text-align: center; max-width: 900px; margin-left: auto; margin-right: auto; }
 .about p + p { margin-top: 14px; }
 
 /* Sections rise in slightly as they scroll into view (content stays visible) */
