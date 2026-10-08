@@ -180,15 +180,21 @@
         <p class="center"><a class="btn-outline" href="projects.html">View all projects</a></p>
       </section>
 
-      <section class="block" id="services" data-label="Services">
-        <div class="head"><h2>SERVICES</h2><p>Everything The Tale Haus team can make for you.</p></div>
-        <div class="service-grid">
-          ${tiles.map((s) => `
-            <a class="service-tile${s.thumb ? " has-thumb" : ""}" href="services.html#${esc(s.slug)}">
-              ${s.thumb ? `<img class="tile-thumb" src="${esc(s.thumb)}" alt="" loading="lazy">` : ""}
-              <span class="dash-btn">${esc(s.label || s.title).replace(/\n/g, "<br>").toUpperCase()}</span>
-              ${s.blurb ? `<span class="blurb">${esc(s.blurb)} ${arrow.up}</span>` : ""}
-            </a>`).join("")}
+      <section class="block services-list" id="services" data-label="Services">
+        ${H.servicesImage ? `<img class="services-bg" src="${esc(H.servicesImage)}" alt="" loading="lazy">` : ""}
+        <div class="services-inner">
+          <p class="eyebrow">WHAT WE DO</p>
+          <h2>Services</h2>
+          <ol class="svc-rows">
+            ${tiles.map((s, i) => `
+              <li><a class="svc-row" href="services.html#${esc(s.slug)}">
+                <span class="svc-num">${String(i + 1).padStart(2, "0")}</span>
+                <span class="svc-name">${esc(s.title)}</span>
+                <span class="svc-desc">${esc(s.blurb || "")}</span>
+                <span class="svc-go" aria-hidden="true">${arrow.up}</span>
+              </a></li>`).join("")}
+          </ol>
+          <p class="svc-foot">The Tale Haus is a team of creatives in Tanzania, ready to travel any distance to tell your story.</p>
         </div>
       </section>
 

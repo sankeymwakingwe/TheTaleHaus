@@ -270,7 +270,6 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 .dash-btn.dark { color: var(--ink); min-width: 0; padding: 10px 22px; }
 .dash-btn.dark:hover { background: var(--ink); color: var(--white); }
 /* Service tile titles keep the same frame but stay labels, not buttons. */
-.service-tile .dash-btn { font-weight: 600; font-size: 15px; letter-spacing: 0.04em; line-height: 1.3; }
 
 /* Trusted brands — a slowly moving strip */
 .brands-block { padding-left: 0; padding-right: 0; }
@@ -321,47 +320,32 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 }
 .btn-outline:hover { background: var(--teal); color: var(--white); }
 
-.service-grid {
-  max-width: var(--wrap);
-  margin: 0 auto;
+/* Services: a numbered list over a full-width photo */
+.services-list { position: relative; margin-top: 60px; padding: 90px var(--edge) 80px; overflow: hidden; background: var(--ink); color: var(--white); }
+.services-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.services-list::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(0, 36, 37, 0.78), rgba(0, 36, 37, 0.62) 50%, rgba(0, 36, 37, 0.8)); }
+.services-inner { position: relative; z-index: 2; max-width: var(--wrap); margin: 0 auto; }
+.services-list .eyebrow { text-align: center; font-size: 13px; letter-spacing: 0.32em; color: #9fd6d7; }
+.services-list h2 { text-align: center; font-family: var(--display); font-weight: 400; font-size: clamp(36px, 4vw, 56px); margin: 6px 0 44px; }
+.svc-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, 0.45); }
+.svc-rows li { border-bottom: 1px solid rgba(255, 255, 255, 0.45); }
+.svc-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 17px 15px;
-}
-.service-tile {
-  position: relative;
-  display: grid;
-  place-items: center;
-  aspect-ratio: 470 / 273;
-  max-height: 340px;
-  width: 100%;
-  background: var(--teal);
-  border-radius: 30px;
-  text-decoration: none;
-  overflow: hidden;
-  transition: background 0.25s, transform 0.25s;
-}
-.service-tile:hover, .service-tile:focus-visible { background: var(--teal-dark); transform: translateY(-3px); }
-/* Tiles with a photo: the picture fills the tile under a dark wash so the label stays readable */
-.tile-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-.service-tile.has-thumb::before { content: ""; position: absolute; inset: 0; z-index: 1; background: rgba(0, 36, 37, 0.3); transition: background 0.25s; }
-.service-tile.has-thumb > :not(.tile-thumb) { position: relative; z-index: 2; }
-.service-tile.has-thumb .blurb { position: absolute; }
-.service-tile.has-thumb:hover::before { background: rgba(0, 36, 37, 0.5); }
-.service-tile.has-thumb:hover .tile-thumb { transform: scale(1.04); }
-.blurb {
-  position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 20px;
+  grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1.4fr) 24px;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 12px;
   color: var(--white);
-  font-size: 14px;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.25s, transform 0.25s;
+  text-decoration: none;
+  transition: background 0.25s, padding 0.25s;
 }
-.service-tile:hover .blurb, .service-tile:focus-visible .blurb { opacity: 0.95; transform: none; }
+.svc-num { font-size: 15px; opacity: 0.85; }
+.svc-name { font-family: var(--display); font-size: clamp(22px, 2.1vw, 30px); line-height: 1.2; }
+.svc-desc { font-size: 15px; line-height: 1.5; opacity: 0.9; }
+.svc-go { opacity: 0; transform: translate(-6px, 6px); transition: opacity 0.25s, transform 0.25s; }
+.svc-row:hover, .svc-row:focus-visible { background: rgba(255, 255, 255, 0.08); padding-left: 20px; }
+.svc-row:hover .svc-go, .svc-row:focus-visible .svc-go { opacity: 1; transform: none; }
+.svc-foot { max-width: 680px; margin: 40px auto 0; text-align: center; font-size: 15px; line-height: 1.6; opacity: 0.9; }
 
 .about { max-width: calc(min(80%, 1100px) + 2 * var(--edge)); margin: 0 auto; padding-top: 90px; padding-bottom: 8px; }
 .about h2 { text-align: center; margin-bottom: 12px; }
@@ -577,10 +561,11 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
   .hero { margin-top: -26px; border-radius: 24px; height: auto; aspect-ratio: 4 / 5; }
   .card { border-radius: 28px; }
   .card, .project-tile { aspect-ratio: 16 / 9; }
-  .tile-title small, .tile-view, .blurb { opacity: 0.9; transform: none; }
-  .service-grid { grid-template-columns: 1fr; }
-  .service-tile { aspect-ratio: 16 / 8; border-radius: 22px; font-size: 14px; }
-  .blurb { font-size: 12px; bottom: 14px; }
+  .tile-title small, .tile-view { opacity: 0.9; transform: none; }
+  .services-list { padding: 64px var(--gutter) 56px; }
+  .svc-row { grid-template-columns: 40px minmax(0, 1fr); gap: 4px 12px; padding: 20px 4px; }
+  .svc-desc { grid-column: 2; font-size: 14px; }
+  .svc-go { display: none; }
   .brands { min-height: 96px; }
   .brands-track { gap: 40px; }
   .footer-card { padding: 60px 24px 32px; border-radius: 30px 30px 0 0; }

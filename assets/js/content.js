@@ -112,11 +112,13 @@ window.HAUS = {
    * used on services.html; `thumb` is an optional photo behind the home page
    * tile. Wrap words in *asterisks* to italicise them.
    */
+  // Photo behind the home page Services list (shown under a dark wash).
+  servicesImage: "images/services/film/01.jpg",
   services: [
     {
       slug: "live-broadcasting",
       label: "High Quality\nLive Streaming",
-      blurb: "Multi-camera streams for concerts, conferences and launches.",
+      blurb: "High-quality live broadcasts that captivate your audience.",
       title: "High Quality Live Broadcasting",
       image: "images/services/live/01.jpg",
       // extra photos shown in a row under the description (w/h = width ÷ height)
@@ -129,7 +131,7 @@ window.HAUS = {
     {
       slug: "film-production",
       thumb: "images/services/film/thumb.jpg",   // background photo for the home page tile
-      blurb: "Brand films, documentaries and music videos.",
+      blurb: "Cinematic creativity that breathes life into your story.",
       title: "Film Production",
       image: "images/services/film/01.jpg",
       gallery: [
@@ -141,7 +143,7 @@ window.HAUS = {
     {
       slug: "content-creation",
       thumb: "images/services/content/thumb.jpg",
-      blurb: "Reels, short videos and photos for every platform.",
+      blurb: "Timeless moments in pixels that tell your brand’s story.",
       title: "Content Creation",
       image: "",
       text: "We freeze the timeless moments in pixels and allow these to linger with you. We also allow pictures to tell your unique brand’s story because at The Tale Haus we believe that *“a picture is worth a thousand words.”*",
@@ -156,7 +158,7 @@ window.HAUS = {
     {
       slug: "graphics-design",
       label: "Graphics Designing",
-      blurb: "Logos, identities, posters and social graphics.",
+      blurb: "Design that turns concepts into captivating visual tales.",
       title: "Graphics Design",
       image: "",
       text: "Whether you’re a brand seeking a distinct identity or an individual looking to bring visions to life, we are here to craft stories through design that turn concepts into captivating visual tales.",
