@@ -66,18 +66,19 @@
     <footer class="site-footer" data-label="Footer">
       <div class="footer-card">
         <section class="contact" id="contact">
-          <h2 class="contact-title">Get in touch and<br>let’s tell your tale.</h2>
+          <h2 class="contact-title">Get in touch and let’s tell your tale.</h2>
           <form class="contact-form" action="api/contact.php" method="POST">
-            <label class="sr-only" for="c-first">First name</label><input id="c-first" name="first_name" required autocomplete="given-name" placeholder="First name">
-            <label class="sr-only" for="c-last">Last name</label><input id="c-last" name="last_name" autocomplete="family-name" placeholder="Last name">
-            <label class="sr-only" for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone">
-            <label class="sr-only" for="c-email">Email</label><input id="c-email" name="email" type="email" required autocomplete="email" placeholder="Email">
-            <label class="sr-only" for="c-service">What can we help with?</label>
-            <select id="c-service" name="service" class="wide">
-              ${H.services.map((s) => `<option>${esc(s.title)}</option>`).join("")}
-              <option>Something else</option>
-            </select>
-            <label class="sr-only" for="c-message">Your message</label><textarea id="c-message" class="wide" name="message" rows="3" required placeholder="Your message"></textarea>
+            <div class="field"><label for="c-first">First name</label><input id="c-first" name="first_name" required autocomplete="given-name"></div>
+            <div class="field"><label for="c-last">Last name</label><input id="c-last" name="last_name" autocomplete="family-name"></div>
+            <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
+            <div class="field wide"><label for="c-service">What can we help with?</label>
+              <select id="c-service" name="service">
+                ${H.services.map((s) => `<option>${esc(s.title)}</option>`).join("")}
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field wide"><label for="c-message">Your message</label><textarea id="c-message" name="message" rows="3" required></textarea></div>
             <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="wide"><button type="submit">Send message</button></div>
           </form>
