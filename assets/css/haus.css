@@ -210,8 +210,10 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   .rail-left { left: 0; border-right: 1px solid var(--line); }
   .rail-right { right: 0; border-left: 1px solid var(--line); }
   .rail span {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+    /* Ordinary horizontal text turned on its side. (Vertical writing mode
+       stood the apostrophe in LET’S upright, so it read "LET - S".) */
+    flex: none;
+    transform: rotate(-90deg);
     font: 600 clamp(18px, 2.4vh, 28px)/1 var(--sans);
     letter-spacing: 0.02em;
     text-transform: uppercase;
