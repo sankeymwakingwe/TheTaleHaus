@@ -29,3 +29,11 @@ Options -Indexes
   ExpiresByType text/css "access plus 1 day"
   ExpiresByType application/javascript "access plus 1 day"
 </IfModule>
+
+# Pages are always re-checked, so a new deploy shows up straight away.
+# (CSS/JS links carry a version stamp, so those can be cached safely.)
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
