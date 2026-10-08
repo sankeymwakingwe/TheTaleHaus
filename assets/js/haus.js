@@ -23,6 +23,9 @@
   }
 
   const projectUrl = (p) => `project.html?p=${encodeURIComponent(p.slug)}`;
+  // Projects without a cover photo stay hidden until their photos are added
+  // in content.js (or set show: true to force one on).
+  const PROJECTS = H.projects.filter((p) => p.show ?? Boolean(p.cover));
 
   /* ── Shared chrome ─────────────────────────────────────── */
   const logo = H.logo
@@ -88,7 +91,7 @@
 
   /* ── Pages ─────────────────────────────────────────────── */
   function home() {
-    const latest = H.projects.find((p) => p.slug === H.latestProject) || H.projects[0];
+    const latest = PROJECTS.find((p) => p.slug === H.latestProject) || PROJECTS[0];
     const tiles = H.services.filter((s) => s.tile !== false);
     const brand = (b, hidden) =>
       b.image
@@ -128,7 +131,7 @@
         <div class="head"><h2>PROJECT INDEX</h2><p>A few tales we’re proud of.</p></div>
         <div class="index-head" aria-hidden="true"><span>ID</span><span>PROJECT</span></div>
         <ol class="project-list">
-          ${H.projects.slice(0, 3).map((p, i) => `
+          ${PROJECTS.slice(0, 3).map((p, i) => `
             <li><a class="project-tile" href="${projectUrl(p)}">
               ${media(p.cover, p.title)}
               <span class="tile-id">${String(i + 1).padStart(2, "0")}</span>
@@ -163,7 +166,7 @@
       ${nav}
       <section class="page-head"><h1 class="serif">PROJECT INDEX</h1></section>
       <ol class="project-list full">
-        ${H.projects.map((p) => `
+        ${PROJECTS.map((p) => `
           <li><a class="project-tile tall" href="${projectUrl(p)}">
             ${media(p.cover, p.title)}
             <span class="tile-title">${esc(p.title.toUpperCase())}<small>${esc(p.tag)}</small></span>
@@ -175,7 +178,7 @@
 
   function project() {
     const slug = new URLSearchParams(location.search).get("p");
-    const p = H.projects.find((x) => x.slug === slug) || H.projects[0];
+    const p = PROJECTS.find((x) => x.slug === slug) || PROJECTS[0];
     document.title = `${p.title} — The Tale Haus`;
 
     let film;
@@ -210,7 +213,7 @@
         ${film ? `<h3 class="serif">Film</h3>${film}` : ""}
         <h3 class="serif">Shots</h3>
         <div class="collage">
-          ${p.shots.map((s, i) => media(s.image, `${p.title} — shot ${i + 1}`, `shot ${s.shape}`)).join("")}
+          ${p.shots.filter((s) => s.image).map((s, i) => media(s.image, `${p.title} — shot ${i + 1}`, `shot ${s.shape}`)).join("")}
         </div>
       </section>
       ${footer}`;
@@ -223,7 +226,7 @@
       ${H.services.map((s) => `
         <section class="service" id="${esc(s.slug)}">
           <h2>${esc(s.title)}</h2>
-          ${media(s.image, s.title)}
+          ${s.image ? media(s.image, s.title) : ""}
           <p>${rich(s.text)}</p>
           ${s.gallery ? `<div class="service-gallery">${s.gallery.map((g, i) => `<div class="sg-item" style="flex:${g.ratio};aspect-ratio:${g.ratio}">${media(g.image, `${s.title} — photo ${i + 2}`)}</div>`).join("")}</div>` : ""}
         </section>`).join("")}
