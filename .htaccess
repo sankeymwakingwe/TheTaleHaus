@@ -1,8 +1,15 @@
-# Always use HTTPS and the bare domain.
 RewriteEngine On
-RewriteCond %{HTTPS} !=on [OR]
-RewriteCond %{HTTP_HOST} ^www\. [NC]
+
+# HTTPS redirect is handled by cPanel → Namecheap SSL → "HTTPS by default".
+# Never redirect SSL certificate validation checks.
+RewriteRule ^\.well-known/ - [L]
+
+# Send www to the bare domain, keeping whichever scheme the visitor used.
+RewriteCond %{HTTP_HOST} ^www\.thetale\.haus$ [NC]
+RewriteCond %{HTTPS} =on
 RewriteRule ^ https://thetale.haus%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\.thetale\.haus$ [NC]
+RewriteRule ^ http://thetale.haus%{REQUEST_URI} [L,R=301]
 
 # Keep helper files and saved form data private.
 RewriteRule ^(private|\.github)(/|$) - [F,L]
