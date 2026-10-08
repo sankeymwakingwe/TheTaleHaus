@@ -63,11 +63,12 @@
     <footer class="site-footer" data-label="Footer">
       <div class="footer-card">
         <div class="footer-cols">
-          <form class="notify" ${H.newsletter.action ? `action="${esc(H.newsletter.action)}" method="POST"` : ""}>
+          <form class="notify" action="api/subscribe.php" method="POST">
             <h3>GET NOTIFIED</h3>
             <p>Hear about new projects, behind-the-scenes and open shoot days.</p>
             <label class="sr-only" for="notify-email">Email address</label>
             <input id="notify-email" name="email" type="email" required placeholder="Your email">
+            <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">Submit</button>
             <p class="fine">We’ll only use your email to send Tale Haus updates. Unsubscribe any time.</p>
           </form>
@@ -312,13 +313,31 @@
 
   if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
 
-  // Newsletter: without a form endpoint, fall back to the visitor's email app.
+  // Newsletter: posts to the PHP handler on our server. If that isn't
+  // available (e.g. while still on static hosting), fall back to email.
   const form = document.querySelector(".notify");
-  if (form && !H.newsletter.action) {
-    form.addEventListener("submit", (e) => {
+  if (form) {
+    const note = document.createElement("p");
+    note.className = "form-note";
+    note.setAttribute("role", "status");
+    form.querySelector("button").after(note);
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = form.querySelector("input").value;
-      location.href = `mailto:${H.contact.email}?subject=${encodeURIComponent("Get notified")}&body=${encodeURIComponent("Please add " + email + " to The Tale Haus updates.")}`;
+      const btn = form.querySelector("button");
+      const email = form.querySelector('input[type="email"]').value;
+      btn.disabled = true;
+      note.textContent = "Sending…";
+      try {
+        const res = await fetch(H.newsletter.action || "api/subscribe.php", { method: "POST", body: new FormData(form) });
+        const data = await res.json();
+        note.textContent = data.message;
+        if (data.ok) form.reset();
+      } catch {
+        note.textContent = "";
+        location.href = `mailto:${H.contact.email}?subject=${encodeURIComponent("Get notified")}&body=${encodeURIComponent("Please add " + email + " to The Tale Haus updates.")}`;
+      } finally {
+        btn.disabled = false;
+      }
     });
   }
 })();

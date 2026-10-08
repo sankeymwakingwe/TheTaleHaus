@@ -166,8 +166,9 @@ window.HAUS = {
 
 
   newsletter: {
-    // Where the signup form posts (e.g. a Formspree URL).
-    // Until set, Submit opens the visitor's email app instead.
+    // Where the signup form posts. Defaults to the PHP handler on our own
+    // server (api/subscribe.php); if that isn't reachable, Submit opens the
+    // visitor's email app instead.
     action: "",
   },
 };

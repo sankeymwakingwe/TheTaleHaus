@@ -1,0 +1,24 @@
+# Always use HTTPS and the bare domain.
+RewriteEngine On
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://thetale.haus%{REQUEST_URI} [L,R=301]
+
+# Keep helper files and saved form data private.
+RewriteRule ^(private|\.github)(/|$) - [F,L]
+RewriteRule ^api/_lib\.php$ - [F,L]
+<FilesMatch "\.(csv|json|md|yml)$">
+  Require all denied
+</FilesMatch>
+
+Options -Indexes
+
+# Cache images and video for a month, CSS/JS for a day.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType video/mp4 "access plus 1 month"
+  ExpiresByType text/css "access plus 1 day"
+  ExpiresByType application/javascript "access plus 1 day"
+</IfModule>
