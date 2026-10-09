@@ -313,7 +313,9 @@
   // Services page: an overview of cards (one thumbnail each). Clicking a card
   // opens services.html?s=<slug> with that service's full photos.
   const serviceUrl = (sv) => `services.html?s=${encodeURIComponent(sv.slug)}`;
-  const serviceCover = (sv) => sv.thumb || sv.image || (sv.gallery && sv.gallery[0] && sv.gallery[0].image) || "";
+  // A gallery is one row of photos, or a list of rows.
+  const galleryRows = (sv) => !sv.gallery || !sv.gallery.length ? [] : Array.isArray(sv.gallery[0]) ? sv.gallery : [sv.gallery];
+  const serviceCover = (sv) => sv.thumb || sv.image || (galleryRows(sv)[0] || [])[0]?.image || "";
 
   function services() {
     const slug = new URLSearchParams(location.search).get("s");
@@ -353,7 +355,7 @@
         <h2>${esc(sv.title)}</h2>
         ${sv.image ? media(sv.image, sv.title) : ""}
         <p>${rich(sv.text)}</p>
-        ${sv.gallery ? `<div class="service-gallery">${sv.gallery.map((g, n) => `<div class="sg-item" style="flex:${g.ratio};aspect-ratio:${g.ratio}">${media(g.image, `${sv.title} — photo ${n + 2}`)}</div>`).join("")}</div>` : ""}
+        ${galleryRows(sv).map((row) => `<div class="service-gallery">${row.map((g) => `<div class="sg-item" style="flex:${g.ratio};aspect-ratio:${g.ratio}">${media(g.image, `${sv.title} — photo`)}</div>`).join("")}</div>`).join("")}
         <p class="svc-next"><a class="dash-btn dark" href="${serviceUrl(next)}">Next: ${esc(next.title)} ${arrow.up}</a></p>
       </section>`;
   }

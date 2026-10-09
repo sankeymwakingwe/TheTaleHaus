@@ -182,16 +182,25 @@ window.HAUS = {
       text: "At The Tale Haus, we specialise in providing high-quality live broadcasting services that captivate your audience. Our team ensures that your content is engaging and impactful, helping you achieve your marketing goals.",
     },
     {
-      slug: "film-production",
-      thumb: "images/services/film/thumb.jpg",   // background photo for the home page tile
-      blurb: "Cinematic creativity that breathes life into your story.",
-      title: "Film Production",
+      slug: "film-photography",
+      thumb: "images/services/film/thumb.jpg",   // photo on the services page card
+      blurb: "Cinematic films and photos that breathe life into your story.",
+      title: "Film & Photography",
       image: "images/services/film/01.jpg",
+      // one array per row of photos (ratio = width ÷ height)
       gallery: [
-        { image: "images/services/film/02.jpg", ratio: 0.8 },
-        { image: "images/services/film/03.jpg", ratio: 0.8 },
+        [
+          { image: "images/services/film/02.jpg", ratio: 0.8 },
+          { image: "images/services/film/03.jpg", ratio: 0.8 },
+        ],
+        [
+          { image: "images/services/photography/03.jpg", ratio: 0.8 },
+          { image: "images/services/photography/01.jpg", ratio: 0.8 },
+          { image: "images/services/photography/04.jpg", ratio: 0.8 },
+          { image: "images/services/photography/02.jpg", ratio: 0.8 },
+        ],
       ],
-      text: "We are a community of tale tellers whose cinematic creativity breathes life into your story. *“You tell us your story, we show it to the world.”*",
+      text: "We are a community of tale tellers whose cinematic creativity breathes life into your story. From brand films and music videos to portraits, weddings and events, we capture the moments worth keeping. *“You tell us your story, we show it to the world.”*",
     },
     {
       slug: "real-estate-visualisation",
@@ -205,53 +214,22 @@ window.HAUS = {
       text: "Photoreal 3D renders that let buyers walk through a development before the first stone is laid. From restaurants and pool decks to full tower exteriors, we help developers and architects sell off-plan with confidence.",
     },
     {
-      slug: "content-creation",
-      thumb: "images/services/content/thumb.jpg",
-      blurb: "Timeless moments in pixels that tell your brand’s story.",
-      title: "Content Creation",
-      image: "",
-      text: "We freeze the timeless moments in pixels and allow these to linger with you. We also allow pictures to tell your unique brand’s story because at The Tale Haus we believe that *“a picture is worth a thousand words.”*",
-    },
-    {
-      slug: "photography",
-      blurb: "Portraits, weddings and events, captured to last.",
-      title: "Photography",
-      image: "",
-      // four portraits in a row
-      gallery: [
-        { image: "images/services/photography/03.jpg", ratio: 0.8 },
-        { image: "images/services/photography/01.jpg", ratio: 0.8 },
-        { image: "images/services/photography/04.jpg", ratio: 0.8 },
-        { image: "images/services/photography/02.jpg", ratio: 0.8 },
-      ],
-      text: "Portraits, products, events and campaigns, captured so the moments worth keeping stay with you.",
-    },
-    {
-      slug: "graphics-design",
-      label: "Graphics Designing",
-      blurb: "Design that turns concepts into captivating visual tales.",
-      title: "Graphics Design",
+      slug: "brand-web-design",
+      blurb: "Identities and websites that turn concepts into visual tales.",
+      title: "Brand & Web Design",
       image: "images/services/graphics/01.jpg",
       // Socrate Consultancy brand identity
       gallery: [
         { image: "images/services/graphics/02.jpg", ratio: 1.5 },
       ],
-      text: "Whether you’re a brand seeking a distinct identity or an individual looking to bring visions to life, we are here to craft stories through design that turn concepts into captivating visual tales.",
+      text: "Whether you’re a brand seeking a distinct identity or an individual looking to bring visions to life, we craft stories through design that turn concepts into captivating visual tales. From logos and stationery to fast, easy-to-update websites, your brand looks like itself wherever people meet it.",
     },
     {
-      slug: "web-designing",
-      label: "Web Designing",
-      blurb: "Fast, easy-to-update websites that show off your work.",
-      title: "Web Design",
-      image: "",
-      text: "Websites that show off your work, load fast and are easy for you to update, on any screen.",
-    },
-    {
-      slug: "digital-marketing",
-      blurb: "Campaigns planned, cut and tracked for each platform.",
-      title: "Digital Marketing",
-      image: "",
-      text: "We plan the campaign, cut the content for each platform and track what works, so your story reaches the people it is meant for.",
+      slug: "content-digital-marketing",
+      blurb: "Content made for every platform, planned and tracked to perform.",
+      title: "Content & Digital Marketing",
+      image: "images/services/content/thumb.jpg",
+      text: "We freeze the timeless moments in pixels and let pictures tell your brand’s story, because at The Tale Haus we believe that *“a picture is worth a thousand words.”* Then we plan the campaign, cut the content for each platform and track what works, so your story reaches the people it is meant for.",
     },
   ],
 
