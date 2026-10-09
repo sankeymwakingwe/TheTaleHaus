@@ -351,7 +351,7 @@
   // With `auto: true` the latest posts are loaded from api/instagram.php;
   // the strip stays hidden until there is something to show.
   const igTiles = (ig, posts) => {
-    const tile = (p, hidden) => `<a class="ig-post" href="${esc(p.url || `https://www.instagram.com/${ig.handle}/`)}" target="_blank" rel="noopener"${hidden ? ' tabindex="-1" aria-hidden="true"' : ""}><img src="${esc(p.image)}" alt="${hidden ? "" : esc(p.caption || `Instagram post by @${ig.handle}`)}" loading="lazy" referrerpolicy="no-referrer"></a>`;
+    const tile = (p, hidden) => `<a class="ig-post" href="${esc(p.url || `https://www.instagram.com/${ig.handle}/`)}" target="_blank" rel="noopener"${hidden ? ' tabindex="-1" aria-hidden="true"' : ""}><img src="${esc(p.image)}" alt="${hidden ? "" : esc(p.caption || `Instagram post by @${ig.handle}`)}" loading="lazy" referrerpolicy="no-referrer"><svg class="ig-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>`;
     return posts.map((p) => tile(p, false)).join("") + posts.map((p) => tile(p, true)).join("");
   };
   const instaStrip = (ig) => {
