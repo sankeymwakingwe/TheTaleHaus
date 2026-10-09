@@ -199,7 +199,7 @@
           <h2>Services</h2>
           <ol class="svc-rows">
             ${tiles.map((s, i) => `
-              <li><a class="svc-row" href="services.html#${esc(s.slug)}">
+              <li><a class="svc-row" href="${serviceUrl(s)}">
                 <span class="svc-num">${String(i + 1).padStart(2, "0")}</span>
                 <span class="svc-name">${esc(s.title)}</span>
                 <span class="svc-desc">${esc(s.blurb || "")}</span>
@@ -295,18 +295,52 @@
       ${footer}`;
   }
 
+  // Services page: an overview of cards (one thumbnail each). Clicking a card
+  // opens services.html?s=<slug> with that service's full photos.
+  const serviceUrl = (sv) => `services.html?s=${encodeURIComponent(sv.slug)}`;
+  const serviceCover = (sv) => sv.thumb || sv.image || (sv.gallery && sv.gallery[0] && sv.gallery[0].image) || "";
+
   function services() {
+    const slug = new URLSearchParams(location.search).get("s");
+    const i = H.services.findIndex((sv) => sv.slug === slug);
     return `
       ${topbar}
       ${nav}
-      ${H.services.map((s) => `
-        <section class="service" id="${esc(s.slug)}">
-          <h2>${esc(s.title)}</h2>
-          ${s.image ? media(s.image, s.title) : ""}
-          <p>${rich(s.text)}</p>
-          ${s.gallery ? `<div class="service-gallery">${s.gallery.map((g, i) => `<div class="sg-item" style="flex:${g.ratio};aspect-ratio:${g.ratio}">${media(g.image, `${s.title} — photo ${i + 2}`)}</div>`).join("")}</div>` : ""}
-        </section>`).join("")}
+      ${i < 0 ? servicesIndex() : serviceDetail(H.services[i], i)}
       ${footer}`;
+  }
+
+  function servicesIndex() {
+    return `
+      <section class="page-head"><h1>SERVICES</h1></section>
+      <div class="svc-cards">
+        ${H.services.map((sv, n) => {
+          const cover = serviceCover(sv);
+          return `
+          <a class="svc-card${cover ? "" : " no-photo"}" href="${serviceUrl(sv)}">
+            ${cover ? `<div class="svc-card-img">${media(cover, sv.title)}</div>` : ""}
+            <div class="svc-card-body">
+              <span class="svc-num">${String(n + 1).padStart(2, "0")}</span>
+              <h2>${esc(sv.title)}</h2>
+              ${sv.blurb ? `<p>${esc(sv.blurb)}</p>` : ""}
+              <span class="svc-card-go">View ${arrow.up}</span>
+            </div>
+          </a>`;
+        }).join("")}
+      </div>`;
+  }
+
+  function serviceDetail(sv, i) {
+    const next = H.services[(i + 1) % H.services.length];
+    return `
+      <section class="service" id="${esc(sv.slug)}">
+        <a class="back" href="services.html">← All services</a>
+        <h2>${esc(sv.title)}</h2>
+        ${sv.image ? media(sv.image, sv.title) : ""}
+        <p>${rich(sv.text)}</p>
+        ${sv.gallery ? `<div class="service-gallery">${sv.gallery.map((g, n) => `<div class="sg-item" style="flex:${g.ratio};aspect-ratio:${g.ratio}">${media(g.image, `${sv.title} — photo ${n + 2}`)}</div>`).join("")}</div>` : ""}
+        <p class="svc-next"><a class="dash-btn dark" href="${serviceUrl(next)}">Next: ${esc(next.title)} ${arrow.up}</a></p>
+      </section>`;
   }
 
   main.innerHTML = { home, projects, project, services }[page]();

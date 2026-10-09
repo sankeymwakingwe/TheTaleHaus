@@ -531,6 +531,24 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 .shot.portrait img { object-position: center 20%; }
 .shot:nth-child(4n + 2) { margin-left: auto; }
 
+/* Services overview: one card (thumbnail + text) per service */
+.svc-cards { max-width: var(--wrap); margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.svc-card { display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: var(--grey); color: var(--ink); text-decoration: none; transition: transform 0.25s; }
+.svc-card:hover { transform: translateY(-3px); }
+.svc-card-img .media { aspect-ratio: 16 / 10; margin: 0; }
+.svc-card-img img { transition: transform 0.6s; }
+.svc-card:hover .svc-card-img img { transform: scale(1.04); }
+.svc-card-body { display: grid; gap: 6px; padding: 22px 26px 26px; }
+.svc-card-body .svc-num { font-size: 13px; color: var(--teal); }
+.svc-card-body h2 { font-family: var(--display); font-weight: 400; font-size: clamp(24px, 2.2vw, 32px); text-transform: none; line-height: 1.2; padding: 0; }
+.svc-card-body p { font-size: 15px; line-height: 1.5; color: var(--muted); }
+.svc-card-go { margin-top: 6px; font-size: 14px; font-weight: 600; display: inline-flex; gap: 6px; align-items: center; }
+.svc-card.no-photo { background: var(--teal); color: var(--white); justify-content: flex-end; min-height: 220px; }
+.svc-card.no-photo .svc-num, .svc-card.no-photo p { color: rgba(255, 255, 255, 0.85); }
+.service .back { display: inline-block; margin-bottom: 18px; font-size: 14px; color: var(--ink); text-decoration: none; }
+.service .back:hover { text-decoration: underline; }
+.svc-next { margin-top: 40px; text-align: center; }
+
 .service { max-width: calc(min(100%, 1300px)); margin: 0 auto; padding: 60px var(--edge) 40px; scroll-margin-top: 80px; }
 .service h2 { font-size: clamp(28px, 3.4vw, 48px); font-weight: 400; text-transform: uppercase; line-height: 1.5; padding-left: 7px; }
 .service .media { aspect-ratio: 957 / 440; max-height: 70vh; width: 100%; margin: 8px 0 34px; background: var(--teal); }
@@ -593,6 +611,7 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
   .card, .project-tile { aspect-ratio: 16 / 9; }
   .tile-title small, .tile-view { opacity: 0.9; transform: none; }
   .services-list { padding: 64px var(--gutter) 56px; }
+  .svc-cards { grid-template-columns: 1fr; gap: 16px; }
   .about .founder { grid-template-columns: 1fr; gap: 24px; margin-top: 40px; }
   .dict { padding: 26px 22px; }
   .about-intro { grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
