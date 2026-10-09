@@ -239,6 +239,15 @@ window.HAUS = {
       blurb: "Content made for every platform, planned and tracked to perform.",
       title: "Content & Digital Marketing",
       image: "images/services/content/thumb.jpg",
+      // Moving strip of Instagram posts on this service's page. Add one entry per
+      // post: a square image saved in images/instagram/ and the post's link.
+      // The strip stays hidden until at least one post is listed.
+      instagram: {
+        handle: "thetalehaus",
+        posts: [
+          // { image: "images/instagram/01.jpg", url: "https://www.instagram.com/p/XXXXXXXX/" },
+        ],
+      },
       text: "We freeze the timeless moments in pixels and let pictures tell your brand’s story, because at The Tale Haus we believe that *“a picture is worth a thousand words.”* Then we plan the campaign, cut the content for each platform and track what works, so your story reaches the people it is meant for.",
     },
   ],

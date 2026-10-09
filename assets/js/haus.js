@@ -347,6 +347,17 @@
       </div>`;
   }
 
+  // Instagram posts sliding past like the Trusted Brands strip (pauses on hover).
+  const instaStrip = (ig) => {
+    if (!ig || !ig.posts || !ig.posts.length) return "";
+    const tile = (p, hidden) => `<a class="ig-post" href="${esc(p.url || `https://www.instagram.com/${ig.handle}/`)}" target="_blank" rel="noopener"${hidden ? ' tabindex="-1" aria-hidden="true"' : ""}><img src="${esc(p.image)}" alt="${hidden ? "" : `Instagram post by @${esc(ig.handle)}`}" loading="lazy"></a>`;
+    return `
+      <div class="ig">
+        <p class="ig-head"><a href="https://www.instagram.com/${esc(ig.handle)}/" target="_blank" rel="noopener">@${esc(ig.handle)} on Instagram ${arrow.up}</a></p>
+        <div class="ig-strip"><div class="ig-track">${ig.posts.map((p) => tile(p, false)).join("")}${ig.posts.map((p) => tile(p, true)).join("")}</div></div>
+      </div>`;
+  };
+
   function serviceDetail(sv, i) {
     const next = H.services[(i + 1) % H.services.length];
     return `
@@ -356,6 +367,7 @@
         ${sv.image ? media(sv.image, sv.title) : ""}
         <p>${rich(sv.text)}</p>
         ${galleryRows(sv).map((row) => `<div class="service-gallery">${row.map((g) => `<div class="sg-item" style="flex:${g.ratio};aspect-ratio:${g.ratio}">${media(g.image, `${sv.title} — photo`)}</div>`).join("")}</div>`).join("")}
+        ${instaStrip(sv.instagram)}
         <p class="svc-next"><a class="dash-btn dark" href="${serviceUrl(next)}">Next: ${esc(next.title)} ${arrow.up}</a></p>
       </section>`;
   }
