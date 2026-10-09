@@ -404,6 +404,7 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 }
 /* Left: heading, then the signup. Right: the form, social icons under it. */
 .contact {
+  scroll-margin-top: 90px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
   grid-template-rows: auto 1fr auto;

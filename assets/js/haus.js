@@ -44,7 +44,7 @@
         <p class="info"><small>Local time</small><span class="clock">--:--</span></p>
         <span class="divider hide-md" aria-hidden="true"></span>
         <p class="info hide-md"><small>Currently, the Haus is</small>${esc(status)}</p>
-        <a class="btn-connect" href="mailto:${esc(H.contact.email)}">Let’s Connect</a>
+        <a class="btn-connect" href="#contact" data-connect>Let’s Connect</a>
       </div>
     </header>`;
 
@@ -154,7 +154,7 @@
         ${media(H.hero.video || H.hero.image, "Hero image or showreel", "hero-media", H.hero.video ? H.hero.image : "")}
         <div class="hero-copy">
           <h1>${H.hero.lines.map(esc).join("<br>")}</h1>
-          <p class="ready"><a class="btn-solid" href="mailto:${esc(H.contact.email)}">Let’s Connect</a></p>
+          <p class="ready"><a class="btn-solid" href="#contact" data-connect>Let’s Connect</a></p>
         </div>
       </section>
 
@@ -465,6 +465,24 @@
     document.body.append(box);
     box.querySelector(".yt-close").focus();
   });
+
+  // "Let's Connect" glides down to the contact form in the footer and puts the
+  // cursor in the first field. The logo always leads home (on the home page
+  // it glides back to the top).
+  const smooth = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+  document.querySelectorAll("[data-connect]").forEach((a) => a.addEventListener("click", (e) => {
+    const form = document.getElementById("contact");
+    if (!form) return;
+    e.preventDefault();
+    form.scrollIntoView({ behavior: smooth, block: "start" });
+    setTimeout(() => document.getElementById("c-first")?.focus({ preventScroll: true }), 700);
+  }));
+  document.querySelectorAll(".logo, .nav-brand").forEach((a) => a.addEventListener("click", (e) => {
+    if (page !== "home") return;
+    e.preventDefault();
+    history.replaceState(null, "", "index.html");
+    window.scrollTo({ top: 0, behavior: smooth });
+  }));
 
   /* ── Sticky nav: compact once scrolled, highlight the section in view ── */
   const navEl = document.querySelector(".pill-nav");
