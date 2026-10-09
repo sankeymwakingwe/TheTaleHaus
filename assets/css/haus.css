@@ -555,9 +555,6 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 .service .back:hover { text-decoration: underline; }
 /* Instagram strip on a service page */
 .ig { margin-top: 40px; }
-.ig-head { margin-bottom: 14px; font-size: 15px; font-weight: 600; }
-.ig-head a { color: var(--ink); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
-.ig-head a:hover { color: var(--teal); }
 .ig-strip { overflow: hidden; border-radius: 18px; }
 .ig-track { display: flex; gap: 14px; width: max-content; animation: brands 40s linear infinite; }
 .ig-strip:hover .ig-track { animation-play-state: paused; }

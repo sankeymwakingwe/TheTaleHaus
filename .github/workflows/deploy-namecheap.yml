@@ -9,6 +9,8 @@ name: Deploy The Tale Haus to Namecheap
 # Optional, so form emails are sent through Private Email and skip spam:
 #   SMTP_USER     a Private Email mailbox, e.g. inquiries@thetale.haus
 #   SMTP_PASSWORD that mailbox's password
+# Optional, for the live Instagram strip:
+#   INSTAGRAM_TOKEN  a long-lived Instagram API token (refreshed automatically)
 on:
   push:
     branches: ["main"]
@@ -35,22 +37,27 @@ jobs:
         if: env.FTP_SERVER != ''
         run: sed -i "s/?v=dev/?v=${GITHUB_SHA::7}/g" *.html
 
-      - name: Write mail settings
+      - name: Write server settings (mail, Instagram)
         if: env.FTP_SERVER != ''
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
         run: |
-          if [ -n "$SMTP_USER" ] && [ -n "$SMTP_PASSWORD" ]; then
-            {
-              echo "<?php"
+          b64() { printf %s "$1" | base64 -w0; }
+          {
+            echo "<?php"
+            if [ -n "$SMTP_USER" ] && [ -n "$SMTP_PASSWORD" ]; then
               echo "const SMTP_HOST = 'mail.privateemail.com';"
-              echo "define('SMTP_USER', base64_decode('$(printf %s "$SMTP_USER" | base64 -w0)'));"
-              echo "define('SMTP_PASS', base64_decode('$(printf %s "$SMTP_PASSWORD" | base64 -w0)'));"
-            } > api/_config.php
-          else
-            echo "SMTP secrets not set; forms will use PHP mail()."
-          fi
+              echo "define('SMTP_USER', base64_decode('$(b64 "$SMTP_USER")'));"
+              echo "define('SMTP_PASS', base64_decode('$(b64 "$SMTP_PASSWORD")'));"
+            else
+              echo "// SMTP secrets not set; forms use PHP mail()."
+            fi
+            if [ -n "$INSTAGRAM_TOKEN" ]; then
+              echo "define('INSTAGRAM_TOKEN', base64_decode('$(b64 "$INSTAGRAM_TOKEN")'));"
+            fi
+          } > api/_config.php
 
       - name: Upload to public_html
         if: env.FTP_SERVER != ''

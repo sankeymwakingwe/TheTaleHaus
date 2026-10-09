@@ -239,11 +239,12 @@ window.HAUS = {
       blurb: "Content made for every platform, planned and tracked to perform.",
       title: "Content & Digital Marketing",
       image: "images/services/content/thumb.jpg",
-      // Moving strip of Instagram posts on this service's page. Add one entry per
-      // post: a square image saved in images/instagram/ and the post's link.
-      // The strip stays hidden until at least one post is listed.
+      // Moving strip of Instagram posts on this service's page. `auto: true`
+      // loads the latest posts live (needs the INSTAGRAM_TOKEN secret, see
+      // README). `posts` are hand-picked extras: { image, url }.
       instagram: {
         handle: "thetalehaus",
+        auto: true,
         posts: [
           // { image: "images/instagram/01.jpg", url: "https://www.instagram.com/p/XXXXXXXX/" },
         ],

@@ -348,13 +348,19 @@
   }
 
   // Instagram posts sliding past like the Trusted Brands strip (pauses on hover).
+  // With `auto: true` the latest posts are loaded from api/instagram.php;
+  // the strip stays hidden until there is something to show.
+  const igTiles = (ig, posts) => {
+    const tile = (p, hidden) => `<a class="ig-post" href="${esc(p.url || `https://www.instagram.com/${ig.handle}/`)}" target="_blank" rel="noopener"${hidden ? ' tabindex="-1" aria-hidden="true"' : ""}><img src="${esc(p.image)}" alt="${hidden ? "" : esc(p.caption || `Instagram post by @${ig.handle}`)}" loading="lazy" referrerpolicy="no-referrer"></a>`;
+    return posts.map((p) => tile(p, false)).join("") + posts.map((p) => tile(p, true)).join("");
+  };
   const instaStrip = (ig) => {
-    if (!ig || !ig.posts || !ig.posts.length) return "";
-    const tile = (p, hidden) => `<a class="ig-post" href="${esc(p.url || `https://www.instagram.com/${ig.handle}/`)}" target="_blank" rel="noopener"${hidden ? ' tabindex="-1" aria-hidden="true"' : ""}><img src="${esc(p.image)}" alt="${hidden ? "" : `Instagram post by @${esc(ig.handle)}`}" loading="lazy"></a>`;
+    if (!ig) return "";
+    const posts = ig.posts || [];
+    if (!posts.length && !ig.auto) return "";
     return `
-      <div class="ig">
-        <p class="ig-head"><a href="https://www.instagram.com/${esc(ig.handle)}/" target="_blank" rel="noopener">@${esc(ig.handle)} on Instagram ${arrow.up}</a></p>
-        <div class="ig-strip"><div class="ig-track">${ig.posts.map((p) => tile(p, false)).join("")}${ig.posts.map((p) => tile(p, true)).join("")}</div></div>
+      <div class="ig"${posts.length ? "" : " hidden"} data-ig-handle="${esc(ig.handle)}"${ig.auto ? " data-ig-auto" : ""}>
+        <div class="ig-strip"><div class="ig-track">${igTiles(ig, posts)}</div></div>
       </div>`;
   };
 
@@ -418,6 +424,15 @@
   burger.addEventListener("click", () => setMenu(burger.getAttribute("aria-expanded") !== "true"));
   document.querySelectorAll(".nav-links a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+
+  document.querySelectorAll(".ig[data-ig-auto]").forEach(async (box) => {
+    try {
+      const data = await (await fetch("api/instagram.php")).json();
+      if (!data.posts || !data.posts.length) return;
+      box.querySelector(".ig-track").innerHTML = igTiles({ handle: box.dataset.igHandle }, data.posts);
+      box.hidden = false;
+    } catch { /* no live feed (e.g. static preview): keep the hand-picked posts, if any */ }
+  });
 
   /* ── Sticky nav: compact once scrolled, highlight the section in view ── */
   const navEl = document.querySelector(".pill-nav");
