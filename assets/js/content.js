@@ -193,7 +193,11 @@ window.HAUS = {
       // They slide past under the description and play in a pop-up when
       // clicked; once any are listed they replace the photo gallery.
       videos: [
-        // { url: "https://www.youtube.com/watch?v=XXXXXXXXXXX", title: "Event name" },
+        { url: "https://www.youtube.com/watch?v=0jXt3RMuGMY", title: "Zoravo · BFF Saga" },
+        { url: "https://www.youtube.com/watch?v=RUQrIKNP3vQ", title: "Dr Ipyana" },
+        { url: "https://www.youtube.com/watch?v=dkxWi26K4Eg", title: "Dr Ipyana" },
+        { url: "https://www.youtube.com/watch?v=gk5A62wkQ-Q", title: "Dr Ipyana" },
+        { url: "https://www.youtube.com/watch?v=hjICQ0kHfSM", title: "TAFES Ardhi" },
       ],
       text: "At The Tale Haus, we specialise in providing high-quality live broadcasting services that captivate your audience. Our team ensures that your content is engaging and impactful, helping you achieve your marketing goals.",
     },
