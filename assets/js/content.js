@@ -113,6 +113,19 @@ window.HAUS = {
       shots: [1, 2, 3, 4, 5].map((n) => ({ image: `images/projects/lyson/0${n}.jpg`, shape: "portrait" })),
     },
     {
+      slug: "maku-oasis",
+      title: "Maku Oasis",
+      tag: "Hospitality",
+      client: "Maku",
+      year: "2026",
+      cover: "images/projects/maku/cover.jpg",
+      film: "",
+      shots: [
+        { image: "images/projects/maku/01.jpg", shape: "landscape" },
+        ...[2, 3, 4, 5].map((n) => ({ image: `images/projects/maku/0${n}.jpg`, shape: "portrait" })),
+      ],
+    },
+    {
       slug: "johari-developers",
       title: "Johari Developers",
       tag: "Construction Update",
