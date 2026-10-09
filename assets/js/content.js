@@ -231,7 +231,11 @@ window.HAUS = {
       label: "Graphics Designing",
       blurb: "Design that turns concepts into captivating visual tales.",
       title: "Graphics Design",
-      image: "",
+      image: "images/services/graphics/01.jpg",
+      // Socrate Consultancy brand identity
+      gallery: [
+        { image: "images/services/graphics/02.jpg", ratio: 1.5 },
+      ],
       text: "Whether you’re a brand seeking a distinct identity or an individual looking to bring visions to life, we are here to craft stories through design that turn concepts into captivating visual tales.",
     },
     {
