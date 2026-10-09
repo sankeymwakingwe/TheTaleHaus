@@ -133,6 +133,16 @@ window.HAUS = {
       shots: [3, 1, 4, 2].map((n) => ({ image: `images/services/photography/0${n}.jpg`, shape: "portrait" })),
     },
     {
+      slug: "k-finance",
+      title: "K-Finance",
+      tag: "Corporate Headshots",
+      client: "K-Finance",
+      year: "2026",
+      cover: "images/projects/kfinance/cover.jpg",
+      film: "",
+      shots: [1, 2, 3, 4].map((n) => ({ image: `images/projects/kfinance/0${n}.jpg`, shape: "portrait" })),
+    },
+    {
       slug: "rev-majestic",
       title: "REV · Real Estate Visualisation",
       tag: "Architectural renders",
