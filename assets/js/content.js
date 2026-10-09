@@ -122,6 +122,22 @@ window.HAUS = {
       film: "",
       shots: [1, 2, 3, 4, 5].map((n) => ({ image: `images/projects/johari/0${n}.jpg`, shape: "landscape" })),
     },
+    {
+      slug: "rev-majestic",
+      title: "REV · Real Estate Visualisation",
+      tag: "Architectural renders",
+      client: "Real estate developer",
+      year: "2026",
+      cover: "images/rev/tower-and-pool.jpg",
+      film: "",
+      shots: [
+        { image: "images/rev/restaurant.jpg", shape: "landscape" },
+        { image: "images/rev/tower-from-bar.jpg", shape: "portrait" },
+        { image: "images/rev/pool-deck.jpg", shape: "landscape" },
+        { image: "images/rev/villa-pool.jpg", shape: "portrait" },
+        { image: "images/rev/tower-and-pool.jpg", shape: "landscape" },
+      ],
+    },
     { slug: "zanzibar-beach-house", title: "Zanzibar Beach House", tag: "Hospitality film", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
     { slug: "paul-clement", title: "Paul Clement", tag: "Live concert stream", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
     { slug: "dr-ipyana", title: "Dr. Ipyana", tag: "Worship night film", client: "Client name", year: "2024", cover: "", film: "", shots: defaultShots() },
@@ -139,18 +155,6 @@ window.HAUS = {
    * used on services.html; `thumb` is an optional photo behind the home page
    * tile. Wrap words in *asterisks* to italicise them.
    */
-  // REV showcase on the home page: rows of renders (ratio = width ÷ height).
-  rev: {
-    eyebrow: "REV",
-    title: "Real Estate Visualisation",
-    tagline: "Off-plan, brought to life.",
-    rows: [
-      [{ image: "images/rev/restaurant.jpg", ratio: 1.779 }, { image: "images/rev/tower-from-bar.jpg", ratio: 0.75 }],
-      [{ image: "images/rev/villa-pool.jpg", ratio: 0.75 }, { image: "images/rev/pool-deck.jpg", ratio: 1.779 }],
-      [{ image: "images/rev/tower-and-pool.jpg", ratio: 1.779 }],
-    ],
-  },
-
   // Photo behind the home page Services list (shown under a dark wash).
   servicesImage: "images/services/film/01.jpg",
   services: [

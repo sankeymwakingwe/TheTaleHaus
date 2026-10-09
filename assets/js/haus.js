@@ -211,19 +211,6 @@
       </section>
 
 
-      ${H.rev ? `
-      <section class="block rev" id="rev" data-label="REV">
-        <div class="head rev-head">
-          <p class="eyebrow">${esc(H.rev.eyebrow)}</p>
-          <h2>${esc(H.rev.title.toUpperCase())}</h2>
-          <p>${esc(H.rev.tagline)}</p>
-        </div>
-        <div class="rev-rows">
-          ${H.rev.rows.map((row) => `<div class="rev-row">${row.map((g) => `<div class="rev-item" style="flex:${g.ratio};aspect-ratio:${g.ratio}"><img src="${esc(g.image)}" alt="${esc(H.rev.title)} render" loading="lazy"></div>`).join("")}</div>`).join("")}
-        </div>
-        <p class="rev-more"><a class="dash-btn dark" href="services.html#real-estate-visualisation">About REV ${arrow.up}</a></p>
-      </section>` : ""}
-
       <section class="block about" id="about" data-label="About">
         <h2 class="about-label">${esc(H.about.heading || "About Us")}</h2>
         <div class="about-intro">
