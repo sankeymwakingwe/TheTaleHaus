@@ -123,6 +123,16 @@ window.HAUS = {
       shots: [1, 2, 3, 4, 5].map((n) => ({ image: `images/projects/johari/0${n}.jpg`, shape: "landscape" })),
     },
     {
+      slug: "alex-and-angela",
+      title: "Alex & Angela",
+      tag: "Wedding · Bukoba, Tanzania",
+      client: "Alex & Angela",
+      year: "2026",
+      cover: "images/projects/alex-angela/cover.jpg",
+      film: "",
+      shots: [3, 1, 4, 2].map((n) => ({ image: `images/services/photography/0${n}.jpg`, shape: "portrait" })),
+    },
+    {
       slug: "rev-majestic",
       title: "REV · Real Estate Visualisation",
       tag: "Architectural renders",
