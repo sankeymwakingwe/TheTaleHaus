@@ -200,9 +200,16 @@ window.HAUS = {
     },
     {
       slug: "photography",
-      tile: false,
+      blurb: "Portraits, weddings and events, captured to last.",
       title: "Photography",
       image: "",
+      // four portraits in a row
+      gallery: [
+        { image: "images/services/photography/03.jpg", ratio: 0.8 },
+        { image: "images/services/photography/01.jpg", ratio: 0.8 },
+        { image: "images/services/photography/04.jpg", ratio: 0.8 },
+        { image: "images/services/photography/02.jpg", ratio: 0.8 },
+      ],
       text: "Portraits, products, events and campaigns, captured so the moments worth keeping stay with you.",
     },
     {
