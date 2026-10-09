@@ -49,10 +49,26 @@ window.HAUS = {
 
   // "About The Tale Haus" section.
   about: {
+    // Dictionary-style entry at the top of the About section.
+    entry: {
+      term: "The Tale Haus",
+      pronunciation: "/ðə teɪl haʊs/",
+      partOfSpeech: "noun",
+      origins: [
+        { word: "tale", lang: "English", meaning: "a story, especially one that is told with imagination and meaning." },
+        { word: "haus", lang: "German", meaning: "a house; a home; a place where something lives and grows." },
+      ],
+      definitions: [
+        "A house of storytellers.",
+        "A creative production company that turns brand stories into lasting business value.",
+      ],
+    },
+    quote: "They didn’t just make our content. They told our story.",
+    heading: "About Us",
     paragraphs: [
-      "We provide turnkey marketing solutions that are strategic, meaningful and effective, helping brands to stand out and connect with their audiences.",
-      "From research, strategy and planning, to copy, design, production, and seamless execution, our in-house team delivers outside-the-box campaigns that get results.",
+      "Every brand has a story worth telling, and when it’s told well, it becomes one of your most valuable assets. Through film, photography, design and digital marketing, our in-house team creates strategic content that builds trust, attracts the right customers and keeps paying off long after it’s delivered.",
     ],
+    signoff: "The Tale Haus. Let us tell your tales.",
   },
 
   // The project shown under "Latest Project" (by slug).

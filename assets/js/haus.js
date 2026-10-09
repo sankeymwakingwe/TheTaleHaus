@@ -127,6 +127,17 @@
       </div>
     </footer>`;
 
+  // "The Tale Haus /ðə teɪl haʊs/ noun …" dictionary entry for the About section.
+  const aboutEntry = (e) => !e ? "" : `
+    <div class="dict" lang="en">
+      <p class="dict-head"><span class="dict-term">${esc(e.term)}</span> <span class="dict-ipa">${esc(e.pronunciation)}</span></p>
+      <p class="dict-pos">${esc(e.partOfSpeech)}</p>
+      <dl class="dict-origins">
+        ${e.origins.map((o) => `<div><dt><b>${esc(o.word)}</b> (${esc(o.lang)}):</dt><dd>${esc(o.meaning)}</dd></div>`).join("")}
+      </dl>
+      <ol class="dict-defs">${e.definitions.map((d) => `<li>${esc(d)}</li>`).join("")}</ol>
+    </div>`;
+
   /* ── Pages ─────────────────────────────────────────────── */
   function home() {
     const latest = PROJECTS.find((p) => p.slug === H.latestProject) || PROJECTS[0];
@@ -200,8 +211,11 @@
 
 
       <section class="block about" id="about" data-label="About">
-        <h2>ABOUT THE TALE HAUS</h2>
+        ${aboutEntry(H.about.entry)}
+        ${H.about.quote ? `<blockquote class="about-quote">“${esc(H.about.quote.replace(/^[“"]|[”"]$/g, ""))}”</blockquote>` : ""}
+        <h2>${esc(H.about.heading || "About Us")}</h2>
         ${H.about.paragraphs.map((p) => `<p>${rich(p)}</p>`).join("")}
+        ${H.about.signoff ? `<p class="about-signoff">${esc(H.about.signoff)}</p>` : ""}
         ${H.founder && H.founder.image ? `
         <div class="founder">
           <img class="founder-photo" src="${esc(H.founder.image)}" alt="${esc(H.founder.name || H.founder.role)}" loading="lazy">
