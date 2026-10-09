@@ -139,6 +139,18 @@ window.HAUS = {
    * used on services.html; `thumb` is an optional photo behind the home page
    * tile. Wrap words in *asterisks* to italicise them.
    */
+  // REV showcase on the home page: rows of renders (ratio = width ÷ height).
+  rev: {
+    eyebrow: "REV",
+    title: "Real Estate Visualisation",
+    tagline: "Off-plan, brought to life.",
+    rows: [
+      [{ image: "images/rev/restaurant.jpg", ratio: 1.779 }, { image: "images/rev/tower-from-bar.jpg", ratio: 0.75 }],
+      [{ image: "images/rev/villa-pool.jpg", ratio: 0.75 }, { image: "images/rev/pool-deck.jpg", ratio: 1.779 }],
+      [{ image: "images/rev/tower-and-pool.jpg", ratio: 1.779 }],
+    ],
+  },
+
   // Photo behind the home page Services list (shown under a dark wash).
   servicesImage: "images/services/film/01.jpg",
   services: [
@@ -166,6 +178,17 @@ window.HAUS = {
         { image: "images/services/film/03.jpg", ratio: 0.8 },
       ],
       text: "We are a community of tale tellers whose cinematic creativity breathes life into your story. *“You tell us your story, we show it to the world.”*",
+    },
+    {
+      slug: "real-estate-visualisation",
+      blurb: "Photoreal renders that sell developments before they’re built.",
+      title: "REV · Real Estate Visualisation",
+      image: "images/rev/tower-and-pool.jpg",
+      gallery: [
+        { image: "images/rev/restaurant.jpg", ratio: 1.779 },
+        { image: "images/rev/tower-from-bar.jpg", ratio: 0.75 },
+      ],
+      text: "Photoreal 3D renders that let buyers walk through a development before the first stone is laid. From restaurants and pool decks to full tower exteriors, we help developers and architects sell off-plan with confidence.",
     },
     {
       slug: "content-creation",
