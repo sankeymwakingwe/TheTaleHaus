@@ -6,7 +6,8 @@
 
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   // *text* → <em>text</em>
-  const rich = (s) => esc(s).replace(/\*(.+?)\*/g, "<em>$1</em>");
+  // *word* → italic, [[words]] → highlighted.
+  const rich = (s) => esc(s).replace(/\*(.+?)\*/g, "<em>$1</em>").replace(/\[\[(.+?)\]\]/g, "<mark>$1</mark>");
 
   const arrow = {
     up: '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>',
@@ -211,11 +212,16 @@
 
 
       <section class="block about" id="about" data-label="About">
+        <h2 class="about-label">${esc(H.about.heading || "About Us")}</h2>
+        <div class="about-intro">
+          <p class="about-statement">${rich(H.about.statement)}</p>
+          <div class="about-copy">
+            ${H.about.paragraphs.map((p) => `<p>${rich(p)}</p>`).join("")}
+            ${H.about.signoff ? `<p class="about-signoff">${esc(H.about.signoff)}</p>` : ""}
+          </div>
+        </div>
         ${aboutEntry(H.about.entry)}
         ${H.about.quote ? `<blockquote class="about-quote">“${esc(H.about.quote.replace(/^[“"]|[”"]$/g, ""))}”</blockquote>` : ""}
-        <h2>${esc(H.about.heading || "About Us")}</h2>
-        ${H.about.paragraphs.map((p) => `<p>${rich(p)}</p>`).join("")}
-        ${H.about.signoff ? `<p class="about-signoff">${esc(H.about.signoff)}</p>` : ""}
         ${H.founder && H.founder.image ? `
         <div class="founder">
           <img class="founder-photo" src="${esc(H.founder.image)}" alt="${esc(H.founder.name || H.founder.role)}" loading="lazy">

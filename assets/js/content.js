@@ -63,6 +63,8 @@ window.HAUS = {
         "A creative production company that turns brand stories into lasting business value.",
       ],
     },
+    // Big statement on the left; wrap words in [[double brackets]] to highlight them.
+    statement: "The Tale Haus is a [[house of storytellers]] turning [[brand stories]] into lasting business value.",
     quote: "They didn’t just make our content. They told our story.",
     heading: "About Us",
     paragraphs: [
