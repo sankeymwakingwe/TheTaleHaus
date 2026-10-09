@@ -7,7 +7,9 @@ Built from the Figma file "The Tale Haus" (frames: Desktop - 1, Project Index Pa
 | Home | `index.html` |
 | Project Index (all projects) | `projects.html` |
 | Project detail (Client / Year, Film, Shots collage) | `project.html?p=<slug>` |
-| Services | `services.html` |
+| Services (one card per service) | `services.html` |
+| One service with its photos | `services.html?s=<slug>` |
+| About Us (name, story, founder) | `about.html` |
 
 ## Editing
 

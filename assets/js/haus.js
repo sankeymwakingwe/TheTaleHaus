@@ -57,7 +57,7 @@
       <div class="nav-links" id="nav-links">
         <a href="index.html" data-spy="hello" ${page === "home" ? 'aria-current="page"' : ""}>Haus</a>
         <a href="projects.html" data-spy="work" ${page === "projects" || page === "project" ? 'aria-current="page"' : ""}>Work</a>
-        <a href="index.html#about" data-spy="about">Us</a>
+        <a href="about.html" ${page === "about" ? 'aria-current="page"' : ""}>Us</a>
         <a href="services.html" data-spy="services" ${page === "services" ? 'aria-current="page"' : ""}>Services</a>
       </div>
     </nav>`;
@@ -212,6 +212,14 @@
 
 
       <section class="block about" id="about" data-label="About">
+        ${aboutIntro()}
+        <p class="about-more"><a class="dash-btn dark" href="about.html">More about us ${arrow.up}</a></p>
+      </section>
+      ${footer}`;
+  }
+
+  // About: "About Us" label, big statement and the About text (home page and about.html).
+  const aboutIntro = () => `
         <h2 class="about-label">${esc(H.about.heading || "About Us")}</h2>
         <div class="about-intro">
           <p class="about-statement">${rich(H.about.statement)}</p>
@@ -219,7 +227,14 @@
             ${H.about.paragraphs.map((p) => `<p>${rich(p)}</p>`).join("")}
             ${H.about.signoff ? `<p class="about-signoff">${esc(H.about.signoff)}</p>` : ""}
           </div>
-        </div>
+        </div>`;
+
+  function about() {
+    return `
+      ${topbar}
+      ${nav}
+      <section class="block about about-page" id="about" data-label="About">
+        ${aboutIntro()}
         ${aboutEntry(H.about.entry)}
         ${H.about.quote ? `<blockquote class="about-quote">“${esc(H.about.quote.replace(/^[“"]|[”"]$/g, ""))}”</blockquote>` : ""}
         ${H.founder && H.founder.image ? `
@@ -343,7 +358,7 @@
       </section>`;
   }
 
-  main.innerHTML = { home, projects, project, services }[page]();
+  main.innerHTML = { home, projects, project, services, about }[page]();
 
 
   // Make sure background videos start muted (some browsers ignore the attribute in injected HTML).
@@ -408,7 +423,7 @@
   if (page === "home") {
     spyLinks.forEach((a) => {
       const id = a.dataset.spy;
-      if (id === "hello" || id === "about") a.addEventListener("click", (e) => {
+      if (id === "hello") a.addEventListener("click", (e) => {
         e.preventDefault();
         document.getElementById(id).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
       });
