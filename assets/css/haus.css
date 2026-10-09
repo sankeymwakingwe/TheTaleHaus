@@ -618,9 +618,13 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
   .dict { padding: 26px 22px; }
   .about-intro { grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
   .founder-photo { border-radius: 22px; }
-  .svc-row { grid-template-columns: 40px minmax(0, 1fr); gap: 4px 12px; padding: 20px 4px; }
-  .svc-desc { grid-column: 2; font-size: 14px; }
-  .svc-go { display: none; }
+  /* Phones: a compact list — number, name and an arrow; descriptions live on each service's page */
+  .services-list h2 { margin-bottom: 24px; }
+  .svc-row { grid-template-columns: 30px minmax(0, 1fr) 16px; gap: 12px; padding: 15px 2px; }
+  .svc-num { font-size: 12px; }
+  .svc-name { font-size: 19px; }
+  .svc-desc, .svc-foot { display: none; }
+  .svc-go { opacity: 0.7; transform: none; }
   .brands { min-height: 96px; }
   .brands-track { gap: 40px; }
   .footer-card { padding: 60px 24px 32px; border-radius: 30px 30px 0 0; }
