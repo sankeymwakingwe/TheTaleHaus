@@ -122,7 +122,9 @@ window.HAUS = {
       film: "",
       shots: [
         { image: "images/projects/maku/01.jpg", shape: "landscape" },
-        ...[2, 3, 4, 5].map((n) => ({ image: `images/projects/maku/0${n}.jpg`, shape: "portrait" })),
+        ...[2, 3, 4, 5, 6, 7].map((n) => ({ image: `images/projects/maku/0${n}.jpg`, shape: "portrait" })),
+        { image: "images/projects/maku/08.jpg", shape: "landscape" },
+        ...[9, 10].map((n) => ({ image: `images/projects/maku/${String(n).padStart(2, "0")}.jpg`, shape: "portrait" })),
       ],
     },
     {
