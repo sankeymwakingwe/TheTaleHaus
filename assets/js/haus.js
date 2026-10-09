@@ -290,7 +290,7 @@
           <small>Project Details</small>
           <div class="meta-row">
             <div><span class="serif">Client</span><strong>${esc(p.client)}</strong></div>
-            <div class="right"><span class="serif">Year</span><strong>${esc(p.year)}</strong></div>
+            ${p.year ? `<div class="right"><span class="serif">Year</span><strong>${esc(p.year)}</strong></div>` : ""}
           </div>
         </div>
         <div class="collections">

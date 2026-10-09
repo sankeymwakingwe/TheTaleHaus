@@ -143,6 +143,16 @@ window.HAUS = {
       shots: [1, 2, 3, 4].map((n) => ({ image: `images/projects/kfinance/0${n}.jpg`, shape: "portrait" })),
     },
     {
+      slug: "maternity-session",
+      title: "Awaiting Joy",
+      tag: "Maternity Session",
+      client: "Private client",
+      year: "",   // add the year to show it on the project page
+      cover: "images/projects/maternity/cover.jpg",
+      film: "",
+      shots: [1, 2, 3, 4, 5].map((n) => ({ image: `images/projects/maternity/0${n}.jpg`, shape: "portrait" })),
+    },
+    {
       slug: "rev-majestic",
       title: "REV · Real Estate Visualisation",
       tag: "Architectural renders",
