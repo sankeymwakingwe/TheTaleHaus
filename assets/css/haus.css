@@ -565,6 +565,22 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 .ig-post:hover { transform: scale(1.05); box-shadow: 0 10px 24px rgba(0, 36, 37, 0.25); z-index: 1; }
 .ig-badge { position: absolute; right: 8px; bottom: 8px; width: 20px; height: 20px; color: var(--white); filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)); }
 
+/* YouTube strip: same motion as the Instagram strip, wide 16:9 cards */
+.yt { margin: 44px calc(50% - 50vw) 0; }
+.yt-track { animation-duration: 70s; }
+.yt-card { position: relative; flex: none; width: clamp(260px, 28vw, 440px); aspect-ratio: 16 / 9; padding: 0; border: 0; border-radius: 12px; overflow: hidden; background: var(--ink); cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
+.yt-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s; }
+.yt-card:hover { transform: scale(1.04); box-shadow: 0 10px 24px rgba(0, 36, 37, 0.25); z-index: 1; }
+.yt-card:hover img { opacity: 1; }
+.yt-play { position: absolute; left: 50%; top: 50%; width: 58px; height: 58px; margin: -29px 0 0 -29px; display: grid; place-items: center; border-radius: 50%; background: rgba(36, 158, 161, 0.92); color: var(--white); }
+.yt-play svg { width: 26px; height: 26px; margin-left: 3px; }
+.yt-title { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 14px 10px; text-align: left; color: var(--white); font: 600 14px/1.3 var(--sans); background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)); }
+.yt-modal { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; background: rgba(0, 20, 21, 0.88); }
+.yt-frame { width: min(1100px, 100%); aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; }
+.yt-frame iframe { width: 100%; height: 100%; border: 0; }
+.yt-close { position: absolute; top: 18px; right: 22px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.15); color: var(--white); font-size: 20px; cursor: pointer; }
+.yt-close:hover { background: rgba(255, 255, 255, 0.3); }
+
 .svc-next { margin-top: 40px; text-align: center; }
 
 .service { max-width: calc(min(100%, 1300px)); margin: 0 auto; padding: 60px var(--edge) 40px; scroll-margin-top: 80px; }

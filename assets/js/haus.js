@@ -364,6 +364,20 @@
       </div>`;
   };
 
+  // YouTube videos sliding past like the Instagram strip; click to play in a pop-up.
+  const ytId = (url) => (String(url).match(/(?:youtu\.be\/|[?&]v=|\/(?:live|shorts|embed)\/)([\w-]{11})/) || [])[1];
+  const videoStrip = (videos) => {
+    const list = (videos || []).map((v) => ({ ...v, id: ytId(v.url) })).filter((v) => v.id);
+    if (!list.length) return "";
+    const card = (v, hidden) => `
+      <button class="yt-card" type="button" data-yt="${v.id}"${hidden ? ' tabindex="-1" aria-hidden="true"' : ""} aria-label="Play ${esc(v.title || "video")}">
+        <img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+        ${v.title ? `<span class="yt-title">${esc(v.title)}</span>` : ""}
+      </button>`;
+    return `<div class="yt"><div class="ig-strip"><div class="ig-track yt-track">${list.map((v) => card(v, false)).join("")}${list.map((v) => card(v, true)).join("")}</div></div></div>`;
+  };
+
   function serviceDetail(sv, i) {
     const next = H.services[(i + 1) % H.services.length];
     return `
@@ -372,8 +386,9 @@
         <h2>${esc(sv.title)}</h2>
         ${sv.image ? media(sv.image, sv.title) : ""}
         <p>${rich(sv.text)}</p>
-        ${galleryRows(sv).map((row) => `<div class="service-gallery">${row.map((g) => `<div class="sg-item" style="flex:${g.ratio};aspect-ratio:${g.ratio}">${media(g.image, `${sv.title} — photo`)}</div>`).join("")}</div>`).join("")}
+        ${(sv.videos && sv.videos.length ? [] : galleryRows(sv)).map((row) => `<div class="service-gallery">${row.map((g) => `<div class="sg-item" style="flex:${g.ratio};aspect-ratio:${g.ratio}">${media(g.image, `${sv.title} — photo`)}</div>`).join("")}</div>`).join("")}
         ${instaStrip(sv.instagram)}
+        ${videoStrip(sv.videos)}
         <p class="svc-next"><a class="dash-btn dark" href="${serviceUrl(next)}">Next: ${esc(next.title)} ${arrow.up}</a></p>
       </section>`;
   }
@@ -432,6 +447,23 @@
       box.querySelector(".ig-track").innerHTML = igTiles({ handle: box.dataset.igHandle }, data.posts);
       box.hidden = false;
     } catch { /* no live feed (e.g. static preview): keep the hand-picked posts, if any */ }
+  });
+
+  // Video pop-up for the YouTube strip.
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest("[data-yt]");
+    if (!card) return;
+    const box = document.createElement("div");
+    box.className = "yt-modal";
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-modal", "true");
+    box.innerHTML = `<div class="yt-frame"><iframe src="https://www.youtube-nocookie.com/embed/${card.dataset.yt}?autoplay=1&rel=0" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div><button class="yt-close" type="button" aria-label="Close video">✕</button>`;
+    const close = () => { box.remove(); document.removeEventListener("keydown", onKey); card.focus(); };
+    const onKey = (k) => { if (k.key === "Escape") close(); };
+    box.addEventListener("click", (k) => { if (k.target === box || k.target.closest(".yt-close")) close(); });
+    document.addEventListener("keydown", onKey);
+    document.body.append(box);
+    box.querySelector(".yt-close").focus();
   });
 
   /* ── Sticky nav: compact once scrolled, highlight the section in view ── */

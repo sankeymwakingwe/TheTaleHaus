@@ -189,6 +189,12 @@ window.HAUS = {
         { image: "images/services/live/02.jpg", ratio: 1.5 },
         { image: "images/services/live/03.jpg", ratio: 0.667 },
       ],
+      // Streams we've done, as YouTube links (watch, youtu.be, /live/ or /shorts/).
+      // They slide past under the description and play in a pop-up when
+      // clicked; once any are listed they replace the photo gallery.
+      videos: [
+        // { url: "https://www.youtube.com/watch?v=XXXXXXXXXXX", title: "Event name" },
+      ],
       text: "At The Tale Haus, we specialise in providing high-quality live broadcasting services that captivate your audience. Our team ensures that your content is engaging and impactful, helping you achieve your marketing goals.",
     },
     {
