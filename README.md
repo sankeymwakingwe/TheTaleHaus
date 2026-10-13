@@ -41,3 +41,7 @@ The site is hosted on **Namecheap shared hosting** (cPanel), so it can run PHP.
 ## Run locally
 
 No build step: `python3 -m http.server` from the repo root, then open http://localhost:8000/.
+
+## Becoming Zanzibar thumbnails
+
+`tools/becoming-zanzibar-thumbnails.html` makes quote thumbnails for the Becoming Zanzibar podcast in the style of the quote poster (Instagram post 1080×1350, reel cover 1080×1920, YouTube 1280×720). Open the file in a browser, drop in a frame from the episode, type the quote and save the PNG. It is excluded from the website deploy.
