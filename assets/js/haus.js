@@ -444,8 +444,15 @@
     try {
       const data = await (await fetch("api/instagram.php")).json();
       if (!data.posts || !data.posts.length) return;
-      box.querySelector(".ig-track").innerHTML = igTiles({ handle: box.dataset.igHandle }, data.posts);
+      const track = box.querySelector(".ig-track");
+      track.innerHTML = igTiles({ handle: box.dataset.igHandle }, data.posts);
       box.hidden = false;
+      // Instagram image links expire; drop any tile whose picture won't load,
+      // and hide the strip if none do.
+      track.querySelectorAll("img").forEach((img) => img.addEventListener("error", () => {
+        img.closest(".ig-post").remove();
+        if (!track.querySelector(".ig-post")) box.hidden = true;
+      }));
     } catch { /* no live feed (e.g. static preview): keep the hand-picked posts, if any */ }
   });
 

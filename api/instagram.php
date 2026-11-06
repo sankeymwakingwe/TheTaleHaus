@@ -13,8 +13,13 @@ const IG_CACHE = DATA_DIR . '/instagram.json';
 const IG_TOKEN_FILE = DATA_DIR . '/instagram-token.json';
 const IG_CACHE_SECONDS = 3600;
 
+$IG_ERROR = '';   // why the last live fetch failed, shown in the response for diagnosis
+
 function ig_out(array $posts): void {
-    echo json_encode(['ok' => true, 'posts' => $posts]);
+    global $IG_ERROR;
+    $out = ['ok' => true, 'posts' => $posts];
+    if ($IG_ERROR !== '') $out['error'] = $IG_ERROR;
+    echo json_encode($out);
     exit;
 }
 
@@ -29,7 +34,13 @@ function ig_get(string $url): ?array {
         $body = @file_get_contents($url, false, stream_context_create(['http' => ['timeout' => 10, 'ignore_errors' => true]]));
         $code = $body === false ? 0 : 200;
     }
-    if (!$body || $code >= 400) { error_log("Instagram API $code: " . substr((string)$body, 0, 300)); return null; }
+    if (!$body || $code >= 400) {
+        global $IG_ERROR;
+        $msg = json_decode((string)$body, true)['error']['message'] ?? ($body ? "HTTP $code" : 'no response from Instagram');
+        $IG_ERROR = mb_substr((string)$msg, 0, 200);
+        error_log("Instagram API $code: " . substr((string)$body, 0, 300));
+        return null;
+    }
     return json_decode($body, true) ?: null;
 }
 
@@ -43,7 +54,7 @@ $deployed = defined('INSTAGRAM_TOKEN') ? INSTAGRAM_TOKEN : '';
 $saved = is_file(IG_TOKEN_FILE) ? json_decode((string)file_get_contents(IG_TOKEN_FILE), true) : null;
 if ($saved && ($saved['from'] ?? '') !== hash('sha256', $deployed)) $saved = null;
 $token = $saved['token'] ?? $deployed;
-if ($token === '') ig_out($cached['posts'] ?? []);
+if ($token === '') { $IG_ERROR = 'no Instagram token on the server'; ig_out($cached['posts'] ?? []); }
 
 // Refresh roughly every 30 days (tokens last 60).
 if (time() - ($saved['at'] ?? 0) > 30 * 86400) {
