@@ -558,6 +558,13 @@ a:hover .dash-btn, .dash-btn:hover { background: var(--white); color: var(--teal
 /* Instagram strip on a service page: full-width row of reel-shaped posts */
 .ig { margin: 44px calc(50% - 50vw) 0; }
 .ig-strip { overflow: hidden; padding: 12px 0; }
+/* Home page version: section heading lined up with the other blocks */
+.ig-head-home { max-width: var(--wrap); margin: 0 auto 6px; }
+.ig-head-home h2 { font-family: var(--display); font-weight: 400; letter-spacing: 0.01em; font-size: 1.3em; }
+.ig-head-home p { margin-top: 2px; }
+@media (max-width: 760px) { .ig-head-home { padding: 0 var(--gutter); } }
+.ig-head-home a { color: inherit; display: inline-flex; gap: 6px; align-items: center; }
+#hello ~ .ig { margin-top: 90px; }
 .ig-track { display: flex; gap: 10px; width: max-content; animation: brands 60s linear infinite; }
 .ig-strip:hover .ig-track { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .ig-track { animation: none; } }

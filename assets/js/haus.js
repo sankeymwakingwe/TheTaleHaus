@@ -211,6 +211,12 @@
       </section>
 
 
+      ${instaStrip(H.services.find((sv) => sv.instagram)?.instagram, `
+        <div class="head ig-head-home">
+          <h2>ON INSTAGRAM</h2>
+          <p><a href="${esc(H.contact.instagram)}" target="_blank" rel="noopener">Follow @thetalehaus ${arrow.up}</a></p>
+        </div>`)}
+
       <section class="block about" id="about" data-label="About">
         ${aboutIntro()}
         <p class="about-more"><a class="dash-btn dark" href="about.html">More about us ${arrow.up}</a></p>
@@ -354,12 +360,13 @@
     const tile = (p, hidden) => `<a class="ig-post" href="${esc(p.url || `https://www.instagram.com/${ig.handle}/`)}" target="_blank" rel="noopener"${hidden ? ' tabindex="-1" aria-hidden="true"' : ""}><img src="${esc(p.image)}" alt="${hidden ? "" : esc(p.caption || `Instagram post by @${ig.handle}`)}" loading="lazy" referrerpolicy="no-referrer"><svg class="ig-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>`;
     return posts.map((p) => tile(p, false)).join("") + posts.map((p) => tile(p, true)).join("");
   };
-  const instaStrip = (ig) => {
+  const instaStrip = (ig, head = "") => {
     if (!ig) return "";
     const posts = ig.posts || [];
     if (!posts.length && !ig.auto) return "";
     return `
       <div class="ig"${posts.length ? "" : " hidden"} data-ig-handle="${esc(ig.handle)}"${ig.auto ? " data-ig-auto" : ""}>
+        ${head}
         <div class="ig-strip"><div class="ig-track">${igTiles(ig, posts)}</div></div>
       </div>`;
   };
