@@ -47,7 +47,7 @@
   <section class="hero">
     <div class="hero-photo" role="img" aria-label="ArchFams project photo"></div>
     <div class="hero-inner">
-      <h1 class="display-l">You dream it, <em>we build it.</em></h1>
+      <h1 class="display-l"><span class="line"><span>You dream it,</span></span> <span class="line"><span><em>we build it.</em></span></span></h1>
       <p class="hero-sub">Designs, construction and renovations across Zanzibar</p>
       <a class="btn btn-light btn-caps" href="#contact">Start your project</a>
     </div>
@@ -56,9 +56,11 @@
     </a>
   </section>
 
+  <div class="sheet">
+
   <!-- Process (ADEMI format): label left, two-tone headline right, steps with a picture and notes -->
   <section class="section wrap" id="process">
-    <div class="split-head">
+    <div class="split-head" data-reveal>
       <p class="pill-label">Our process</p>
       <div>
         <h2 class="display-m two-tone"><b>We turn your plans</b> into homes, villas and hotels through a <b>clear, step-by-step process.</b></h2>
@@ -66,13 +68,13 @@
       </div>
     </div>
     <div class="process-grid">
-      <ol class="steps" data-steps>
+      <ol class="steps" data-steps data-reveal>
           <li><button type="button" aria-expanded="true" aria-controls="step-1"><span class="num">01</span><span>Discovery and concept</span><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></button></li>
           <li><button type="button" aria-expanded="false" aria-controls="step-2"><span class="num">02</span><span>Design and planning</span><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></button></li>
           <li><button type="button" aria-expanded="false" aria-controls="step-3"><span class="num">03</span><span>Permits and approval</span><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></button></li>
           <li><button type="button" aria-expanded="false" aria-controls="step-4"><span class="num">04</span><span>Construction and handover</span><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></button></li>
       </ol>
-      <div class="step-details">
+      <div class="step-details" data-reveal style="--d: .12s">
           <div class="step-detail" id="step-1">
             <div class="split-img" role="img" aria-label="Discovery and concept: finished building beside its drawing" style="--img:url('images/projects/process-1.jpg')">
               <span class="split-photo"><span>Site photo</span></span>
@@ -112,7 +114,7 @@
   <!-- Projects (ADEMI format): Charcoal panel, label left, two-tone headline right -->
   <section class="section projects" id="projects">
     <div class="wrap">
-      <div class="split-head">
+      <div class="split-head" data-reveal>
         <p class="pill-label">Our projects</p>
         <div>
           <h2 class="display-m two-tone"><b>Homes, villas and hotels</b> built across Zanzibar, <b>one millimetre at a time.</b></h2>
@@ -121,7 +123,7 @@
       </div>
       <div class="project-grid">
         <!-- Replace each project's name, place, type and photo (images/projects/project-1.jpg …) after the first shoot. -->
-        <a class="project project-wide" href="#contact">
+        <a class="project project-wide" href="#contact" data-reveal data-cursor="View" style="--d: 0.00s">
           <div class="project-photo ph" role="img" aria-label="Project photo coming soon" style="--img:url('images/projects/project-1.jpg')"><span>Project photo</span></div>
           <ul class="tags"><li>Design</li><li>Construction</li></ul>
           <div class="project-meta">
@@ -130,7 +132,7 @@
             <span class="more more-filled">More details <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-chevron"/></svg></span>
           </div>
         </a>
-        <a class="project" href="#contact">
+        <a class="project" href="#contact" data-reveal data-cursor="View" style="--d: 0.10s">
           <div class="project-photo ph" role="img" aria-label="Project photo coming soon" style="--img:url('images/projects/project-2.jpg')"><span>Project photo</span></div>
           <ul class="tags"><li>Construction</li></ul>
           <div class="project-meta">
@@ -139,7 +141,7 @@
             <span class="more">More details <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-chevron"/></svg></span>
           </div>
         </a>
-        <a class="project" href="#contact">
+        <a class="project" href="#contact" data-reveal data-cursor="View" style="--d: 0.20s">
           <div class="project-photo ph" role="img" aria-label="Project photo coming soon" style="--img:url('images/projects/project-3.jpg')"><span>Project photo</span></div>
           <ul class="tags"><li>Renovation</li></ul>
           <div class="project-meta">
@@ -155,27 +157,27 @@
   <!-- Services -->
   <section class="section band" id="services">
     <div class="wrap">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <p class="kicker">What we do</p>
       <h2 class="display-m">From the first drawing <em>to the final handover.</em></h2>
     </div>
     <div class="cards">
-      <article class="card">
+      <article class="card" data-reveal style="--d: 0.00s">
         <svg class="picto" aria-hidden="true" viewBox="0 0 48 48"><use href="#p-design"/></svg>
         <h3 class="heading">Design</h3>
         <p>Plans, drawings and 3D views of your home or building, so you see it before we break ground.</p>
       </article>
-      <article class="card">
+      <article class="card" data-reveal style="--d: 0.08s">
         <svg class="picto" aria-hidden="true" viewBox="0 0 48 48"><use href="#p-build"/></svg>
         <h3 class="heading">New construction</h3>
         <p>Villas, hotels, apartments and commercial buildings, built from the foundation up.</p>
       </article>
-      <article class="card">
+      <article class="card" data-reveal style="--d: 0.16s">
         <svg class="picto" aria-hidden="true" viewBox="0 0 48 48"><use href="#p-renovate"/></svg>
         <h3 class="heading">Renovation and extension</h3>
         <p>New rooms, new floors and new finishes for buildings that already stand.</p>
       </article>
-      <article class="card">
+      <article class="card" data-reveal style="--d: 0.24s">
         <svg class="picto" aria-hidden="true" viewBox="0 0 48 48"><use href="#p-manage"/></svg>
         <h3 class="heading">Project management</h3>
         <p>One team that keeps the budget, the timeline and the site on track, with updates you can follow.</p>
@@ -186,11 +188,11 @@
 
   <!-- About / who we build for -->
   <section class="section wrap about" id="about">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <p class="kicker">Who we build for</p>
       <h2 class="display-m">Built right, <em>for the people who live and invest here.</em></h2>
     </div>
-    <div class="audiences">
+    <div class="audiences" data-reveal>
       <div>
         <h3 class="heading">Developers and investors</h3>
         <p>Staged pricing, clear timelines and a site you can check on, so your money and your schedule are safe.</p>
@@ -209,7 +211,7 @@
   <!-- Contact -->
   <section class="section contact" id="contact">
     <div class="wrap contact-grid">
-      <div class="contact-copy">
+      <div class="contact-copy" data-reveal>
         <p class="kicker">Start your project</p>
         <h2 class="display-m">Send us your plan.</h2>
         <p>Tell us what you want to build. We reply within one working day.</p>
@@ -219,7 +221,7 @@
           <li><a href="mailto:info@archfams.com"><span class="badge"><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-mail"/></svg></span>info@archfams.com</a></li>
         </ul>
       </div>
-      <form class="form" action="api/contact.php" method="POST" data-form>
+      <form class="form" action="api/contact.php" method="POST" data-form data-reveal style="--d: .12s">
         <div class="field-row">
           <label>Name<input name="name" autocomplete="name" required maxlength="120"></label>
           <label>Phone or WhatsApp<input name="phone" type="tel" autocomplete="tel" required maxlength="40"></label>
@@ -242,6 +244,7 @@
     </div>
   </section>
 
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -260,6 +263,9 @@
   </div>
   <div class="wrap footer-base caption">© <span data-year>2026</span> ArchFams Building Construction</div>
 </footer>
+
+<!-- Cursor that follows the mouse on desktop -->
+<div class="cursor" aria-hidden="true"><span class="cursor-label"></span></div>
 
 <!-- Contact pill that follows on phones -->
 <a class="float-wa" href="https://wa.me/255745468634" target="_blank" rel="noopener" aria-label="WhatsApp ArchFams">
