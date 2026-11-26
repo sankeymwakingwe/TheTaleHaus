@@ -149,10 +149,19 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .clients-title { text-align: center; font: 600 13px/20px var(--sans); letter-spacing: .04em; color: #fff; margin-bottom: var(--space-4); padding: 0 var(--space-4); }
 .marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  position: relative; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
+/* Motion blur at both ends: logos smear progressively as they enter and leave.
+   Three stacked blur layers, each masked to a narrower band at the edge. */
+.edge-blur { position: absolute; top: 0; bottom: 0; width: 22%; z-index: 1; pointer-events: none; }
+.edge-blur.left { left: 0; }
+.edge-blur.right { right: 0; transform: scaleX(-1); }
+.edge-blur span { position: absolute; inset: 0; }
+.edge-blur span:nth-child(1) { backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent 100%); mask-image: linear-gradient(90deg, #000 30%, transparent 100%); }
+.edge-blur span:nth-child(2) { backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); -webkit-mask-image: linear-gradient(90deg, #000 10%, transparent 65%); mask-image: linear-gradient(90deg, #000 10%, transparent 65%); }
+.edge-blur span:nth-child(3) { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 35%); mask-image: linear-gradient(90deg, #000 0%, transparent 35%); }
 .marquee-track { display: flex; align-items: center; gap: var(--space-8); width: max-content; padding: 0 var(--space-4); margin: 0 auto; }
 .marquee-track li { flex: none; display: grid; place-items: center; height: 40px; }
 .marquee-track img { height: 32px; width: auto; max-width: 160px; object-fit: contain; filter: brightness(0) invert(1); opacity: .85; transition: opacity .3s ease; }
