@@ -128,6 +128,12 @@
 
   <!-- Projects (ADEMI format): Charcoal panel, label left, two-tone headline right -->
   <section class="section projects" id="projects">
+    <!-- The hovered project's cover fills the panel behind everything -->
+    <div class="projects-bg" aria-hidden="true">
+      <img class="is-active" src="images/projects/project-1.jpg" alt="" loading="lazy">
+      <img src="images/projects/project-2.jpg" alt="" loading="lazy">
+      <img src="images/projects/project-3.jpg" alt="" loading="lazy">
+    </div>
     <div class="wrap">
       <div class="split-head" data-reveal>
         <p class="pill-label">Our projects</p>
@@ -136,15 +142,15 @@
           <p class="sub">Homes, villas and hotels across Zanzibar:</p>
         </div>
       </div>
-      <div class="project-grid">
+      <div class="project-grid" data-projects>
         <!-- Replace each project's name, place, type and photo (images/projects/project-1.jpg …) after the first shoot. -->
-        <a class="project project-wide" href="#contact" data-reveal data-cursor="View" style="--d: 0.00s">
+        <a class="project is-active" href="#contact" data-reveal data-cursor="View" style="--d: 0.00s">
           <div class="project-photo ph"><img src="images/projects/project-1.jpg" alt="Seafront villas with glass fronts and private terraces" width="1400" height="932" loading="lazy"></div>
           <ul class="tags"><li>Design</li><li>Construction</li></ul>
           <div class="project-meta">
             <h3 class="heading">[Project name]</h3>
             <p class="caption">[Location], Zanzibar · [Year]</p>
-            <span class="more more-filled">More details <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-chevron"/></svg></span>
+            <span class="more">More details <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-chevron"/></svg></span>
           </div>
         </a>
         <a class="project" href="#contact" data-reveal data-cursor="View" style="--d: 0.10s">

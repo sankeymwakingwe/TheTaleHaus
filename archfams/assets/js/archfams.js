@@ -93,6 +93,24 @@
     marquee.classList.add("running");
   }
 
+  // Projects: the card under the cursor (or keyboard focus) widens, and its
+  // cover fills the panel behind. The last one picked stays open.
+  const grid = document.querySelector("[data-projects]");
+  if (grid) {
+    const cards = [...grid.querySelectorAll(".project")];
+    const covers = [...document.querySelectorAll(".projects-bg img")];
+    const pick = (i) => {
+      cards.forEach((c, k) => c.classList.toggle("is-active", k === i));
+      covers.forEach((c, k) => c.classList.toggle("is-active", k === i));
+    };
+    cards.forEach((card, i) => {
+      card.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") pick(i); });
+      card.addEventListener("focus", () => pick(i));
+    });
+    // Load every cover up front so the crossfade never waits on the network.
+    covers.forEach((img) => { img.loading = "eager"; });
+  }
+
   document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new Date().getFullYear(); });
 
   // Enquiry form: sends to api/contact.php; if that can't be reached (for
