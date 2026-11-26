@@ -1,0 +1,70 @@
+name: Deploy ArchFams to Namecheap
+
+# Uploads the site to the Namecheap (cPanel) server over FTPS on every push to
+# main. It stays switched off until these repository secrets exist
+# (Settings → Secrets and variables → Actions):
+#   FTP_SERVER    e.g. ftp.archfams.com
+#   FTP_USERNAME  the cPanel FTP account (its directory must be public_html)
+#   FTP_PASSWORD  its password
+# Optional, so form emails are sent through Private Email and skip spam:
+#   SMTP_USER     a Private Email mailbox, e.g. info@archfams.com
+#   SMTP_PASSWORD that mailbox's password
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: namecheap
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+    steps:
+      - name: Skip until FTP details are set
+        if: env.FTP_SERVER == ''
+        run: echo "FTP_SERVER secret not set yet; nothing to deploy."
+
+      - uses: actions/checkout@v4
+        if: env.FTP_SERVER != ''
+
+      - name: Stamp CSS/JS links with this commit so browsers fetch the new files
+        if: env.FTP_SERVER != ''
+        run: sed -i "s/?v=dev/?v=${GITHUB_SHA::7}/g" *.html
+
+      - name: Write mail settings
+        if: env.FTP_SERVER != ''
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: |
+          b64() { printf %s "$1" | base64 -w0; }
+          {
+            echo "<?php"
+            if [ -n "$SMTP_USER" ] && [ -n "$SMTP_PASSWORD" ]; then
+              echo "const SMTP_HOST = 'mail.privateemail.com';"
+              echo "define('SMTP_USER', base64_decode('$(b64 "$SMTP_USER")'));"
+              echo "define('SMTP_PASS', base64_decode('$(b64 "$SMTP_PASSWORD")'));"
+            else
+              echo "// SMTP secrets not set; forms use PHP mail()."
+            fi
+          } > api/_config.php
+
+      - name: Upload to public_html
+        if: env.FTP_SERVER != ''
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: ./   # the FTP account already starts in public_html
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            README.md
+            private/**
