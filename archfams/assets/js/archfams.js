@@ -17,7 +17,7 @@
   nav.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && nav.classList.contains("open")) { setMenu(false); menuBtn.focus(); } });
 
-  // Process steps: one open at a time.
+  // Process steps: the chosen step's picture and notes show beside the list.
   const steps = [...document.querySelectorAll("[data-steps] button")];
   steps.forEach((btn) => btn.addEventListener("click", () => {
     steps.forEach((b) => {
