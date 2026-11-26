@@ -25,6 +25,11 @@
   --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
   --radius-sm: 6px; --radius-md: 12px; --radius-lg: 28px; --radius-pill: 999px;
   --content: 1200px;
+  /* Layout matched to The Tale Haus: content sits at 80% of the page inside
+     a 40px edge; on phones it goes full width with a 16px gutter. */
+  --edge: 40px;
+  --wrapf: .8;
+  --gutter: 16px;
   color-scheme: light only;
 }
 
@@ -33,7 +38,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 body {
   margin: 0; background: var(--bg); color: var(--ink);
-  font: 400 17px/28px var(--serif-text);
+  font: 400 clamp(16px, 1.4vw, 20px)/1.6 var(--serif-text);
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; height: auto; display: block; }
@@ -45,13 +51,12 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .sr, .hp { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: -999px; top: 8px; z-index: 100; background: var(--bg); padding: 8px 16px; border-radius: var(--radius-md); }
 .skip:focus { left: 16px; }
-.wrap { width: 100%; max-width: calc(var(--content) + 2 * var(--space-5)); margin: 0 auto; padding: 0 var(--space-5); }
-@media (max-width: 640px) { .wrap { padding: 0 var(--space-4); } }
+.wrap { width: 100%; max-width: calc((100vw - 2 * var(--edge)) * var(--wrapf) + 2 * var(--edge)); margin: 0 auto; padding: 0 var(--edge); }
 
 /* Type styles */
 .display-l, .display-m { font-family: var(--display); font-weight: 400; letter-spacing: -.01em; }
-.display-l { font-size: clamp(40px, 6vw, 64px); line-height: 1.02; }
-.display-m { font-size: clamp(30px, 4vw, 40px); line-height: 1.08; }
+.display-l { font-size: clamp(46px, 6.2vw, 104px); line-height: .98; }
+.display-m { font-size: clamp(34px, 3.8vw, 56px); line-height: 1.1; }
 .display-l em, .display-m em { font-style: italic; }
 .eyebrow { font: 600 14px/20px var(--sans); letter-spacing: .4em; text-transform: uppercase; }
 .kicker { font: 600 14px/20px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: var(--space-3); }
@@ -90,7 +95,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .nav { margin-right: auto; }
 .brand img { height: 72px; width: auto; transition: height .3s var(--ease-out, ease); }
 .site-header.solid .brand img { height: 52px; }
-@media (max-width: 640px) { .brand img { height: 56px; } .site-header.solid .brand img { height: 44px; } }
+@media (max-width: 760px) { .brand img { height: 56px; } .site-header.solid .brand img { height: 44px; } }
 .nav { display: flex; gap: var(--space-2); }
 .nav a { color: #fff; text-decoration: none; font: 500 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; padding: 14px 12px; border-bottom: 1px solid transparent; }
 .nav a:hover { border-bottom-color: rgba(255, 255, 255, .7); }
@@ -103,7 +108,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .menu-btn[aria-expanded="true"] .bars { background: transparent; }
 .menu-btn[aria-expanded="true"] .bars::before { transform: translateY(6px) rotate(45deg); }
 .menu-btn[aria-expanded="true"] .bars::after { transform: translateY(-6px) rotate(-45deg); }
-@media (max-width: 900px) {
+@media (max-width: 760px) {
   .header-cta { display: none; }
   .menu-btn { display: block; }
   .nav {
@@ -135,9 +140,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .hero-inner {
   position: relative; display: grid; justify-items: center; gap: var(--space-4);
-  padding: 140px var(--space-5) var(--space-6); max-width: 900px; align-self: center;
+  padding: 140px var(--edge) var(--space-6); max-width: 1200px; align-self: center;
 }
-.hero h1 { font-size: clamp(38px, 5.4vw, 64px); text-shadow: 0 2px 30px rgba(0, 0, 0, .6); text-wrap: balance; }
+.hero h1 { font-size: clamp(46px, 6.2vw, 104px); text-shadow: 0 2px 30px rgba(0, 0, 0, .6); text-wrap: balance; }
 .hero-sub { text-shadow: 0 1px 12px rgba(0, 0, 0, .8); font: 600 13px/20px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: rgba(255, 255, 255, .92); margin-bottom: var(--space-3); }
 .btn-caps { text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 600; border-radius: var(--radius-sm); padding: 0 28px; }
 /* Client logos along the bottom of the hero */
@@ -176,16 +181,16 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .clients { animation: fade-in 1s ease 1.2s both; }
 }
 @keyframes marquee { to { transform: translateX(-50%); } }
-@media (max-width: 640px) { .hero-inner { padding: 120px var(--space-4) var(--space-5); } .marquee-track { gap: var(--space-6); } .hero-sub { letter-spacing: .1em; } }
+@media (max-width: 760px) { .hero-inner { padding: 120px var(--space-4) var(--space-5); } .marquee-track { gap: var(--space-6); } .hero-sub { letter-spacing: .1em; } }
 
 /* Sections */
-.section { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+.section { padding-top: 90px; padding-bottom: 80px; }
 .section-head { max-width: 760px; margin-bottom: var(--space-7); }
 .band { background: var(--bg); }
-@media (max-width: 640px) { .band { margin: 0 var(--space-2); } .section { padding-top: var(--space-7); padding-bottom: var(--space-7); } }
+@media (max-width: 760px) { .band { margin: 0 var(--space-2); } .section { padding-top: 64px; padding-bottom: 56px; } }
 
 /* Services */
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4); }
+.cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
 .card { background: var(--surface-alt); border-radius: var(--radius-md); padding: var(--space-5); display: grid; gap: var(--space-3); align-content: start; }
 .card p { color: var(--ink-muted); }
 .picto { width: 48px; height: 48px; color: var(--brand-steel); margin-bottom: var(--space-2); }
@@ -201,7 +206,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .two-tone b { color: var(--ink); font-weight: inherit; }
 .split-head .tagline { color: var(--brand-strong); font-size: 22px; }
 .split-head .sub { font: 500 17px/1.4 var(--sans); }
-@media (max-width: 860px) { .split-head { grid-template-columns: 1fr; gap: var(--space-4); } }
+@media (max-width: 760px) { .split-head { grid-template-columns: 1fr; gap: var(--space-4); } }
 
 /* Process */
 .process-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: var(--space-6); align-items: start; }
@@ -238,7 +243,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .split-photo span { font: 600 11px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: #fff; opacity: .75; }
 .split-sketch { background: #fff; display: grid; place-items: center; padding: var(--space-3); color: #2f6c89; }
 .split-sketch svg { width: 100%; height: 100%; max-height: 100%; }
-@media (max-width: 860px) {
+@media (max-width: 760px) {
   .process-grid { grid-template-columns: 1fr; }
   .steps button { gap: var(--space-3); padding: 12px var(--space-3); font-size: 17px; }
   .steps .num { width: 28px; }
@@ -324,7 +329,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .audiences { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
 .audiences > div { border-top: 2px solid var(--brand); padding-top: var(--space-5); display: grid; gap: var(--space-3); align-content: start; }
 .audiences p { color: var(--ink-muted); }
-@media (max-width: 860px) { .audiences { grid-template-columns: 1fr; gap: var(--space-5); } }
+@media (max-width: 760px) { .audiences { grid-template-columns: 1fr; gap: var(--space-5); } }
 
 /* Contact */
 .contact { background: var(--bg); color: var(--ink); border-top: 1px solid var(--line); }
@@ -347,8 +352,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
 .form .btn { justify-self: start; }
 .form-status { font: 500 14px/20px var(--sans); color: var(--ink-muted); min-height: 20px; }
-@media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
-@media (max-width: 640px) { .field-row { grid-template-columns: 1fr; } .form { padding: var(--space-5); } }
+@media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .field-row { grid-template-columns: 1fr; } .form { padding: var(--space-5); } }
 
 /* Footer */
 .site-footer { padding: var(--space-8) 0 var(--space-6); margin-top: var(--space-3); }
@@ -367,7 +372,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   background: #1b5375; color: #fff; box-shadow: var(--shadow-panel);
 }
 .float-wa svg { width: 28px; height: 28px; }
-@media (max-width: 900px) { .float-wa { display: grid; } }
+@media (max-width: 760px) { .float-wa { display: grid; } }
 
 /* ---------- Motion ---------- */
 :root { --ease-out: cubic-bezier(.16, 1, .3, 1); }
@@ -417,7 +422,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .nav a { position: relative; border-bottom: 0; }
 .nav a::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 8px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease-out); }
 .nav a:hover::after { transform: scaleX(1); }
-@media (max-width: 900px) { .nav a::after { display: none; } }
+@media (max-width: 760px) { .nav a::after { display: none; } }
 
 /* Step arrows turn to point at their picture */
 .steps button svg { transition: background-color .2s ease, transform .35s var(--ease-out); }
@@ -447,3 +452,34 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 /* Buttons: a soft lift with the arrow nudging forward */
 .btn svg { transition: transform .3s var(--ease-out); }
 .btn:hover svg { transform: translateX(2px); }
+
+
+/* ---------- Responsive, matched to The Tale Haus ---------- */
+/* Mid-size (≤1100px): drop the header button, two service cards per row */
+@media (max-width: 1100px) {
+  .header-cta { display: none; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-grid { height: 400px; }
+}
+/* Phones and small tablets (≤760px) */
+@media (max-width: 760px) {
+  :root { --edge: var(--gutter); --wrapf: 1; }
+  /* hero becomes a rounded card inside the gutter, like The Tale Haus */
+  .hero { margin: 0 var(--gutter); border-radius: 24px; min-height: max(560px, calc((100vw - 2 * var(--gutter)) * 1.25)); }
+  .sheet { margin-top: 24px; border-radius: 0; box-shadow: none; }
+  .brand img { height: 44px; }
+  .site-header.solid .brand img { height: 40px; }
+  .site-header { padding: var(--gutter) 0; }
+  .cards { grid-template-columns: 1fr; gap: 16px; }
+  .card { border-radius: 28px; }
+  .projects, .band { margin: 0; border-radius: 0; }
+  .projects { border-radius: 30px 30px 0 0; }
+  .project, .project.is-active { height: auto; aspect-ratio: 16 / 9; border-radius: 28px; }
+  .project .more { display: none; }
+  .project .tags li:nth-child(n+2) { display: none; }
+  .split-img { border-radius: 22px; }
+  .form { padding: 20px; border-radius: 24px; }
+  .contact-grid { gap: 28px; }
+  .steps button { font-size: 17px; }
+  .footer-grid { gap: 24px; }
+}
