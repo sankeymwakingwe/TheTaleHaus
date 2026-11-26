@@ -79,6 +79,20 @@
     loop();
   }
 
+  // Client logos scroll in a loop: the list is doubled so the loop is seamless.
+  const marquee = document.querySelector("[data-marquee]");
+  if (marquee && !calm) {
+    const track = marquee.querySelector(".marquee-track");
+    [...track.children].forEach((li) => {
+      const copy = li.cloneNode(true);
+      copy.setAttribute("aria-hidden", "true");
+      track.appendChild(copy);
+    });
+    track.style.setProperty("--marquee-time", `${Math.max(20, track.children.length * 3.5)}s`);
+    marquee.style.setProperty("--marquee-time", `${Math.max(20, track.children.length * 3.5)}s`);
+    marquee.classList.add("running");
+  }
+
   document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new Date().getFullYear(); });
 
   // Enquiry form: sends to api/contact.php; if that can't be reached (for
