@@ -67,7 +67,7 @@
       const link = t && t.closest("a, button, select, input, textarea, label");
       cursor.classList.toggle("label", !!named);
       cursor.classList.toggle("link", !named && !!link);
-      cursor.classList.toggle("light", !!(t && t.closest(".hero, .projects, .contact, .site-header.solid")));
+      cursor.classList.toggle("light", !!(t && t.closest(".hero, .projects")));
       label.textContent = named ? named.dataset.cursor : "";
     }, { passive: true });
     document.addEventListener("pointerleave", () => cursor.classList.remove("on"));
