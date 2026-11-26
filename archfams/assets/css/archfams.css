@@ -1,4 +1,5 @@
-/* ArchFams — colours, type, spacing and radii from the ArchFams design system. */
+/* ArchFams — always light: white page in every system theme.
+   Colours, type, spacing and radii from the ArchFams design system. */
 :root {
   --bg: #ffffff;
   --surface-alt: #f5f6f7;
@@ -24,16 +25,7 @@
   --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
   --radius-sm: 6px; --radius-md: 12px; --radius-lg: 28px; --radius-pill: 999px;
   --content: 1200px;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #111417; --surface-alt: #1a1e22; --ink: #f2f4f5; --ink-muted: #b3b9be; --ink-soft: #858c92;
-    --line: #2a3036; --brand: #2f6c89; --brand-strong: #8cc2e0; --brand-soft: #22282d;
-    --accent: #eaf1f8; --on-accent: #12181d; --focus: #8cc2e0;
-    --shadow-panel: 0 18px 40px rgba(0, 0, 0, .45);
-    color-scheme: dark;
-  }
+  color-scheme: light only;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -93,10 +85,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .brand .logo-dark { display: none; }
 .site-header.solid .brand .logo-light { display: none; }
 .site-header.solid .brand .logo-dark { display: block; }
-@media (prefers-color-scheme: dark) {
-  .site-header.solid .brand .logo-dark { display: none; }
-  .site-header.solid .brand .logo-light { display: block; }
-}
 .header-row { display: flex; align-items: center; gap: var(--space-5); }
 .brand { display: flex; align-items: center; gap: var(--space-3); color: #fff; text-decoration: none; margin-right: auto; }
 .nav { margin-right: auto; }
@@ -192,7 +180,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .card { background: var(--surface-alt); border-radius: var(--radius-md); padding: var(--space-5); display: grid; gap: var(--space-3); align-content: start; }
 .card p { color: var(--ink-muted); }
 .picto { width: 48px; height: 48px; color: var(--brand-steel); margin-bottom: var(--space-2); }
-@media (prefers-color-scheme: dark) { .picto { color: var(--brand-strong); } }
 
 /* Two-column section head (ADEMI format): outlined label left, headline right */
 .split-head { display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-6); margin-bottom: var(--space-7); align-items: start; }
@@ -321,7 +308,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .site-footer { padding: var(--space-8) 0 var(--space-6); margin-top: var(--space-3); }
 .footer-grid { display: grid; grid-template-columns: auto 1fr auto; gap: var(--space-7); align-items: center; }
 .footer-logo { width: 160px; content: url("../../images/brand/archfams-logo-navy.png"); }
-@media (prefers-color-scheme: dark) { .footer-logo { content: url("../../images/brand/archfams-logo-white.png"); } }
 .site-footer .tagline { color: var(--brand-strong); margin-bottom: var(--space-2); }
 .socials { display: flex; gap: var(--space-2); }
 .socials .badge { background: var(--brand); color: var(--on-brand); }
