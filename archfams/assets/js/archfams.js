@@ -119,7 +119,7 @@
   const status = form.querySelector(".form-status");
   const whatsappFallback = (d) => {
     const text = `Hello ArchFams, I'm ${d.get("name")}.\nProject: ${d.get("service")}\n${d.get("message")}\nPhone: ${d.get("phone")}`;
-    window.open(`https://wa.me/255745468634?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+    window.open(`https://wa.me/255675468634?text=${encodeURIComponent(text)}`, "_blank", "noopener");
   };
   form.addEventListener("submit", async (e) => {
     e.preventDefault();

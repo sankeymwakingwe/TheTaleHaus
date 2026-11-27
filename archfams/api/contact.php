@@ -16,5 +16,5 @@ rate_limit('contact');
 save_row('enquiries.csv', ['date' => date('c'), 'name' => $name, 'phone' => $phone, 'email' => $email, 'service' => $service, 'message' => $message]);
 $sent = notify("New enquiry: $service — $name", "Name: $name\nPhone: $phone\nEmail: $email\nProject: $service\n\n$message\n", $email);
 
-if (!$sent) respond(500, 'Sorry, your message could not be sent. Please WhatsApp us on +255 745 46 86 34.');
+if (!$sent) respond(500, 'Sorry, your message could not be sent. Please WhatsApp us on +255 675 46 86 34.');
 respond(200, 'Thank you. We will reply within one working day.');
